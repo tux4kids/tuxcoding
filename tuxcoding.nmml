@@ -48,6 +48,7 @@
 	
 	<haxelib name="nme" />
 	<haxelib name="flixel"/>
+	<haxelib name="leveltools"/>
 	
     <!--Disable the Flixel core debugger-->
     <!--<set name="FLX_NO_DEBUG" />-->

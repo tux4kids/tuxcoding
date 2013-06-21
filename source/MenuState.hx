@@ -11,6 +11,7 @@ import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
 import org.flixel.FlxU;
+import org.ivar.leveltools.DameLevel;
 
 class MenuState extends FlxState
 {
@@ -24,6 +25,14 @@ class MenuState extends FlxState
 		#if !FLX_NO_MOUSE
 		FlxG.mouse.show();
 		#end
+		
+		var level = DameLevel.loadLevel(
+			Assets.getText("assets/levels/tuxcoding/Level_levels.xml"), // XML file exported from DAME
+			"assets/levels/", // directory where we saved .dam
+			true // add the level to the state when loaded
+		);
+		var map1Tilemap = level.getTilemap("Map1");
+		
 	}
 	
 	override public function destroy():Void
