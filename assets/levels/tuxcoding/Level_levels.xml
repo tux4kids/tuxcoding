@@ -3,4 +3,16 @@
 	<layer name="Map1" xScroll="1.000" yScroll="1.000" >
 		<map csv="tuxcoding/mapCSV_levels_Map1.csv" tiles="blocks.png" x="0.000" y="0.000" tileWidth="35" tileHeight="35" hasHits="false" collIdx="1" drawIdx="1" />
 	</layer>
+	<layer name="Map2" xScroll="1.000" yScroll="1.000" >
+		<map csv="tuxcoding/mapCSV_levels_Map2.csv" tiles="blocks.png" x="0.000" y="0.000" tileWidth="35" tileHeight="35" hasHits="false" collIdx="1" drawIdx="1" />
+	</layer>
+	<layer name="Map3" xScroll="1.000" yScroll="1.000" >
+		<map csv="tuxcoding/mapCSV_levels_Map3.csv" tiles="blocks.png" x="0.000" y="0.000" tileWidth="35" tileHeight="35" hasHits="false" collIdx="1" drawIdx="1" />
+	</layer>
+	<layer name="Map4" xScroll="1.000" yScroll="1.000" >
+		<map csv="tuxcoding/mapCSV_levels_Map4.csv" tiles="blocks.png" x="0.000" y="0.000" tileWidth="35" tileHeight="35" hasHits="false" collIdx="1" drawIdx="1" />
+	</layer>
+	<layer name="Map5" xScroll="1.000" yScroll="1.000" >
+		<map csv="tuxcoding/mapCSV_levels_Map5.csv" tiles="blocks.png" x="0.000" y="0.000" tileWidth="35" tileHeight="35" hasHits="false" collIdx="1" drawIdx="1" />
+	</layer>
 </level>

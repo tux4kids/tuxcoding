@@ -1,6 +1,5 @@
 package;
 
-import nme.Assets;
 import nme.geom.Rectangle;
 import nme.net.SharedObject;
 import org.flixel.FlxButton;
@@ -11,12 +10,13 @@ import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
 import org.flixel.FlxU;
-import org.ivar.leveltools.DameLevel;
 
 class MenuState extends FlxState
 {
 	override public function create():Void
 	{
+		Registry.init();
+		
 		#if !neko
 		FlxG.bgColor = 0xff131c1b;
 		#else
@@ -26,22 +26,17 @@ class MenuState extends FlxState
 		FlxG.mouse.show();
 		#end
 		
-		var level = DameLevel.loadLevel(
-			Assets.getText("assets/levels/tuxcoding/Level_levels.xml"), // XML file exported from DAME
-			"assets/levels/", // directory where we saved .dam
-			true // add the level to the state when loaded
-		);
-		var map1Tilemap = level.getTilemap("Map1");
-		
+		var numLevels:Int = 5;
+		var pad:Int = 10;
+		var left:Int = Std.int((FlxG.width - 5 * 100 - 4 * pad) / 2);
+		for (i in 0...numLevels) {
+			add(new LevelBtn(i, left + (100+pad)*i, FlxG.height-150, onStart));
+		}
 	}
 	
-	override public function destroy():Void
+	function onStart(btnNum:Int) 
 	{
-		super.destroy();
+		FlxG.switchState(new PlayState(btnNum));
 	}
 
-	override public function update():Void
-	{
-		super.update();
-	}	
 }
