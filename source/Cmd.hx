@@ -1,5 +1,6 @@
 package ;
 
+import org.flixel.FlxG;
 import org.flixel.FlxSprite;
 
 /**
@@ -23,6 +24,11 @@ class Cmd extends FlxSprite
 		super(X, Y);
 		loadGraphic(AssetNames.Cmds, true, false);
 		type = -1;
+	}
+	
+	public function run():Void 
+	{
+		FlxG.log("Command " + type);
 	}
 	
 }

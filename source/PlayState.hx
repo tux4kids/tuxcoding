@@ -14,16 +14,14 @@ import org.flixel.FlxTilemap;
  */
 class PlayState extends FlxState
 {
-	private inline static var memory_numRows:Int = 2;
-	private inline static var memory_numCols:Int = 5;
 
 	private var levelNum:Int;
 	private var mapTilemap:FlxTilemap;
 	
-	private var program:FlxGroup;
-	private var memory:FlxSprite;
 	private var toolbar:FlxSprite;
 	private var selected:Cmd;
+	
+	private var program:ProgramMem;
 	
 	public function new(LvlNum:Int) 
 	{
@@ -35,7 +33,7 @@ class PlayState extends FlxState
 	{
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xffaaaaaa));
 		prepareToolbar();
-		prepareMemory();
+		add(program = new ProgramMem(430, 100));
 		
 		add(selected = new Cmd());
 		selected.visible = false;
@@ -71,26 +69,6 @@ class PlayState extends FlxState
 		add(toolbar);
 	}
 	
-	private function prepareMemory():Void 
-	{
-		memory = new FlxSprite();
-		program = new FlxGroup();
-		
-		memory.makeGraphic(Std.int(Cmd.Size * memory_numCols), Std.int(Cmd.Size * memory_numRows), 0x00000000);
-		memory.x = FlxG.width - memory.width - 10;
-		memory.y = toolbar.y + toolbar.height + 50;
-		add(memory);
-
-		for (r in 0...memory_numRows) {
-			for (c in 0...memory_numCols) {
-				program.add(new Cmd(memory.x + Cmd.Size * c, memory.y + Cmd.Size * r));
-			}
-		}
-		
-		
-		add(program);
-	}
-	
 	override public function destroy():Void 
 	{
 		remove(mapTilemap);
@@ -104,7 +82,7 @@ class PlayState extends FlxState
 			if (!FlxG.mouse.pressed()) 
 			{
 				// did the player drop the command over the program's memory ?
-				var cmd:Cmd = getOverlappedProgramCmd(FlxG.mouse);
+				var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
 				if (cmd != null) 
 				{
 					cmd.type = selected.type;
@@ -127,7 +105,7 @@ class PlayState extends FlxState
 				else 
 				{
 					// did the player click over the program's memory
-					var cmd:Cmd = getOverlappedProgramCmd(FlxG.mouse);
+					var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
 					if (cmd != null)
 					{
 						selected.type = cmd.type;
@@ -142,27 +120,12 @@ class PlayState extends FlxState
 			selected.x = FlxG.mouse.x - selected.width / 2;
 			selected.y = FlxG.mouse.y - selected.height / 2;
 		}
+		
+		if (FlxG.keys.justPressed("R")) program.run();
+		
 		super.update();
 	}
-	
-	/**
-	 * Finds which program's command is under the mouse
-	 * @param	X x-coordinate of the mouse
-	 * @param	Y y-coordinate of the mouse
-	 * @return overlaped cmd or null if no command found
-	 */
-	private function getOverlappedProgramCmd(point:FlxPoint):Cmd 
-	{
-		
-		if (!memory.overlapsPoint(point)) return null;
 
-		var c:Int = Std.int( Math.floor((point.x - memory.x) / Cmd.Size));
-		var r:Int = Std.int( Math.floor((point.y - memory.y) / Cmd.Size));
-		var index:Int = (r * memory_numCols + c);
-		
-		return cast(program.members[index], Cmd);
-	}
-	
 	function onExit() 
 	{
 		FlxG.switchState(new MenuState());
