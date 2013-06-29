@@ -1,5 +1,6 @@
 package ;
 
+import org.flixel.FlxG;
 import org.flixel.FlxGroup;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
@@ -15,9 +16,19 @@ class ProgramMem extends FlxGroup
 
 	private var memory:FlxSprite;
 
-	public function new(X:Float = 0, Y:Float = 0) 
+	private var playState:PlayState;
+	private var onEnd:Void -> Void; // callback to be called at the end of the execution of this program
+	public var running:Bool;
+
+	private var cmds:Array<Cmd>;
+	private var curCmd:Int;
+	private var curTime:Float;
+	
+	public function new(playState:PlayState, X:Float = 0, Y:Float = 0) 
 	{
 		super(memory_numRows * memory_numCols);
+		
+		this.playState = playState;
 		
 		// memory is just used to test mouse overlap
 		memory = new FlxSprite(X, Y);
@@ -47,11 +58,46 @@ class ProgramMem extends FlxGroup
 		return cast(members[index], Cmd);
 	}
 	
-	public function run():Void 
+	public function run(OnEnd:Void -> Void = null):Void 
 	{
+		onEnd = OnEnd;
+		
+		cmds = [];
 		for (obj in members) {
 			var cmd:Cmd = cast(obj, Cmd);
-			if (cmd != null && cmd.type != -1) cmd.run();
+			if (cmd != null && cmd.type != -1) cmds.push(cmd);
+		}
+		curCmd = 0;
+		runCmd();
+		running = true;
+	}
+	
+	function runCmd() 
+	{
+		if (curCmd == cmds.length)
+		{
+			// program ended
+			running = false;
+			if (onEnd != null) onEnd();
+		}
+		else
+		{
+			cmds[curCmd].run(playState);
+			curCmd++;
+			curTime = 1;
+		}
+	}
+	
+	override public function update():Void
+	{
+		if (running)
+		{
+			curTime -= FlxG.elapsed;
+			if (curTime <= 0)
+			{
+				// time to run next command
+				runCmd();
+			}
 		}
 	}
 	

@@ -17,7 +17,7 @@ class Registry
 		if (initialized) return;
 		
 		level = DameLevel.loadLevel(
-			Assets.getText(AssetNames.levelsXML), // XML file exported from DAME
+			Assets.getText(AssetNames.LevelsXML), // XML file exported from DAME
 			"assets/levels/", // directory where we saved .dam
 			false // add the level to the state when loaded
 		);

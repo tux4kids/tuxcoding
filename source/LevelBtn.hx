@@ -16,8 +16,8 @@ class LevelBtn extends FlxButton
 		num = Num;
 		onClick = OnClick;
 		
-		loadGraphic(AssetNames.lvlBtnBg, true, false, 100, 100);
-		label.setFormat(AssetNames.lvlBtnFont, 25, 0, "center");
+		loadGraphic(AssetNames.LvlBtn, true, false, 100, 100);
+		label.setFormat(AssetNames.LvlBtnFont, 25, 0, "center");
 		labelOffset.y = (100 - label.height) / 2;
 	}
 	

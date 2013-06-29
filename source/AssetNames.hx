@@ -6,11 +6,12 @@ package ;
  */
 class AssetNames
 {
-	public static var levelsXML:String = "assets/levels/tuxcoding/Level_levels.xml";
+	public static var LevelsXML:String = "assets/levels/tuxcoding/Level_levels.xml";
 	
-	public static var lvlBtnBg:String = "assets/gui/blank-btn.png";
-	public static var ExitBtnBg:String = "assets/gui/exit-btn.png";
+	public static var RunBtn:String = "assets/gui/run-btn.png";
+	public static var LvlBtn:String = "assets/gui/blank-btn.png";
+	public static var ExitBtn:String = "assets/gui/exit-btn.png";
 	public static var Cmds:String = "assets/gui/cmds.png";
 	
-	public static var lvlBtnFont:String = "assets/bangers.ttf";
+	public static var LvlBtnFont:String = "assets/bangers.ttf";
 }

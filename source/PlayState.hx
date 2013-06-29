@@ -19,7 +19,9 @@ class PlayState extends FlxState
 	private var mapTilemap:FlxTilemap;
 	
 	private var toolbar:FlxSprite;
-	private var selected:Cmd;
+	public var selected:Cmd;
+	
+	private var runBtn:FlxButton;
 	
 	private var program:ProgramMem;
 	
@@ -33,7 +35,7 @@ class PlayState extends FlxState
 	{
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xffaaaaaa));
 		prepareToolbar();
-		add(program = new ProgramMem(430, 100));
+		add(program = new ProgramMem(this, 430, 100));
 		
 		add(selected = new Cmd());
 		selected.visible = false;
@@ -47,9 +49,12 @@ class PlayState extends FlxState
 		add(mapTilemap);
 		
 		var exitBtn:FlxButton;
-		add(exitBtn = new FlxButton((FlxG.width-75)/2, FlxG.height - 110, null, onExit));
-		exitBtn.loadGraphic(AssetNames.ExitBtnBg, true, false, 75, 75);
-		
+		add(exitBtn = new FlxButton(FlxG.width/2 - 80, FlxG.height - 110, null, onExit));
+		exitBtn.loadGraphic(AssetNames.ExitBtn, true, false, 75, 75);
+
+		add(runBtn = new FlxButton(FlxG.width/2 + 5, FlxG.height - 110, null, onRun));
+		runBtn.loadGraphic(AssetNames.RunBtn, true);
+
 		super.create();
 	}
 	
@@ -77,40 +82,43 @@ class PlayState extends FlxState
 	
 	override public function update():Void 
 	{
-		if (selected.visible) 
+		if (!program.running)
 		{
-			if (!FlxG.mouse.pressed()) 
+			if (selected.visible) 
 			{
-				// did the player drop the command over the program's memory ?
-				var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
-				if (cmd != null) 
+				if (!FlxG.mouse.pressed()) 
 				{
-					cmd.type = selected.type;
-				}
-
-				selected.visible = false;
-			}
-		} 
-		else 
-		{
-			if (FlxG.mouse.justPressed()) 
-			{
-				// did the player click over the toolbar ?
-				if (toolbar.overlapsPoint(FlxG.mouse))
-				{
-					// find which command was selected
-					selected.type = Std.int( (FlxG.mouse.x - toolbar.x) / Cmd.Size);
-					selected.visible = true;
-				}
-				else 
-				{
-					// did the player click over the program's memory
+					// did the player drop the command over the program's memory ?
 					var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
-					if (cmd != null)
+					if (cmd != null) 
 					{
-						selected.type = cmd.type;
+						cmd.type = selected.type;
+					}
+
+					selected.visible = false;
+				}
+			} 
+			else 
+			{
+				if (FlxG.mouse.justPressed()) 
+				{
+					// did the player click over the toolbar ?
+					if (toolbar.overlapsPoint(FlxG.mouse))
+					{
+						// find which command was selected
+						selected.type = Std.int( (FlxG.mouse.x - toolbar.x) / Cmd.Size);
 						selected.visible = true;
-						cmd.type = -1;
+					}
+					else 
+					{
+						// did the player click over the program's memory
+						var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
+						if (cmd != null)
+						{
+							selected.type = cmd.type;
+							selected.visible = true;
+							cmd.type = -1;
+						}
 					}
 				}
 			}
@@ -121,8 +129,6 @@ class PlayState extends FlxState
 			selected.y = FlxG.mouse.y - selected.height / 2;
 		}
 		
-		if (FlxG.keys.justPressed("R")) program.run();
-		
 		super.update();
 	}
 
@@ -131,4 +137,16 @@ class PlayState extends FlxState
 		FlxG.switchState(new MenuState());
 	}
 	
+	function onRun() 
+	{
+		program.run(onRunEnd);
+		runBtn.active = false;
+		runBtn.frame = 3;
+	}
+	
+	function onRunEnd()
+	{
+		runBtn.active = true;
+		runBtn.frame = 0;
+	}
 }

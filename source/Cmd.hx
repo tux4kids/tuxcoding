@@ -26,9 +26,10 @@ class Cmd extends FlxSprite
 		type = -1;
 	}
 	
-	public function run():Void 
+	public function run(playState:PlayState):Void 
 	{
-		FlxG.log("Command " + type);
+		playState.selected.type = type;
+		playState.selected.visible = true;
 	}
 	
 }
