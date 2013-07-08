@@ -2,7 +2,6 @@ package ;
 
 import org.flixel.FlxButton;
 import org.flixel.FlxG;
-import org.flixel.FlxGroup;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
@@ -14,7 +13,9 @@ import org.flixel.FlxTilemap;
  */
 class PlayState extends FlxState
 {
-
+	public inline static var PlayerTile:Int = 14;
+	public inline static var TileSize:Int = 35;
+	
 	private var levelNum:Int;
 	private var mapTilemap:FlxTilemap;
 	
@@ -24,6 +25,8 @@ class PlayState extends FlxState
 	private var runBtn:FlxButton;
 	
 	private var program:ProgramMem;
+	
+	private var player:Player;
 	
 	public function new(LvlNum:Int) 
 	{
@@ -47,6 +50,8 @@ class PlayState extends FlxState
 		mapTilemap.y = 10;
 		
 		add(mapTilemap);
+
+		initPlayer();
 		
 		var exitBtn:FlxButton;
 		add(exitBtn = new FlxButton(FlxG.width/2 - 80, FlxG.height - 110, null, onExit));
@@ -54,8 +59,20 @@ class PlayState extends FlxState
 
 		add(runBtn = new FlxButton(FlxG.width/2 + 5, FlxG.height - 110, null, onRun));
 		runBtn.loadGraphic(AssetNames.RunBtn, true);
-
+		
 		super.create();
+	}
+	
+	private function initPlayer():Void
+	{
+		add(player = new Player());
+		// find starting position
+		var tiles:Array<Int> = mapTilemap.getTileInstances(PlayerTile);
+		var coords:Array<FlxPoint> = mapTilemap.getTileCoords(PlayerTile);
+		if (coords.length > 0) {
+			player.setPos(coords[0].x, coords[0].y + TileSize / 2);
+			mapTilemap.setTileByIndex(tiles[0], 0);
+		}
 	}
 	
 	private function prepareToolbar():Void 
@@ -127,6 +144,15 @@ class PlayState extends FlxState
 		if (selected.visible) {
 			selected.x = FlxG.mouse.x - selected.width / 2;
 			selected.y = FlxG.mouse.y - selected.height / 2;
+		}
+		
+		// testing the player
+		if (player.idle)
+		{
+			if (FlxG.keys.justPressed("T")) player.turn();
+			else if (FlxG.keys.justPressed("W")) player.walk(TileSize);
+			else if (FlxG.keys.justPressed("UP")) player.jumpUp();
+			else if (FlxG.keys.justPressed("DOWN")) player.jumpDown();
 		}
 		
 		super.update();

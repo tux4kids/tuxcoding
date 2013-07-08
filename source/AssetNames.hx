@@ -13,5 +13,7 @@ class AssetNames
 	public static var ExitBtn:String = "assets/gui/exit-btn.png";
 	public static var Cmds:String = "assets/gui/cmds.png";
 	
+	public static var Player:String = "assets/player01.png";
+	
 	public static var LvlBtnFont:String = "assets/bangers.ttf";
 }
