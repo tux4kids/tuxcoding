@@ -1,5 +1,6 @@
 package ;
 
+import cmds.Cmd;
 import org.flixel.FlxG;
 import org.flixel.FlxGroup;
 import org.flixel.FlxPoint;
@@ -12,19 +13,22 @@ class ProgramGui extends FlxGroup
 
 	private var memory:FlxSprite;
 
-	private var playState:PlayState;
+	private var world:World;
+	
 	private var onEnd:Void -> Void; // callback to be called at the end of the execution of this program
 	public var running:Bool;
 
-	private var cmds:Array<CmdIcon>;
+	private var cmds:Array<Cmd>;
 	private var curCmd:Int;
 	private var curTime:Float;
 	
-	public function new(playState:PlayState, X:Float = 0, Y:Float = 0) 
+	private var cmdPool:Array<Cmd>;
+	
+	public function new(world:World, X:Float = 0, Y:Float = 0) 
 	{
 		super(memory_numRows * memory_numCols);
 		
-		this.playState = playState;
+		this.world = world;
 		
 		// memory is just used to test mouse overlap
 		memory = new FlxSprite(X, Y);
@@ -35,6 +39,8 @@ class ProgramGui extends FlxGroup
 				add(new CmdIcon(memory.x + CmdIcon.Size * c, memory.y + CmdIcon.Size * r));
 			}
 		}
+		
+		cmdPool = [];
 	}
 	
 	/**
@@ -53,23 +59,49 @@ class ProgramGui extends FlxGroup
 		
 		return cast(members[index], CmdIcon);
 	}
-/*	
-	public function run(OnEnd:Void -> Void = null):Void 
+	
+	private function recycleCmd(cmdClass:Class<Cmd>):Cmd
+	{
+		for (cmd in cmdPool) {
+			if (Std.is(cmd, cmdClass) && !cmd.active) {
+				cmd.active = true;
+				return cmd;
+			}
+		}
+	
+		var cmd = Type.createInstance(cmdClass, [world]);
+		cmdPool.push(cmd);
+		
+		return cmd;
+	}
+	
+	public function run(OnEnd:Void -> Void = null):Bool 
 	{
 		onEnd = OnEnd;
 		
 		cmds = [];
 		for (obj in members) {
-			var cmd:Cmd = cast(obj, Cmd);
-			if (cmd != null && cmd.type != -1) cmds.push(cmd);
+			var cmd:CmdIcon = cast(obj, CmdIcon);
+			if (cmd != null && cmd.type != -1) {
+				var cmdClass:Class<Cmd> = Cmd.getCmdClass(cmd.type);
+				if (cmdClass != null) cmds.push(recycleCmd(cmdClass));
+				
+			}
 		}
-		curCmd = 0;
-		runCmd();
-		running = true;
+		
+		curCmd = -1;
+		if (cmds.length > 0) {
+			runCmd();
+			running = true;
+		}
+		
+		return cmds.length > 0;
 	}
-	
+
 	function runCmd() 
 	{
+		curCmd++;
+		
 		if (curCmd == cmds.length)
 		{
 			// program ended
@@ -78,23 +110,22 @@ class ProgramGui extends FlxGroup
 		}
 		else
 		{
-			cmds[curCmd].run(playState);
-			curCmd++;
+			cmds[curCmd].run();
 			curTime = 1;
 		}
 	}
-*/	
+
 	override public function update():Void
 	{
-		//if (running)
-		//{
-			//curTime -= FlxG.elapsed;
-			//if (curTime <= 0)
-			//{
-				// time to run next command
-				//runCmd();
-			//}
-		//}
+		if (running)
+		{
+			if (curTime > 0) curTime -= FlxG.elapsed;
+			else if (!cmds[curCmd].isRunning)
+			{
+				//time to run next command
+				runCmd();
+			}
+		}
 	}
 	
 }

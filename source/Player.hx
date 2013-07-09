@@ -44,11 +44,11 @@ class Player extends FlxSprite
 		facing = facingLeft() ? FlxObject.RIGHT : FlxObject.LEFT;
 	}
 	
-	public function walk(dist:Float):Void 
+	public function walk():Void 
 	{
 		curAnim = "walk";
 		velocity.x = facingLeft() ? -50 : 50;
-		walkingDist = dist;
+		walkingDist = PlayState.TileSize;
 	}
 	
 	public function jumpUp():Void

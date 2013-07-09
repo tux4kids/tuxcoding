@@ -28,6 +28,8 @@ class PlayState extends FlxState
 	
 	private var player:Player;
 	
+	private var world:World;
+	
 	public function new(LvlNum:Int) 
 	{
 		super();
@@ -48,6 +50,8 @@ class PlayState extends FlxState
 
 		initPlayer();
 		
+		world = new World(player, mapTilemap);
+		
 		var exitBtn:FlxButton;
 		add(exitBtn = new FlxButton(FlxG.width/2 - 80, FlxG.height - 110, null, onExit));
 		exitBtn.loadGraphic(AssetNames.ExitBtn, true, false, 75, 75);
@@ -56,7 +60,7 @@ class PlayState extends FlxState
 		runBtn.loadGraphic(AssetNames.RunBtn, true);
 
 		prepareToolbar();
-		add(program = new ProgramGui(this, 430, 100));
+		add(program = new ProgramGui(world, 430, 100));
 		
 		add(selected = new CmdIcon());
 		selected.visible = false;
@@ -147,15 +151,6 @@ class PlayState extends FlxState
 			selected.y = FlxG.mouse.y - selected.height / 2;
 		}
 		
-		// testing the player
-		if (player.idle)
-		{
-			if (FlxG.keys.justPressed("T")) player.turn();
-			else if (FlxG.keys.justPressed("W")) player.walk(TileSize);
-			else if (FlxG.keys.justPressed("UP")) player.jumpUp();
-			else if (FlxG.keys.justPressed("DOWN")) player.jumpDown();
-		}
-		
 		super.update();
 	}
 
@@ -166,14 +161,15 @@ class PlayState extends FlxState
 	
 	function onRun() 
 	{
-		//program.run(onRunEnd);
-		//runBtn.active = false;
-		//runBtn.frame = 3;
+		if (program.run(onRunEnd)) {
+			runBtn.active = false;
+			runBtn.frame = 3;
+		}
 	}
 	
 	function onRunEnd()
 	{
-		//runBtn.active = true;
-		//runBtn.frame = 0;
+		runBtn.active = true;
+		runBtn.frame = 0;
 	}
 }

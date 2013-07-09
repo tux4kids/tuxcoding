@@ -20,5 +20,4 @@ class CmdIcon extends FlxSprite
 		loadGraphic(AssetNames.Cmds, true, false);
 		type = -1;
 	}
-	
 }
