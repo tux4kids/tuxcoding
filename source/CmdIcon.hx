@@ -1,13 +1,8 @@
 package ;
 
-import org.flixel.FlxG;
 import org.flixel.FlxSprite;
 
-/**
- * ...
- * @author haden
- */
-class Cmd extends FlxSprite
+class CmdIcon extends FlxSprite
 {
 	public inline static var NumCmds:Int = 4;
 	public inline static var Size:Int = 40;
@@ -24,12 +19,6 @@ class Cmd extends FlxSprite
 		super(X, Y);
 		loadGraphic(AssetNames.Cmds, true, false);
 		type = -1;
-	}
-	
-	public function run(playState:PlayState):Void 
-	{
-		playState.selected.type = type;
-		playState.selected.visible = true;
 	}
 	
 }

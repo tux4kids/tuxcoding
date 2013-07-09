@@ -5,11 +5,7 @@ import org.flixel.FlxGroup;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 
-/**
- * ...
- * @author haden
- */
-class ProgramMem extends FlxGroup
+class ProgramGui extends FlxGroup
 {
 	private inline static var memory_numRows:Int = 2;
 	private inline static var memory_numCols:Int = 5;
@@ -20,7 +16,7 @@ class ProgramMem extends FlxGroup
 	private var onEnd:Void -> Void; // callback to be called at the end of the execution of this program
 	public var running:Bool;
 
-	private var cmds:Array<Cmd>;
+	private var cmds:Array<CmdIcon>;
 	private var curCmd:Int;
 	private var curTime:Float;
 	
@@ -32,11 +28,11 @@ class ProgramMem extends FlxGroup
 		
 		// memory is just used to test mouse overlap
 		memory = new FlxSprite(X, Y);
-		memory.makeGraphic(Std.int(Cmd.Size * memory_numCols), Std.int(Cmd.Size * memory_numRows), 0x00000000);
+		memory.makeGraphic(Std.int(CmdIcon.Size * memory_numCols), Std.int(CmdIcon.Size * memory_numRows), 0x00000000);
 
 		for (r in 0...memory_numRows) {
 			for (c in 0...memory_numCols) {
-				add(new Cmd(memory.x + Cmd.Size * c, memory.y + Cmd.Size * r));
+				add(new CmdIcon(memory.x + CmdIcon.Size * c, memory.y + CmdIcon.Size * r));
 			}
 		}
 	}
@@ -47,17 +43,17 @@ class ProgramMem extends FlxGroup
 	 * @param	Y y-coordinate of the mouse
 	 * @return overlaped cmd or null if no command found
 	 */
-	public function getSelectedCmd(point:FlxPoint):Cmd 
+	public function getSelectedCmd(point:FlxPoint):CmdIcon
 	{
 		if (!memory.overlapsPoint(point)) return null;
 
-		var c:Int = Std.int( Math.floor((point.x - memory.x) / Cmd.Size));
-		var r:Int = Std.int( Math.floor((point.y - memory.y) / Cmd.Size));
+		var c:Int = Std.int( Math.floor((point.x - memory.x) / CmdIcon.Size));
+		var r:Int = Std.int( Math.floor((point.y - memory.y) / CmdIcon.Size));
 		var index:Int = (r * memory_numCols + c);
 		
-		return cast(members[index], Cmd);
+		return cast(members[index], CmdIcon);
 	}
-	
+/*	
 	public function run(OnEnd:Void -> Void = null):Void 
 	{
 		onEnd = OnEnd;
@@ -87,18 +83,18 @@ class ProgramMem extends FlxGroup
 			curTime = 1;
 		}
 	}
-	
+*/	
 	override public function update():Void
 	{
-		if (running)
-		{
-			curTime -= FlxG.elapsed;
-			if (curTime <= 0)
-			{
+		//if (running)
+		//{
+			//curTime -= FlxG.elapsed;
+			//if (curTime <= 0)
+			//{
 				// time to run next command
-				runCmd();
-			}
-		}
+				//runCmd();
+			//}
+		//}
 	}
 	
 }

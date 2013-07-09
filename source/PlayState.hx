@@ -20,11 +20,11 @@ class PlayState extends FlxState
 	private var mapTilemap:FlxTilemap;
 	
 	private var toolbar:FlxSprite;
-	public var selected:Cmd;
+	public var selected:CmdIcon;
 	
 	private var runBtn:FlxButton;
 	
-	private var program:ProgramMem;
+	private var program:ProgramGui;
 	
 	private var player:Player;
 	
@@ -37,11 +37,6 @@ class PlayState extends FlxState
 	override public function create():Void 
 	{
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xffaaaaaa));
-		prepareToolbar();
-		add(program = new ProgramMem(this, 430, 100));
-		
-		add(selected = new Cmd());
-		selected.visible = false;
 		
 		var mapName:String = "Map" + (levelNum + 1);
 
@@ -59,6 +54,12 @@ class PlayState extends FlxState
 
 		add(runBtn = new FlxButton(FlxG.width/2 + 5, FlxG.height - 110, null, onRun));
 		runBtn.loadGraphic(AssetNames.RunBtn, true);
+
+		prepareToolbar();
+		add(program = new ProgramGui(this, 430, 100));
+		
+		add(selected = new CmdIcon());
+		selected.visible = false;
 		
 		super.create();
 	}
@@ -78,10 +79,10 @@ class PlayState extends FlxState
 	private function prepareToolbar():Void 
 	{
 		toolbar = new FlxSprite();
-		var cmd:Cmd = new Cmd();
+		var cmd:CmdIcon = new CmdIcon();
 		
-		toolbar.makeGraphic(Std.int(cmd.width * Cmd.NumCmds), Std.int(cmd.height), 0x00000000);
-		for (i in 0...Cmd.NumCmds) {
+		toolbar.makeGraphic(Std.int(CmdIcon.Size * CmdIcon.NumCmds), Std.int(CmdIcon.Size), 0x00000000);
+		for (i in 0...CmdIcon.NumCmds) {
 			cmd.type = i;
 			toolbar.stamp(cmd, Std.int(i * cmd.width), 0);
 		}
@@ -106,7 +107,7 @@ class PlayState extends FlxState
 				if (!FlxG.mouse.pressed()) 
 				{
 					// did the player drop the command over the program's memory ?
-					var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
+					var cmd:CmdIcon = program.getSelectedCmd(FlxG.mouse);
 					if (cmd != null) 
 					{
 						cmd.type = selected.type;
@@ -123,13 +124,13 @@ class PlayState extends FlxState
 					if (toolbar.overlapsPoint(FlxG.mouse))
 					{
 						// find which command was selected
-						selected.type = Std.int( (FlxG.mouse.x - toolbar.x) / Cmd.Size);
+						selected.type = Std.int( (FlxG.mouse.x - toolbar.x) / CmdIcon.Size);
 						selected.visible = true;
 					}
 					else 
 					{
 						// did the player click over the program's memory
-						var cmd:Cmd = program.getSelectedCmd(FlxG.mouse);
+						var cmd:CmdIcon = program.getSelectedCmd(FlxG.mouse);
 						if (cmd != null)
 						{
 							selected.type = cmd.type;
@@ -165,14 +166,14 @@ class PlayState extends FlxState
 	
 	function onRun() 
 	{
-		program.run(onRunEnd);
-		runBtn.active = false;
-		runBtn.frame = 3;
+		//program.run(onRunEnd);
+		//runBtn.active = false;
+		//runBtn.frame = 3;
 	}
 	
 	function onRunEnd()
 	{
-		runBtn.active = true;
-		runBtn.frame = 0;
+		//runBtn.active = true;
+		//runBtn.frame = 0;
 	}
 }
