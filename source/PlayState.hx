@@ -71,13 +71,31 @@ class PlayState extends FlxState
 	private function initPlayer():Void
 	{
 		add(player = new Player());
+		var startIndex:Int = -1;
+		var startR:Int = -1;
+		var startC:Int = -1;
+		
 		// find starting position
-		var tiles:Array<Int> = mapTilemap.getTileInstances(PlayerTile);
-		var coords:Array<FlxPoint> = mapTilemap.getTileCoords(PlayerTile);
-		if (coords.length > 0) {
-			player.setPos(coords[0].x, coords[0].y + TileSize / 2);
-			mapTilemap.setTileByIndex(tiles[0], 0);
+		for (r in 0...mapTilemap.heightInTiles) {
+			for (c in 0...mapTilemap.widthInTiles) {
+				var index = r * mapTilemap.widthInTiles + c;
+				if (mapTilemap.getTileByIndex(index) == PlayerTile) {
+					startIndex = index;
+					startR = r;
+					startC = c;
+				}
+			}
 		}
+		
+		if (startIndex == -1) {
+			throw "Error, map doesn't contain a starting position";
+			return;
+		}
+
+		player.setPos(startC, startR, 
+			mapTilemap.x + (startC + .5) * TileSize,
+			mapTilemap.y + (startR + 1) * TileSize);
+		mapTilemap.setTileByIndex(startIndex, 0);
 	}
 	
 	private function prepareToolbar():Void 
