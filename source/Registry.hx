@@ -16,13 +16,18 @@ class Registry
 	{
 		if (initialized) return;
 		
+		reloadLevels();
+		
+		initialized = true;
+	}
+	
+	public static function reloadLevels():Void
+	{
 		level = DameLevel.loadLevel(
 			Assets.getText(AssetNames.LevelsXML), // XML file exported from DAME
 			"assets/levels/", // directory where we saved .dam
 			false // add the level to the state when loaded
 		);
-		
-		initialized = true;
 	}
 	
 }
