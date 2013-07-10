@@ -102,7 +102,7 @@ class ProgramGui extends FlxGroup
 	{
 		curCmd++;
 		
-		if (curCmd == cmds.length)
+		if (curCmd == cmds.length || !cmds[curCmd].canRun())
 		{
 			// program ended
 			running = false;

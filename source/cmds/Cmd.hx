@@ -23,7 +23,11 @@ class Cmd
 		throw "Cmd.run() not implemented";
 	}
 	
-	public function get_running():Bool {
+	public function canRun():Bool {
+		return true;
+	}
+	
+	private function get_running():Bool {
 		return !world.player.idle;
 	}
 		
