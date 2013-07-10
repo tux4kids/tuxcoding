@@ -18,7 +18,7 @@ class Walk extends Cmd
 	
 	override public function canRun():Bool 
 	{
-		// can run forward if :
+		// can move forward if :
 		// player faces an empty (but existing) tile
 		// there is a tile below the facing tile
 		var player:Player = world.player;
