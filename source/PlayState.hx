@@ -48,10 +48,9 @@ class PlayState extends FlxState
 		mapTilemap.y = 10;
 		
 		add(mapTilemap);
+		add(player = new Player());
 
-		initPlayer();
-		
-		world = new World(player, mapTilemap);
+		initWorld();
 		
 		var exitBtn:FlxButton;
 		add(exitBtn = new FlxButton(FlxG.width/2 - 80, FlxG.height - 110, null, onExit));
@@ -69,9 +68,8 @@ class PlayState extends FlxState
 		super.create();
 	}
 	
-	private function initPlayer():Void
+	private function initWorld():Void
 	{
-		add(player = new Player());
 		var startIndex:Int = -1;
 		var startR:Int = -1;
 		var startC:Int = -1;
@@ -93,10 +91,10 @@ class PlayState extends FlxState
 			return;
 		}
 
-		player.setPos(startC, startR, 
-			mapTilemap.x + (startC + .5) * TileSize,
-			mapTilemap.y + (startR + 1) * TileSize);
 		mapTilemap.setTileByIndex(startIndex, 0);
+
+		world = new World(player, mapTilemap, startC, startR);
+		world.reset();
 	}
 	
 	private function prepareToolbar():Void 

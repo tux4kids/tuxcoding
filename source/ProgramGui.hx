@@ -77,6 +77,8 @@ class ProgramGui extends FlxGroup
 	
 	public function run(OnEnd:Void -> Void = null):Bool 
 	{
+		world.reset();
+		
 		onEnd = OnEnd;
 		
 		cmds = [];
