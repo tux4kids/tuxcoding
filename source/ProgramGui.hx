@@ -8,7 +8,7 @@ import org.flixel.FlxSprite;
 
 class ProgramGui extends FlxGroup
 {
-	private inline static var memory_numRows:Int = 2;
+	private inline static var memory_numRows:Int = 5;
 	private inline static var memory_numCols:Int = 5;
 
 	private var memory:FlxSprite;

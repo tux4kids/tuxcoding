@@ -4,6 +4,10 @@ import org.flixel.FlxObject;
 import org.flixel.FlxPath;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
+import tileobjs.Key;
+import tileobjs.Lock;
+import tileobjs.TileObj;
+import tileobjs.Coin;
 
 class Player extends FlxSprite
 {
@@ -14,6 +18,7 @@ class Player extends FlxSprite
 	public var tileY(default, null):Int;
 	public var facingLeft(get_facingleft, null):Bool;
 	public var numCoins(default, null):Int;
+	public var hasKey(default, null):Bool;
 	
 	private function get_idle():Bool {
 		return curAnim == null;
@@ -27,6 +32,7 @@ class Player extends FlxSprite
 	{
 		facing = FlxObject.RIGHT;
 		numCoins = 0;
+		hasKey = false;
 	}
 	
 	public function new() 
@@ -57,10 +63,23 @@ class Player extends FlxSprite
 		facing = facingLeft ? FlxObject.RIGHT : FlxObject.LEFT;
 	}
 	
-	public function take(coin:Coin):Void
+	public function take(obj:TileObj):Void
 	{
-		numCoins++;
-		coin.visible = false;
+		if (Std.is(obj, Coin)) 
+		{
+			numCoins++;
+			obj.visible = false;
+		} else if (Std.is(obj, Key))
+		{
+			hasKey = true;
+			obj.visible = false;
+		}
+	}
+	
+	public function unlock(lock:Lock):Void
+	{
+		hasKey = false;
+		lock.visible = false;
 	}
 	
 	public function walk():Void 

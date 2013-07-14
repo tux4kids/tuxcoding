@@ -15,6 +15,8 @@ class AssetNames
 	
 	public static var Player:String = "assets/player01.png";
 	public static var Coin:String = "assets/coinGold.png";
+	public static var Key:String = "assets/keyBlue.png";
+	public static var Lock:String = "assets/lock_blue.png";
 	
 	public static var LvlBtnFont:String = "assets/bangers.ttf";
 }

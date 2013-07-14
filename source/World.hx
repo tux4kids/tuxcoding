@@ -2,6 +2,7 @@ package ;
 import org.flixel.FlxObject;
 import org.flixel.FlxTilemap;
 import org.flixel.FlxPoint;
+import tileobjs.TileObj;
 
 /**
  * contains all information needed by a Cmd
@@ -11,14 +12,14 @@ class World
 	public var player(default, null):Player;
 	public var map(default, null):FlxTilemap;
 	public var startPos(default, null):FlxPoint;
-	public var objects(default, null):Array<Coin>;
+	public var objects(default, null):Array<TileObj>;
 	
-	public function new(player:Player, map:FlxTilemap, coins:Array<Coin>, startX:Int, startY:Int) 
+	public function new(player:Player, map:FlxTilemap, objs:Array<TileObj>, startX:Int, startY:Int) 
 	{
 		this.player = player;
 		this.map = map;
 		startPos = new FlxPoint(startX, startY);
-		objects = coins;
+		objects = objs;
 	}
 	
 	public function restart():Void
@@ -48,14 +49,16 @@ class World
 	
 	public function isEmpty(tileX:Int, tileY:Int):Bool
 	{
-		return map.getTile(tileX, tileY) == 0;
+		if (map.getTile(tileX, tileY) != 0) return false;
+		var obj = getObject(tileX, tileY);
+		return obj == null || obj.canBeWalked;
 	}
 	
-	public function getCoin(tileX:Int, tileY:Int):Coin
+	public function getObject(tileX:Int, tileY:Int):TileObj
 	{
-		for (coin in objects) {
-			if (coin.visible && coin.tileX == tileX && coin.tileY == tileY) 
-				return coin;
+		for (obj in objects) {
+			if (obj.visible && obj.tileX == tileX && obj.tileY == tileY) 
+				return obj;
 		}
 		
 		return null;

@@ -3,10 +3,13 @@ package ;
 import org.flixel.FlxButton;
 import org.flixel.FlxG;
 import org.flixel.FlxGroup;
-import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxTilemap;
+import tileobjs.Coin;
+import tileobjs.Key;
+import tileobjs.Lock;
+import tileobjs.TileObj;
 
 /**
  * Main game state
@@ -16,6 +19,8 @@ class PlayState extends FlxState
 {
 	public inline static var PlayerTile:Int = 14;
 	public inline static var CoinTile:Int = 15;
+	public inline static var KeyTile:Int = 16;
+	public inline static var LockTile:Int = 17;
 	public inline static var TileSize:Int = 35;
 	
 	private var levelNum:Int;
@@ -76,7 +81,7 @@ class PlayState extends FlxState
 	{
 		var startR:Int = -1;
 		var startC:Int = -1;
-		var coins:Array<Coin> = [];
+		var objs:Array<TileObj> = [];
 		
 		// find starting position and coins
 		for (r in 0...mapTilemap.heightInTiles) {
@@ -91,7 +96,17 @@ class PlayState extends FlxState
 				} else if (tile == CoinTile) {
 					var coin = new Coin(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
 					objects.add(coin);
-					coins.push(coin);
+					objs.push(coin);
+					clean = true;
+				} else if (tile == KeyTile) {
+					var key = new Key(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					objects.add(key);
+					objs.push(key);
+					clean = true;
+				} else if (tile == LockTile) {
+					var lock = new Lock(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					objects.add(lock);
+					objs.push(lock);
 					clean = true;
 				}
 				
@@ -105,7 +120,7 @@ class PlayState extends FlxState
 			return;
 		}
 
-		world = new World(player, mapTilemap, coins, startC, startR);
+		world = new World(player, mapTilemap, objs, startC, startR);
 		world.restart();
 	}
 	

@@ -42,6 +42,8 @@ class Cmd
 				return Jump;
 			case 3:
 				return Take;
+			case 4:
+				return Unlock;
 			default:
 				return null;
 		}
