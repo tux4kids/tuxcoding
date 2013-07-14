@@ -2,6 +2,7 @@ package ;
 
 import org.flixel.FlxButton;
 import org.flixel.FlxG;
+import org.flixel.FlxGroup;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
@@ -14,10 +15,12 @@ import org.flixel.FlxTilemap;
 class PlayState extends FlxState
 {
 	public inline static var PlayerTile:Int = 14;
+	public inline static var CoinTile:Int = 15;
 	public inline static var TileSize:Int = 35;
 	
 	private var levelNum:Int;
 	private var mapTilemap:FlxTilemap;
+	private var objects:FlxGroup;
 	
 	private var toolbar:FlxSprite;
 	public var selected:CmdIcon;
@@ -49,6 +52,7 @@ class PlayState extends FlxState
 		
 		add(mapTilemap);
 		add(player = new Player());
+		add(objects = new FlxGroup());
 
 		initWorld();
 		
@@ -70,31 +74,39 @@ class PlayState extends FlxState
 	
 	private function initWorld():Void
 	{
-		var startIndex:Int = -1;
 		var startR:Int = -1;
 		var startC:Int = -1;
+		var coins:Array<Coin> = [];
 		
-		// find starting position
+		// find starting position and coins
 		for (r in 0...mapTilemap.heightInTiles) {
 			for (c in 0...mapTilemap.widthInTiles) {
 				var index = r * mapTilemap.widthInTiles + c;
-				if (mapTilemap.getTileByIndex(index) == PlayerTile) {
-					startIndex = index;
+				var tile = mapTilemap.getTileByIndex(index);
+				var clean = false;
+				if (tile == PlayerTile) {
 					startR = r;
 					startC = c;
+					clean = true;
+				} else if (tile == CoinTile) {
+					var coin = new Coin(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					objects.add(coin);
+					coins.push(coin);
+					clean = true;
 				}
+				
+				if (clean)
+					mapTilemap.setTileByIndex(index, 0);
 			}
 		}
 		
-		if (startIndex == -1) {
+		if (startR == -1) {
 			throw "Error, map doesn't contain a starting position";
 			return;
 		}
 
-		mapTilemap.setTileByIndex(startIndex, 0);
-
-		world = new World(player, mapTilemap, startC, startR);
-		world.reset();
+		world = new World(player, mapTilemap, coins, startC, startR);
+		world.restart();
 	}
 	
 	private function prepareToolbar():Void 

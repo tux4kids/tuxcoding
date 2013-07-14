@@ -13,6 +13,7 @@ class Player extends FlxSprite
 	public var tileX(default, null):Int;
 	public var tileY(default, null):Int;
 	public var facingLeft(get_facingleft, null):Bool;
+	public var numCoins(default, null):Int;
 	
 	private function get_idle():Bool {
 		return curAnim == null;
@@ -20,6 +21,12 @@ class Player extends FlxSprite
 	
 	private function get_facingleft():Bool {
 		return facing == FlxObject.LEFT;
+	}
+	
+	public function restart():Void
+	{
+		facing = FlxObject.RIGHT;
+		numCoins = 0;
 	}
 	
 	public function new() 
@@ -48,6 +55,12 @@ class Player extends FlxSprite
 	public function turn():Void
 	{
 		facing = facingLeft ? FlxObject.RIGHT : FlxObject.LEFT;
+	}
+	
+	public function take(coin:Coin):Void
+	{
+		numCoins++;
+		coin.visible = false;
 	}
 	
 	public function walk():Void 

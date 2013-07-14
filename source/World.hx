@@ -11,20 +11,27 @@ class World
 	public var player(default, null):Player;
 	public var map(default, null):FlxTilemap;
 	public var startPos(default, null):FlxPoint;
+	public var objects(default, null):Array<Coin>;
 	
-	public function new(player:Player, map:FlxTilemap, startX:Int, startY:Int) 
+	public function new(player:Player, map:FlxTilemap, coins:Array<Coin>, startX:Int, startY:Int) 
 	{
 		this.player = player;
 		this.map = map;
 		startPos = new FlxPoint(startX, startY);
+		objects = coins;
 	}
 	
-	public function reset():Void
+	public function restart():Void
 	{
 		player.setPos(Std.int(startPos.x), Std.int(startPos.y), 
 			map.x + (startPos.x + .5) * PlayState.TileSize,
 			map.y + (startPos.y + 1) * PlayState.TileSize);	
-		player.facing = FlxObject.RIGHT;
+		player.restart();
+		
+		for (obj in objects) 
+		{
+			obj.visible = true;
+		}
 	}
 	/**
 	 * checks if the tile is inside the map boundaries
@@ -42,6 +49,16 @@ class World
 	public function isEmpty(tileX:Int, tileY:Int):Bool
 	{
 		return map.getTile(tileX, tileY) == 0;
+	}
+	
+	public function getCoin(tileX:Int, tileY:Int):Coin
+	{
+		for (coin in objects) {
+			if (coin.visible && coin.tileX == tileX && coin.tileY == tileY) 
+				return coin;
+		}
+		
+		return null;
 	}
 	
 }

@@ -40,6 +40,8 @@ class Cmd
 				return Turn;
 			case 2:
 				return Jump;
+			case 3:
+				return Take;
 			default:
 				return null;
 		}
