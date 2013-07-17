@@ -1,10 +1,16 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package ;
 import org.flixel.FlxButton;
 
 /**
  * Level Select Button, displays the level's number
- * 
- * @author haden
  */
 class LevelBtn extends FlxButton
 {

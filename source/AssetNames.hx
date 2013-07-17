@@ -1,8 +1,15 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package ;
 
 /**
  * Holds all asset paths. Makes it easier to change the assets for the game
- * @author haden
  */
 class AssetNames
 {

@@ -1,3 +1,11 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package ;
 import org.flixel.FlxObject;
 import org.flixel.FlxTilemap;

@@ -1,11 +1,15 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package ;
 import org.ivar.leveltools.DameLevel;
 import nme.Assets;
 
-/**
- * ...
- * @author haden
- */
 class Registry
 {
 	private static var initialized:Bool = false;

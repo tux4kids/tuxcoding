@@ -1,10 +1,14 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package cmds;
 import org.flixel.FlxG;
 
-/**
- * ...
- * @author haden
- */
 class Cmd
 {
 	public var active:Bool; // true is this command is part of the program

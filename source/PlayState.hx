@@ -1,3 +1,11 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package ;
 
 import org.flixel.FlxButton;
@@ -13,7 +21,6 @@ import tileobjs.TileObj;
 
 /**
  * Main game state
- * @author haden
  */
 class PlayState extends FlxState
 {

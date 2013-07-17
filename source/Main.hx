@@ -1,3 +1,11 @@
+/*
+ * Copyright 2013 Tux4Kids 
+ * Distributed under the terms of the MIT License. 
+ * 
+ * Author(s): 
+ * Abdelhakim Deneche 
+ */
+
 package;
 
 import nme.display.StageAlign;
@@ -9,9 +17,6 @@ import nme.Lib;
 import nme.ui.Keyboard;
 import org.flixel.FlxGame;
 
-/**
- * @author Joshua Granick
- */
 class Main extends Sprite 
 {
 	
