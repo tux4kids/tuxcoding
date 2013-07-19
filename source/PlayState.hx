@@ -13,6 +13,7 @@ import org.flixel.FlxG;
 import org.flixel.FlxGroup;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
+import org.flixel.FlxText;
 import org.flixel.FlxTilemap;
 import tileobjs.Coin;
 import tileobjs.Key;
@@ -40,6 +41,7 @@ class PlayState extends FlxState
 	private var runBtn:FlxButton;
 	
 	private var program:ProgramGui;
+	private var fun1:ProgramGui;
 	
 	private var player:Player;
 	
@@ -76,7 +78,12 @@ class PlayState extends FlxState
 		runBtn.loadGraphic(AssetNames.RunBtn, true);
 
 		prepareToolbar(10, 310);
+		
+		add(new FlxText(10, 360, 100, "Main:").setFormat(null, 16, 0));
 		add(program = new ProgramGui(world, 3, 8, 10, 380));
+
+		add(new FlxText(400, 360, 110, "Function 1:").setFormat(null, 16, 0));
+		add(fun1 = new ProgramGui(world, 3, 8, 400, 380));
 		
 		add(selected = new CmdIcon());
 		selected.visible = false;
@@ -159,8 +166,11 @@ class PlayState extends FlxState
 			{
 				if (!FlxG.mouse.pressed()) 
 				{
-					// did the player drop the command over the program's memory ?
 					var cmd:CmdIcon = program.getSelectedCmd(FlxG.mouse);
+					if (cmd == null)
+						cmd = fun1.getSelectedCmd(FlxG.mouse);
+					
+					// did the player drop the command over a program or a function ?
 					if (cmd != null) 
 					{
 						cmd.type = selected.type;
@@ -210,6 +220,8 @@ class PlayState extends FlxState
 	
 	function onRun() 
 	{
+		world.restart();
+
 		if (program.run(onRunEnd)) {
 			runBtn.active = false;
 			runBtn.frame = 3;
