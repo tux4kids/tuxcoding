@@ -7,65 +7,105 @@
   <spriteEntries currentId="1"/>
   <layers>
     <group name="levels" id="0" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
-      <maplayer name="Map1" id="0" xScroll="1" yScroll="1" x="0" y="0" width="11" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,14,0,0,0,0,0,15,0,0</row>
-        <row>9,9,9,9,9,9,9,9,9,9,9</row>
+      <maplayer name="Map1" id="0" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,14,0,0,0,15,0,0,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
-      <maplayer name="Map2" id="1" xScroll="1" yScroll="1" x="0" y="0" width="10" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false" selected="true">
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,10,0,0</row>
-        <row>0,0,0,0,0,0,0,10,0,0</row>
-        <row>0,0,14,0,16,0,0,17,0,15</row>
-        <row>9,9,9,9,9,9,9,9,9,9</row>
+      <maplayer name="Map2" id="1" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,14,0,0,15,0,0,15,0,0,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
-      <maplayer name="Map3" id="2" xScroll="1" yScroll="1" x="0" y="0" width="10" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>10,10,10,10,10,10,10,10,10,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,15,0,10</row>
-        <row>10,0,14,0,0,0,10,10,0,10</row>
-        <row>10,10,10,10,10,10,10,10,10,10</row>
+      <maplayer name="Map3" id="2" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,14,15,15,0,0,15,15,0,0,15,15,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
-      <maplayer name="Map4" id="3" xScroll="1" yScroll="1" x="0" y="0" width="10" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>10,10,10,10,10,10,10,10,10,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,14,0,0,0,0,15,0,10</row>
-        <row>10,10,10,10,10,10,10,10,10,10</row>
+      <maplayer name="Map4" id="3" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,14,0,10,0,15,0,0,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
-      <maplayer name="Map5" id="4" xScroll="1" yScroll="1" x="0" y="0" width="10" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>13,10,10,13,13,13,13,10,10,13</row>
-        <row>13,10,10,13,13,13,13,10,10,13</row>
-        <row>13,10,0,0,0,0,0,0,10,13</row>
-        <row>13,0,0,0,11,11,0,0,0,13</row>
-        <row>13,0,0,0,11,11,0,0,0,13</row>
-        <row>13,0,0,0,0,0,0,0,0,13</row>
-        <row>13,10,0,14,0,0,0,0,10,13</row>
-        <row>13,11,11,11,11,11,11,11,10,13</row>
+      <maplayer name="Map5" id="4" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,15,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,14,0,0,10,0,0,15,0,0,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
-      <maplayer name="Map6" id="5" xScroll="1" yScroll="1" x="0" y="0" width="29" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>10,0,0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10</row>
-        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
+      <maplayer name="Map6" id="5" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,15,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,14,0,10,10,10,0,15,0,0,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
+      </maplayer>
+      <maplayer name="Map7" id="6" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,15,0,0,0,0,15,0,0,0,0,0</row>
+        <row>0,0,0,0,10,0,0,0,0,10,0,0,0,0,0</row>
+        <row>0,14,0,10,10,10,0,0,10,10,10,0,15,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
+      </maplayer>
+      <maplayer name="Map8" id="7" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,15,0,0,0,0,0,0,0,15,0,0,0</row>
+        <row>0,0,0,10,0,0,0,0,0,0,0,10,0,0,0</row>
+        <row>0,0,0,10,10,0,0,14,0,0,10,10,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
+      </maplayer>
+      <maplayer name="Map9" id="8" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,13,13,13,13,13,0,0,0</row>
+        <row>0,0,0,0,0,0,0,13,0,0,0,13,0,0,0</row>
+        <row>0,0,0,14,0,16,0,4,0,15,0,13,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,9,13,9,9,9</row>
+      </maplayer>
+      <maplayer name="Map10" id="9" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false" selected="true">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,13,13,13,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,13,0,13,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,17,15,13,0,0,0,0</row>
+        <row>0,0,16,0,0,14,0,10,10,10,13,0,0,0,0</row>
+        <row>9,9,9,9,9,9,9,9,9,9,13,9,9,9,9</row>
       </maplayer>
     </group>
   </layers>
