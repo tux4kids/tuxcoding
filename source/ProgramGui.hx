@@ -16,8 +16,6 @@ import org.flixel.FlxSprite;
 
 class ProgramGui extends FlxGroup
 {
-	private inline static var memory_numRows:Int = 5;
-	private inline static var memory_numCols:Int = 5;
 
 	private var memory:FlxSprite;
 
@@ -32,18 +30,22 @@ class ProgramGui extends FlxGroup
 	
 	private var cmdPool:Array<Cmd>;
 	
-	public function new(world:World, X:Float = 0, Y:Float = 0) 
+	private var numRows:Int;
+	private var numCols:Int;
+	
+	public function new(world:World, NumRows:Int, NumCols:Int, X:Float = 0, Y:Float = 0) 
 	{
-		super(memory_numRows * memory_numCols);
-		
+		super(NumRows * NumCols);
+		numRows = NumRows;
+		numCols = NumCols;
 		this.world = world;
 		
 		// memory is just used to test mouse overlap
 		memory = new FlxSprite(X, Y);
-		memory.makeGraphic(Std.int(CmdIcon.Size * memory_numCols), Std.int(CmdIcon.Size * memory_numRows), 0x00000000);
+		memory.makeGraphic(Std.int(CmdIcon.Size * NumCols), Std.int(CmdIcon.Size * NumRows), 0x00000000);
 
-		for (r in 0...memory_numRows) {
-			for (c in 0...memory_numCols) {
+		for (r in 0...NumRows) {
+			for (c in 0...NumCols) {
 				add(new CmdIcon(memory.x + CmdIcon.Size * c, memory.y + CmdIcon.Size * r));
 			}
 		}
@@ -63,7 +65,7 @@ class ProgramGui extends FlxGroup
 
 		var c:Int = Std.int( Math.floor((point.x - memory.x) / CmdIcon.Size));
 		var r:Int = Std.int( Math.floor((point.y - memory.y) / CmdIcon.Size));
-		var index:Int = (r * memory_numCols + c);
+		var index:Int = (r * numCols + c);
 		
 		return cast(members[index], CmdIcon);
 	}

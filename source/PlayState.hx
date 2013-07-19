@@ -59,7 +59,7 @@ class PlayState extends FlxState
 
 		Registry.reloadLevels(); // until we fix the starting pos BUG
 		mapTilemap = Registry.level.getTilemap(mapName);
-		mapTilemap.x = 10;
+		mapTilemap.x = (FlxG.width - mapTilemap.width) / 2;
 		mapTilemap.y = 10;
 		
 		add(mapTilemap);
@@ -69,14 +69,14 @@ class PlayState extends FlxState
 		initWorld();
 		
 		var exitBtn:FlxButton;
-		add(exitBtn = new FlxButton(FlxG.width/2 - 80, FlxG.height - 110, null, onExit));
+		add(exitBtn = new FlxButton(FlxG.width - 100, 350, null, onExit));
 		exitBtn.loadGraphic(AssetNames.ExitBtn, true, false, 75, 75);
 
-		add(runBtn = new FlxButton(FlxG.width/2 + 5, FlxG.height - 110, null, onRun));
+		add(runBtn = new FlxButton(FlxG.width - 100, 450, null, onRun));
 		runBtn.loadGraphic(AssetNames.RunBtn, true);
 
-		prepareToolbar();
-		add(program = new ProgramGui(world, 430, 100));
+		prepareToolbar(10, 310);
+		add(program = new ProgramGui(world, 3, 8, 10, 380));
 		
 		add(selected = new CmdIcon());
 		selected.visible = false;
@@ -131,9 +131,9 @@ class PlayState extends FlxState
 		world.restart();
 	}
 	
-	private function prepareToolbar():Void 
+	private function prepareToolbar(X:Float, Y:Float):Void 
 	{
-		toolbar = new FlxSprite();
+		toolbar = new FlxSprite(X, Y);
 		var cmd:CmdIcon = new CmdIcon();
 		
 		toolbar.makeGraphic(Std.int(CmdIcon.Size * CmdIcon.NumCmds), Std.int(CmdIcon.Size), 0x00000000);
@@ -141,9 +141,7 @@ class PlayState extends FlxState
 			cmd.type = i;
 			toolbar.stamp(cmd, Std.int(i * cmd.width), 0);
 		}
-		
-		toolbar.x = FlxG.width - toolbar.width - 10;
-		toolbar.y = 10;
+
 		add(toolbar);
 	}
 	
