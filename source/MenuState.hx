@@ -34,9 +34,9 @@ class MenuState extends FlxState
 		FlxG.mouse.show();
 		#end
 		
-		var numLevels:Int = 5;
+		var numLevels:Int = 6;
 		var pad:Int = 10;
-		var left:Int = Std.int((FlxG.width - 5 * 100 - 4 * pad) / 2);
+		var left:Int = Std.int((FlxG.width - numLevels * 100 - (numLevels - 1) * pad) / 2);
 		for (i in 0...numLevels) {
 			add(new LevelBtn(i, left + (100+pad)*i, FlxG.height-150, onStart));
 		}
