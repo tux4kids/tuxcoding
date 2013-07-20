@@ -20,12 +20,14 @@ class Jump extends Cmd
 		super(world);
 	}
 	
-	override public function run():Void 
+	override public function run():Bool
 	{
 		if (jumpUp)
 			world.player.jumpUp();
 		else
 			world.player.jumpDown();
+			
+		return false;
 	}
 	
 	override public function canRun():Bool 

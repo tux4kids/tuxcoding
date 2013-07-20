@@ -8,6 +8,8 @@
 
 package ;
 
+import cmds.Cmd;
+import cmds.Fun;
 import org.flixel.FlxButton;
 import org.flixel.FlxG;
 import org.flixel.FlxGroup;
@@ -84,9 +86,12 @@ class PlayState extends FlxState
 
 		add(new FlxText(400, 360, 110, "Function 1:").setFormat(null, 16, 0));
 		add(fun1 = new ProgramGui(world, 3, 8, 400, 380));
+		fun1.active = false; // don't call update() automatically
 		
 		add(selected = new CmdIcon());
 		selected.visible = false;
+		
+		Fun.program = fun1;
 		
 		super.create();
 	}
@@ -143,8 +148,8 @@ class PlayState extends FlxState
 		toolbar = new FlxSprite(X, Y);
 		var cmd:CmdIcon = new CmdIcon();
 		
-		toolbar.makeGraphic(Std.int(CmdIcon.Size * CmdIcon.NumCmds), Std.int(CmdIcon.Size), 0x00000000);
-		for (i in 0...CmdIcon.NumCmds) {
+		toolbar.makeGraphic(Std.int(CmdIcon.Size * Cmd.NumCmds), Std.int(CmdIcon.Size), 0x00000000);
+		for (i in 0...Cmd.NumCmds) {
 			cmd.type = i;
 			toolbar.stamp(cmd, Std.int(i * cmd.width), 0);
 		}
@@ -194,6 +199,9 @@ class PlayState extends FlxState
 					{
 						// did the player click over the program's memory
 						var cmd:CmdIcon = program.getSelectedCmd(FlxG.mouse);
+						if (cmd == null)
+							cmd = fun1.getSelectedCmd(FlxG.mouse);
+							
 						if (cmd != null)
 						{
 							selected.type = cmd.type;

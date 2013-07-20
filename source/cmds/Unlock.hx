@@ -22,9 +22,10 @@ class Unlock extends Cmd
 		super(world);
 	}
 	
-	override public function run():Void 
+	override public function run():Bool
 	{
 		world.player.unlock(lock);
+		return false;
 	}
 	
 	override public function canRun():Bool 

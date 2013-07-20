@@ -12,7 +12,6 @@ import org.flixel.FlxSprite;
 
 class CmdIcon extends FlxSprite
 {
-	public inline static var NumCmds:Int = 5;
 	public inline static var Size:Int = 40;
 	
 	public var type(default, set_type) : Int;

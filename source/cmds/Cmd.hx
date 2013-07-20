@@ -7,10 +7,11 @@
  */
 
 package cmds;
-import org.flixel.FlxG;
 
 class Cmd
 {
+	public inline static var NumCmds:Int = 6;
+
 	public var active:Bool; // true is this command is part of the program
 	
 	public var isRunning(get_running, null):Bool;
@@ -23,8 +24,12 @@ class Cmd
 		this.world = world;
 	}
 	
-	public function run():Void {
+	/**
+	 * @return true if the command is still running (probably a function)
+	 */
+	public function run():Bool {
 		throw "Cmd.run() not implemented";
+		return false;
 	}
 	
 	public function canRun():Bool {
@@ -36,7 +41,6 @@ class Cmd
 	}
 		
 	public static function getCmdClass(type:Int):Class<Cmd> {
-		FlxG.log("cmd type: " + type);
 		switch (type) {
 			case 0:
 				return Walk;
@@ -48,6 +52,8 @@ class Cmd
 				return Take;
 			case 4:
 				return Unlock;
+			case 5:
+				return Fun;
 			default:
 				return null;
 		}

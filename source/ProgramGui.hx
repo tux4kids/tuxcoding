@@ -108,14 +108,14 @@ class ProgramGui extends FlxGroup
 		return cmds.length > 0;
 	}
 
-	function runCmd() 
+	public function runCmd() 
 	{
 		var canRun:Bool = cmds[curCmd].canRun();
 		if (canRun)
 		{
-			cmds[curCmd].run();
+			if (!cmds[curCmd].run())
+				curCmd++;
 			curTime = 1;
-			curCmd++;
 		}
 		
 		if (!canRun || curCmd == cmds.length)

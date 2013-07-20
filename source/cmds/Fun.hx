@@ -7,13 +7,15 @@
  */
 
 package cmds;
+import org.flixel.FlxG;
 
 /**
- * make the character change it's facing direction
+ * calls another function (multiple commands)
  */
-class Turn extends Cmd
+class Fun extends Cmd
 {
-
+	public static var program:ProgramGui;
+	
 	public function new(world:World) 
 	{
 		super(world);
@@ -21,8 +23,16 @@ class Turn extends Cmd
 	
 	override public function run():Bool
 	{
-		world.player.turn();
-		return false;
+		if (!program.running)
+		{
+			program.run();
+		} 
+		else
+		{
+			program.runCmd();
+		}
+		
+		return program.running;
 	}
 	
 }

@@ -23,9 +23,10 @@ class Take extends Cmd
 		super(world);
 	}
 	
-	override public function run():Void 
+	override public function run():Bool
 	{
 		world.player.take(obj);
+		return false;
 	}
 	
 	override public function canRun():Bool 
