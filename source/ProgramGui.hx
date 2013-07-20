@@ -99,7 +99,7 @@ class ProgramGui extends FlxGroup
 			}
 		}
 		
-		curCmd = -1;
+		curCmd = 0;
 		if (cmds.length > 0) {
 			runCmd();
 			running = true;
@@ -110,18 +110,19 @@ class ProgramGui extends FlxGroup
 
 	function runCmd() 
 	{
-		curCmd++;
+		var canRun:Bool = cmds[curCmd].canRun();
+		if (canRun)
+		{
+			cmds[curCmd].run();
+			curTime = 1;
+			curCmd++;
+		}
 		
-		if (curCmd == cmds.length || !cmds[curCmd].canRun())
+		if (!canRun || curCmd == cmds.length)
 		{
 			// program ended
 			running = false;
 			if (onEnd != null) onEnd();
-		}
-		else
-		{
-			cmds[curCmd].run();
-			curTime = 1;
 		}
 	}
 
