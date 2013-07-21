@@ -85,19 +85,25 @@ class ProgramGui extends FlxGroup
 		return cmd;
 	}
 	
-	public function run(OnEnd:Void -> Void = null):Bool 
+	public function getCommands():Array<Cmd>
 	{
-		onEnd = OnEnd;
-		
-		cmds = [];
+		var cmds:Array<Cmd> = [];
 		for (obj in members) {
 			var cmd:CmdIcon = cast(obj, CmdIcon);
 			if (cmd != null && cmd.type != -1) {
 				var cmdClass:Class<Cmd> = Cmd.getCmdClass(cmd.type);
 				if (cmdClass != null) cmds.push(recycleCmd(cmdClass));
-				
 			}
 		}
+		
+		return cmds;
+	}
+	
+	public function run(OnEnd:Void -> Void = null):Bool 
+	{
+		onEnd = OnEnd;
+		
+		cmds = getCommands();
 		
 		curCmd = 0;
 		if (cmds.length > 0) {
