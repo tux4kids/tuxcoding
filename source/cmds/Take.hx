@@ -34,7 +34,7 @@ class Take extends Cmd
 		var player:Player = world.player;
 		
 		obj = world.getObject(player.tileX, player.tileY);
-		if (!obj.canBeTaken) obj = null;
+		if (obj != null && !obj.canBeTaken) obj = null;
 		
 		return obj != null;
 	}
