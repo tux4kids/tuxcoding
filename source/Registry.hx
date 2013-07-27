@@ -7,31 +7,27 @@
  */
 
 package ;
-import org.ivar.leveltools.DameLevel;
-import nme.Assets;
+
+import openfl.Assets;
+import org.flixel.FlxTilemap;
 
 class Registry
 {
 	private static var initialized:Bool = false;
 	
-	public static var level:DameLevel;
-	
 	public static function init() 
 	{
 		if (initialized) return;
 		
-		reloadLevels();
-		
 		initialized = true;
 	}
 	
-	public static function reloadLevels():Void
+	public static function getTilemap(mapName: String):FlxTilemap
 	{
-		level = DameLevel.loadLevel(
-			Assets.getText(AssetNames.LevelsXML), // XML file exported from DAME
-			"assets/levels/", // directory where we saved .dam
-			false // add the level to the state when loaded
-		);
+		var tilemap:FlxTilemap = new FlxTilemap();
+		var mapData:String = Assets.getText("assets/levels/tuxcoding/mapCSV_levels_" + mapName + ".csv");
+		tilemap.loadMap(mapData, AssetNames.Tiles);
+		return tilemap;
 	}
 	
 }

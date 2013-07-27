@@ -11,7 +11,7 @@ package ;
 import cmds.Cmd;
 import org.flixel.FlxG;
 import org.flixel.FlxGroup;
-import org.flixel.FlxPoint;
+import org.flixel.util.FlxPoint;
 import org.flixel.FlxSprite;
 
 class ProgramGui extends FlxGroup

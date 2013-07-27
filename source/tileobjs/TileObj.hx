@@ -18,15 +18,15 @@ class TileObj extends FlxSprite
 
 	public var tileX(default, null):Int;
 	public var tileY(default, null):Int;
-	public var canBeTaken(default, set_taken):Bool;
-	public var canBeWalked(default, set_walked):Bool;
+	public var canBeTaken(default, set):Bool;
+	public var canBeWalked(default, set):Bool;
 	
-	private function set_walked(walked:Bool):Bool {
+	private function set_canBeWalked(walked:Bool):Bool {
 		canBeWalked = walked;
 		return walked;
 	}
 
-	private function set_taken(taken:Bool):Bool {
+	private function set_canBeTaken(taken:Bool):Bool {
 		canBeTaken = taken;
 		return taken;
 	}

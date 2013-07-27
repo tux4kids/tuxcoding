@@ -10,7 +10,7 @@ package ;
 
 import org.flixel.FlxObject;
 import org.flixel.FlxPath;
-import org.flixel.FlxPoint;
+import org.flixel.util.FlxPoint;
 import org.flixel.FlxSprite;
 import tileobjs.Key;
 import tileobjs.Lock;
@@ -21,10 +21,10 @@ class Player extends FlxSprite
 {
 	private var walkingDist:Float;
 	
-	public var idle(get_idle, null):Bool;
+	public var idle(get, null):Bool;
 	public var tileX(default, null):Int;
 	public var tileY(default, null):Int;
-	public var facingLeft(get_facingleft, null):Bool;
+	public var facingLeft(get, null):Bool;
 	public var numCoins(default, null):Int;
 	public var hasKey(default, null):Bool;
 	
@@ -32,7 +32,7 @@ class Player extends FlxSprite
 		return curAnim == null;
 	}
 	
-	private function get_facingleft():Bool {
+	private function get_facingLeft():Bool {
 		return facing == FlxObject.LEFT;
 	}
 	
@@ -123,7 +123,10 @@ class Player extends FlxSprite
 	
 	override public function update():Void 
 	{
+		var oldx:Float = x;
 		super.update();
+		if (curAnim == "walk")
+			walkingDist -= Math.abs(x - oldx);
 
 		if (curAnim == "walk")
 		{
@@ -142,14 +145,5 @@ class Player extends FlxSprite
 			if (pathSpeed == 0) curAnim = "idle";
 		}
 	}
-	
-	override public function postUpdate():Void 
-	{
-		var oldx:Float = x;
-		
-		super.postUpdate();
-		
-		if (curAnim == "walk")
-			walkingDist -= Math.abs(x - oldx);
-	}
+
 }

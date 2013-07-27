@@ -61,8 +61,7 @@ class PlayState extends FlxState
 		
 		var mapName:String = "Map" + (levelNum + 1);
 
-		Registry.reloadLevels(); // until we fix the starting pos BUG
-		mapTilemap = Registry.level.getTilemap(mapName);
+		mapTilemap = Registry.getTilemap(mapName);
 		mapTilemap.x = (FlxG.width - mapTilemap.width) / 2;
 		mapTilemap.y = 10;
 		

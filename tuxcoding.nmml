@@ -46,9 +46,8 @@
 	
 	<icon name="assets/HaxeFlixel.svg" />
 	
-	<haxelib name="nme" />
+	<haxelib name="openfl" />
 	<haxelib name="flixel"/>
-	<haxelib name="LevelTools"/>
 	
     <!--Disable the Flixel core debugger-->
     <!--<set name="FLX_NO_DEBUG" />-->

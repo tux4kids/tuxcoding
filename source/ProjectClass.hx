@@ -8,7 +8,7 @@
 
 package;
 
-import nme.Lib;
+import flash.Lib;
 import org.flixel.FlxGame;
 	
 class ProjectClass extends FlxGame

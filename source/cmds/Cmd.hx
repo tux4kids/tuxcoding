@@ -14,7 +14,7 @@ class Cmd
 
 	public var active:Bool; // true is this command is part of the program
 	
-	public var isRunning(get_running, null):Bool;
+	public var isRunning(get, null):Bool;
 	
 	private var world:World;
 	
@@ -36,7 +36,7 @@ class Cmd
 		return true;
 	}
 	
-	private function get_running():Bool {
+	private function get_isRunning():Bool {
 		return !world.player.idle;
 	}
 		

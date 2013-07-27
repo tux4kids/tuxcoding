@@ -14,6 +14,7 @@ package ;
 class AssetNames
 {
 	public static var LevelsXML:String = "assets/levels/tuxcoding/Level_levels.xml";
+	public static var Tiles:String = "assets/levels/blocks.png";
 	
 	public static var RunBtn:String = "assets/gui/run-btn.png";
 	public static var LvlBtn:String = "assets/gui/blank-btn.png";

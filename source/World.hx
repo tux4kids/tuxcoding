@@ -9,7 +9,7 @@
 package ;
 import org.flixel.FlxObject;
 import org.flixel.FlxTilemap;
-import org.flixel.FlxPoint;
+import org.flixel.util.FlxPoint;
 import tileobjs.TileObj;
 
 /**
