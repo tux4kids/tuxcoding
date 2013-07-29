@@ -15,8 +15,12 @@ class ProjectClass extends FlxGame
 {	
 	public function new()
 	{
-		var stageWidth:Int = Lib.current.stage.stageWidth;
-		var stageHeight:Int = Lib.current.stage.stageHeight;
+		var Width:Int = Lib.current.stage.stageWidth;
+		var Height:Int = Lib.current.stage.stageHeight;
+		// game is always in landscape orientation
+		var stageWidth:Float = Math.max(Width, Height);
+		var stageHeight:Float = Math.min(Width, Height);
+		
 		var ratioX:Float = stageWidth / 1024;
 		var ratioY:Float = stageHeight / 600;
 		var ratio:Float = Math.min(ratioX, ratioY);
