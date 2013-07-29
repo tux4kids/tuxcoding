@@ -3,7 +3,7 @@
 	<app title="tuxcoding" file="tuxcoding" main="Main" version="0.0.1" company="Zaphod" />
 	
 	<window width="1024" height="600" fps="30" orientation="landscape" resizable="false" if="web" />
-	<window width="640" height="480" fps="30" orientation="landscape" fullscreen="false" unless="web" />
+	<window width="0" height="0" fps="30" orientation="landscape" fullscreen="false" unless="web" />
  	
 	<set name="BUILD_DIR" value="export" />
 	
@@ -53,12 +53,12 @@
     <!--<set name="FLX_NO_DEBUG" />-->
 	
     <!--Disable the Flixel core recording system if your not using it-->
-    <!--<set name="FLX_NO_RECORD" />-->
+    <set name="FLX_NO_RECORD" />
 	
 	<!--Optimise inputs, be careful you will get null errors if you don't use conditionals in your game-->
-    <!--<set name="FLX_NO_MOUSE" if="mobile" />-->
-    <!--<set name="FLX_NO_KEYBOARD" if="mobile" />-->
-    <!--<set name="FLX_NO_TOUCH" if="desktop" />-->
-    <!--<set name="FLX_NO_JOYSTICK" />-->
+    <set name="FLX_NO_MOUSE" if="mobile" />
+    <set name="FLX_NO_KEYBOARD" if="mobile" />
+    <set name="FLX_NO_TOUCH" if="desktop" />
+    <set name="FLX_NO_JOYSTICK" />
 
 </project>
