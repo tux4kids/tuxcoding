@@ -29,7 +29,7 @@ class MenuState extends FlxState
 		#else
 		FlxG.camera.bgColor = {rgb: 0x131c1b, a: 0xff};
 		#end		
-		#if !FLX_NO_MOUSE
+		#if !mouse
 		FlxG.mouse.show();
 		#end
 		

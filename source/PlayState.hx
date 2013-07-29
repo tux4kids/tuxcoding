@@ -17,6 +17,8 @@ import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
 import org.flixel.FlxTilemap;
+import org.flixel.system.input.FlxTouch;
+import org.flixel.util.FlxPoint;
 import tileobjs.Coin;
 import tileobjs.Key;
 import tileobjs.Lock;
@@ -49,10 +51,13 @@ class PlayState extends FlxState
 	
 	private var world:World;
 	
+	private var _point:FlxPoint;
+	
 	public function new(LvlNum:Int) 
 	{
 		super();
 		levelNum = LvlNum;
+		_point = new FlxPoint();
 	}
 	
 	override public function create():Void 
@@ -164,15 +169,32 @@ class PlayState extends FlxState
 	
 	override public function update():Void 
 	{
+		var mp:Bool = false;
+		var mjp:Bool = false;
+		
+		#if !FLX_NO_MOUSE
+			mp = FlxG.mouse.pressed();
+			mjp = FlxG.mouse.justPressed();
+			_point.copyFrom(FlxG.mouse);
+		#end
+		#if !FLX_NO_TOUCH
+			var touch:FlxTouch = FlxG.touchManager.getFirstTouch();
+			if (touch != null) {
+				mp = touch.pressed();
+				mjp = touch.justPressed();
+				_point.copyFrom(touch);
+			}
+		#end
+		
 		if (!program.running)
 		{
 			if (selected.visible) 
 			{
-				if (!FlxG.mouse.pressed()) 
+				if (!mp) 
 				{
-					var cmd:CmdIcon = program.getSelectedCmd(FlxG.mouse);
+					var cmd:CmdIcon = program.getSelectedCmd(_point);
 					if (cmd == null)
-						cmd = fun1.getSelectedCmd(FlxG.mouse);
+						cmd = fun1.getSelectedCmd(_point);
 					
 					// did the player drop the command over a program or a function ?
 					if (cmd != null) 
@@ -185,21 +207,21 @@ class PlayState extends FlxState
 			} 
 			else 
 			{
-				if (FlxG.mouse.justPressed()) 
+				if (mjp) 
 				{
 					// did the player click over the toolbar ?
-					if (toolbar.overlapsPoint(FlxG.mouse))
+					if (toolbar.overlapsPoint(_point))
 					{
 						// find which command was selected
-						selected.type = Std.int( (FlxG.mouse.x - toolbar.x) / CmdIcon.Size);
+						selected.type = Std.int( (_point.x - toolbar.x) / CmdIcon.Size);
 						selected.visible = true;
 					}
 					else 
 					{
 						// did the player click over the program's memory
-						var cmd:CmdIcon = program.getSelectedCmd(FlxG.mouse);
+						var cmd:CmdIcon = program.getSelectedCmd(_point);
 						if (cmd == null)
-							cmd = fun1.getSelectedCmd(FlxG.mouse);
+							cmd = fun1.getSelectedCmd(_point);
 							
 						if (cmd != null)
 						{
@@ -213,8 +235,8 @@ class PlayState extends FlxState
 		}
 		
 		if (selected.visible) {
-			selected.x = FlxG.mouse.x - selected.width / 2;
-			selected.y = FlxG.mouse.y - selected.height / 2;
+			selected.x = _point.x - selected.width / 2;
+			selected.y = _point.y - selected.height / 2;
 		}
 		
 		super.update();
