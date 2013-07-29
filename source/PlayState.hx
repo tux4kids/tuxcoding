@@ -172,18 +172,17 @@ class PlayState extends FlxState
 		var mp:Bool = false;
 		var mjp:Bool = false;
 		
-		#if !FLX_NO_MOUSE
-			mp = FlxG.mouse.pressed();
-			mjp = FlxG.mouse.justPressed();
-			_point.copyFrom(FlxG.mouse);
-		#end
-		#if !FLX_NO_TOUCH
+		#if mobile
 			var touch:FlxTouch = FlxG.touchManager.getFirstTouch();
 			if (touch != null) {
 				mp = touch.pressed();
 				mjp = touch.justPressed();
 				_point.copyFrom(touch);
 			}
+		#else
+			mp = FlxG.mouse.pressed();
+			mjp = FlxG.mouse.justPressed();
+			_point.copyFrom(FlxG.mouse);
 		#end
 		
 		if (!program.running)

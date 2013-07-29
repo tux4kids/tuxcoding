@@ -17,6 +17,7 @@ import org.flixel.FlxSave;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
+import flash.ui.Mouse;
 
 class MenuState extends FlxState
 {
@@ -29,7 +30,8 @@ class MenuState extends FlxState
 		#else
 		FlxG.camera.bgColor = {rgb: 0x131c1b, a: 0xff};
 		#end		
-		#if !mouse
+		
+		#if !mobile
 		FlxG.mouse.show();
 		#end
 		
@@ -50,6 +52,8 @@ class MenuState extends FlxState
 					add(new LevelBtn(lvlNum, left + (100 + pad) * c, top + (100 + pad) * r, onStart));
 			}
 		}
+
+		super.create();
 	}
 	
 	function onStart(btnNum:Int) 
