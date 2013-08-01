@@ -53,6 +53,10 @@ class MenuState extends FlxState
 			}
 		}
 
+		add(new FlxText(10, 10, 100, "Version 0.2.7").setFormat(null, 16, 0xffffff));
+		
+		FlxG.camera.antialiasing = true;
+
 		super.create();
 	}
 	

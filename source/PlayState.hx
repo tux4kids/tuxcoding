@@ -77,19 +77,31 @@ class PlayState extends FlxState
 		initWorld();
 		
 		var exitBtn:FlxButton;
-		add(exitBtn = new FlxButton(FlxG.width - 100, 350, null, onExit));
-		exitBtn.loadGraphic(AssetNames.ExitBtn, true, false, 75, 75);
+		add(exitBtn = new FlxButton(FlxG.width - 85, FlxG.height - 85*2, null, onExit));
+		exitBtn.loadGraphic(AssetNames.ExitBtn, true);
 
-		add(runBtn = new FlxButton(FlxG.width - 100, 450, null, onRun));
+		add(runBtn = new FlxButton(FlxG.width - 85, FlxG.height - 85, null, onRun));
 		runBtn.loadGraphic(AssetNames.RunBtn, true);
 
-		prepareToolbar(10, 310);
-		
-		add(new FlxText(10, 360, 100, "Main:").setFormat(null, 16, 0));
-		add(program = new ProgramGui(world, 3, 8, 10, 380));
+		var program_numr:Int = 3;
+		var program_numc:Int = 6;
 
-		add(new FlxText(400, 360, 110, "Function 1:").setFormat(null, 16, 0));
-		add(fun1 = new ProgramGui(world, 3, 8, 400, 380));
+		// compute available height for program+toolbar
+		var availableHeight:Float = FlxG.height - mapTilemap.y - mapTilemap.height - 10 - 40 - 10;
+		var availableWidth:Float = FlxG.width - 85 - 10 - 30;
+		// compute the size of CmdIcon
+		CmdIcon.Size = Math.floor(Math.min(
+			Math.floor( availableHeight / (program_numr+1)),
+			Math.floor( availableWidth / (program_numc*2))
+		));
+
+		prepareToolbar(10, mapTilemap.y + mapTilemap.height + 10);
+		
+		add(new FlxText(10, toolbar.y+toolbar.height+10, 100, "Main:").setFormat(null, 16, 0));
+		add(program = new ProgramGui(world, 3, 6, 10, toolbar.y+toolbar.height+40));
+
+		add(new FlxText(400, toolbar.y+toolbar.height+10, 110, "Function 1:").setFormat(null, 16, 0));
+		add(fun1 = new ProgramGui(world, 3, 6, 20+program_numc*CmdIcon.Size, toolbar.y+toolbar.height+40));
 		fun1.active = false; // don't call update() automatically
 		
 		add(selected = new CmdIcon());
@@ -155,7 +167,7 @@ class PlayState extends FlxState
 		toolbar.makeGraphic(Std.int(CmdIcon.Size * Cmd.NumCmds), Std.int(CmdIcon.Size), 0x00000000);
 		for (i in 0...Cmd.NumCmds) {
 			cmd.type = i;
-			toolbar.stamp(cmd, Std.int(i * cmd.width), 0);
+			toolbar.stamp(cmd, Std.int(i * CmdIcon.Size), 0);
 		}
 
 		add(toolbar);
@@ -234,8 +246,8 @@ class PlayState extends FlxState
 		}
 		
 		if (selected.visible) {
-			selected.x = _point.x - selected.width / 2;
-			selected.y = _point.y - selected.height / 2;
+			selected.x = _point.x - CmdIcon.Size / 2;
+			selected.y = _point.y - CmdIcon.Size / 2;
 		}
 		
 		super.update();

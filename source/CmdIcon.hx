@@ -12,7 +12,7 @@ import org.flixel.FlxSprite;
 
 class CmdIcon extends FlxSprite
 {
-	public inline static var Size:Int = 40;
+	public static var Size:Int = 60;
 	
 	public var type(default, set_type) : Int;
 	
@@ -26,5 +26,9 @@ class CmdIcon extends FlxSprite
 		super(X, Y);
 		loadGraphic(AssetNames.Cmds, true, false);
 		type = -1;
+		scale.x = Size / width;
+		scale.y = Size / height;
+		origin.make();
+		antialiasing = true;
 	}
 }
