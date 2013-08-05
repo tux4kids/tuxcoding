@@ -25,6 +25,8 @@ class MenuState extends FlxState
 	{
 		Registry.init();
 		
+		add(new FlxSprite().loadGraphic(AssetNames.Background));
+		
 		#if !neko
 		FlxG.bgColor = 0xff131c1b;
 		#else

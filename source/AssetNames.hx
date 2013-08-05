@@ -27,4 +27,6 @@ class AssetNames
 	public static var Lock:String = "assets/lock_blue.png";
 	
 	public static var LvlBtnFont:String = "assets/bangers.ttf";
+
+	public static var Background:String = "assets/gui/BG.jpg";
 }
