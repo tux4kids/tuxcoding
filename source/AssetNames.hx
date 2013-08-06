@@ -31,4 +31,5 @@ class AssetNames
 	public static var Background:String = "assets/gui/BG.jpg";
 	public static var LevelSelectWindow:String = "assets/gui/level-select-window.png";
 	public static var ScreenNavigationBtn:String = "assets/gui/navigation-btn.png";
+	public static var LevelScreenIndicator:String = "assets/gui/level-screen-indicator.png";
 }

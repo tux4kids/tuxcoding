@@ -19,11 +19,37 @@ import org.flixel.FlxState;
 import org.flixel.FlxText;
 import org.flixel.FlxObject;
 import flash.ui.Mouse;
+import org.flixel.FlxGroup;
 
 class MenuState extends FlxState
 {
+	private var numScreens:Int;
+	public var curScreen (default, set):Int;
+
+	private var screenIndicators:FlxGroup;
+	private var leftNavigator:FlxButton;
+	private var rightNavigator:FlxButton;
+
+	private function set_curScreen(cs:Int):Int
+	{
+		cast(screenIndicators.members[curScreen], FlxSprite).frame = 0;
+		curScreen = cs;
+		cast(screenIndicators.members[curScreen], FlxSprite).frame = 1;
+
+		leftNavigator.visible = leftNavigator.active = curScreen > 0;
+
+		rightNavigator.visible = rightNavigator.active = curScreen < numScreens-1;
+
+		return curScreen;
+	}
+
 	override public function create():Void
 	{
+		var numLevels:Int = 30;
+		var numRows:Int = 3;
+		var numCols:Int = 5;
+		numScreens = Math.floor(numLevels/(numRows*numCols));
+
 		#if !mobile
 		FlxG.mouse.show();
 		#end
@@ -42,25 +68,25 @@ class MenuState extends FlxState
 		add(new FlxText(window.x+30, window.y+10, 200, "LEVEL SELECT")
 			.setFormat(AssetNames.LvlBtnFont, 32, 0xd1535e));
 		
-		// screen navigation buttons
-		var leftBtn:FlxButton = new FlxButton(0,0);
-		leftBtn.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
-		leftBtn.x = window.x - leftBtn.width/2;
-		leftBtn.y = window.y + window.height/2 - leftBtn.height/2;
-		add(leftBtn);
+		if (numScreens > 1)
+		{
+			// screen navigation buttons
+			leftNavigator = new FlxButton(0,0, "", onNavigateLeft);
+			leftNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
+			leftNavigator.x = window.x - leftNavigator.width/2;
+			leftNavigator.y = window.y + window.height/2 - leftNavigator.height/2;
+			add(leftNavigator);
 
-		var rightBtn:FlxButton = new FlxButton(0,0);
-		rightBtn.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
-		rightBtn.x = window.x + window.width - rightBtn.width/2;
-		rightBtn.y = window.y + window.height/2 - rightBtn.height/2;
-		rightBtn.facing = FlxObject.LEFT; //TODO update button graphics to match flixel facing
-		add(rightBtn);
+			rightNavigator = new FlxButton(0,0, "", onNavigateRight);
+			rightNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
+			rightNavigator.x = window.x + window.width - rightNavigator.width/2;
+			rightNavigator.y = window.y + window.height/2 - rightNavigator.height/2;
+			rightNavigator.facing = FlxObject.LEFT; //TODO update button graphics to match flixel facing
+			add(rightNavigator);
+		}
 
-		var numLevels:Int = 10;
-		var numRows:Int = 2;
-		var numCols:Int = 5;
+		// level buttons
 		var pad:Int = 10;
-
 		var allWidth:Int = numCols * 100 + (numCols - 1) * pad;
 		var allHeight:Int = numRows * 100 + (numRows - 1) * pad;
 		var left:Int = Std.int((FlxG.width - allWidth) / 2);
@@ -74,6 +100,26 @@ class MenuState extends FlxState
 			}
 		}
 
+		if (numScreens > 1)
+		{
+			//screen indicators
+			add(screenIndicators = new FlxGroup());
+			pad = 13;
+			var indWidth:Int = 26;
+			var indHeight:Int = 30;
+			allWidth = numScreens * indWidth + (numScreens - 1)*pad;
+			left = Std.int((FlxG.width - allWidth) / 2);
+			top = Std.int(window.y + window.height - indHeight - 50);
+
+			for (screen in 0...numScreens)
+			{
+				screenIndicators.add(new FlxSprite(left + (indWidth+pad)*screen, top)
+					.loadGraphic(AssetNames.LevelScreenIndicator, true, false, indWidth, indHeight));
+			}
+
+			curScreen = 0;
+		}
+
 		add(new FlxText(10, 10, 100, "V. 0.2.7").setFormat(null, 16, 0xffffff));
 		
 		FlxG.camera.antialiasing = true;
@@ -84,6 +130,16 @@ class MenuState extends FlxState
 	function onStart(btnNum:Int) 
 	{
 		FlxG.switchState(new PlayState(btnNum));
+	}
+
+	function onNavigateLeft()
+	{
+		if (curScreen > 0) curScreen--;
+	}
+
+	function onNavigateRight()
+	{
+		if (curScreen < numScreens-1) curScreen++;
 	}
 
 }
