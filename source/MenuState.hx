@@ -17,12 +17,17 @@ import org.flixel.FlxSave;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
+import org.flixel.FlxObject;
 import flash.ui.Mouse;
 
 class MenuState extends FlxState
 {
 	override public function create():Void
 	{
+		#if !mobile
+		FlxG.mouse.show();
+		#end
+
 		Registry.init();
 		
 		add(new FlxSprite(0, 0, AssetNames.Background));
@@ -36,17 +41,21 @@ class MenuState extends FlxState
 		// level select title
 		add(new FlxText(window.x+30, window.y+10, 200, "LEVEL SELECT")
 			.setFormat(AssetNames.LvlBtnFont, 32, 0xd1535e));
+		
+		// screen navigation buttons
+		var leftBtn:FlxButton = new FlxButton(0,0);
+		leftBtn.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
+		leftBtn.x = window.x - leftBtn.width/2;
+		leftBtn.y = window.y + window.height/2 - leftBtn.height/2;
+		add(leftBtn);
 
-		#if !neko
-		FlxG.bgColor = 0xff131c1b;
-		#else
-		FlxG.camera.bgColor = {rgb: 0x131c1b, a: 0xff};
-		#end		
-		
-		#if !mobile
-		FlxG.mouse.show();
-		#end
-		
+		var rightBtn:FlxButton = new FlxButton(0,0);
+		rightBtn.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
+		rightBtn.x = window.x + window.width - rightBtn.width/2;
+		rightBtn.y = window.y + window.height/2 - rightBtn.height/2;
+		rightBtn.facing = FlxObject.LEFT; //TODO update button graphics to match flixel facing
+		add(rightBtn);
+
 		var numLevels:Int = 10;
 		var numRows:Int = 2;
 		var numCols:Int = 5;
@@ -65,7 +74,7 @@ class MenuState extends FlxState
 			}
 		}
 
-		add(new FlxText(10, 10, 100, "Version 0.2.7").setFormat(null, 16, 0xffffff));
+		add(new FlxText(10, 10, 100, "V. 0.2.7").setFormat(null, 16, 0xffffff));
 		
 		FlxG.camera.antialiasing = true;
 
