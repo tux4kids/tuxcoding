@@ -23,12 +23,18 @@ import org.flixel.FlxGroup;
 
 class MenuState extends FlxState
 {
+	private static inline var numLevels:Int = 50;
+	private static inline var numRows:Int = 3;
+	private static inline var numCols:Int = 5;
+
 	private var numScreens:Int;
 	public var curScreen (default, set):Int;
 
 	private var screenIndicators:FlxGroup;
 	private var leftNavigator:FlxButton;
 	private var rightNavigator:FlxButton;
+
+	private var levelBtns:FlxGroup;
 
 	private function set_curScreen(cs:Int):Int
 	{
@@ -40,15 +46,22 @@ class MenuState extends FlxState
 
 		rightNavigator.visible = rightNavigator.active = curScreen < numScreens-1;
 
+		// update level button numbers
+		for (r in 0...numRows) {
+			for (c in 0...numCols) {
+				var lvlNum = r * numCols + c + curScreen * (numRows*numCols);
+				var lvlBtn:LevelBtn = cast(levelBtns.members[r*numCols + c], LevelBtn);
+				lvlBtn.num = lvlNum;
+				lvlBtn.visible = lvlBtn.active = lvlNum < numLevels;
+			}
+		}
+
 		return curScreen;
 	}
 
 	override public function create():Void
 	{
-		var numLevels:Int = 30;
-		var numRows:Int = 3;
-		var numCols:Int = 5;
-		numScreens = Math.floor(numLevels/(numRows*numCols));
+		numScreens = Math.ceil(numLevels/(numRows*numCols));
 
 		#if !mobile
 		FlxG.mouse.show();
@@ -92,11 +105,12 @@ class MenuState extends FlxState
 		var left:Int = Std.int((FlxG.width - allWidth) / 2);
 		var top:Int = Std.int((FlxG.height - allHeight) / 2);
 		
+		add(levelBtns = new FlxGroup());
 		for (r in 0...numRows) {
 			for (c in 0...numCols) {
 				var lvlNum = r * numCols + c;
 				if (lvlNum < numLevels)
-					add(new LevelBtn(lvlNum, left + (100 + pad) * c, top + (100 + pad) * r, onStart));
+					levelBtns.add(new LevelBtn(lvlNum, left + (100 + pad) * c, top + (100 + pad) * r, onStart));
 			}
 		}
 
