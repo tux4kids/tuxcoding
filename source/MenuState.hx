@@ -25,8 +25,18 @@ class MenuState extends FlxState
 	{
 		Registry.init();
 		
-		add(new FlxSprite().loadGraphic(AssetNames.Background));
+		add(new FlxSprite(0, 0, AssetNames.Background));
 		
+		// level select window centered on screen
+		var window:FlxSprite = new FlxSprite(0,0, AssetNames.LevelSelectWindow);
+		window.x = (FlxG.width - window.width)/2;
+		window.y = (FlxG.height - window.height)/2;
+		add(window);
+
+		// level select title
+		add(new FlxText(window.x+30, window.y+10, 200, "LEVEL SELECT")
+			.setFormat(AssetNames.LvlBtnFont, 32, 0xd1535e));
+
 		#if !neko
 		FlxG.bgColor = 0xff131c1b;
 		#else

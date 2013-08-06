@@ -29,4 +29,5 @@ class AssetNames
 	public static var LvlBtnFont:String = "assets/bangers.ttf";
 
 	public static var Background:String = "assets/gui/BG.jpg";
+	public static var LevelSelectWindow:String = "assets/gui/level-select-window.png";
 }
