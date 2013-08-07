@@ -53,6 +53,9 @@ class MenuState extends FlxState
 				var lvlBtn:LevelBtn = cast(levelBtns.members[r*numCols + c], LevelBtn);
 				lvlBtn.num = lvlNum;
 				lvlBtn.visible = lvlBtn.active = lvlNum < numLevels;
+				// locked, numStars should be loaded/saved from player progress
+				lvlBtn.locked = lvlNum > 9;
+				lvlBtn.numStars = lvlNum < 10 ? Std.int(Math.min(lvlNum, 3)) : 0;
 			}
 		}
 
@@ -79,7 +82,7 @@ class MenuState extends FlxState
 
 		// level select title
 		add(new FlxText(window.x+30, window.y+10, 200, "LEVEL SELECT")
-			.setFormat(AssetNames.LvlBtnFont, 32, 0xd1535e));
+			.setFormat(AssetNames.TextFont, 32, 0xd1535e));
 		
 		if (numScreens > 1)
 		{

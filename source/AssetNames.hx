@@ -17,7 +17,7 @@ class AssetNames
 	public static var Tiles:String = "assets/levels/blocks.png";
 	
 	public static var RunBtn:String = "assets/gui/run-btn.png";
-	public static var LvlBtn:String = "assets/gui/blank-btn.png";
+	public static var LvlBtn:String = "assets/gui/level-btn.png";
 	public static var ExitBtn:String = "assets/gui/exit-btn.png";
 	public static var Cmds:String = "assets/gui/cmds.png";
 	
@@ -26,7 +26,11 @@ class AssetNames
 	public static var Key:String = "assets/keyBlue.png";
 	public static var Lock:String = "assets/lock_blue.png";
 	
-	public static var LvlBtnFont:String = "assets/bangers.ttf";
+	public static var Stars:String = "assets/gui/level-select-stars.png";
+
+	
+	public static var LvlBtnFont:String = "assets/JUNEBUG.ttf";
+	public static var TextFont:String = "assets/bangers.ttf";
 
 	public static var Background:String = "assets/gui/BG.jpg";
 	public static var LevelSelectWindow:String = "assets/gui/level-select-window.png";
