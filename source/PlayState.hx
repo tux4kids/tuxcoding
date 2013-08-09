@@ -52,7 +52,7 @@ class PlayState extends FlxState
 	private var world:World;
 	
 	private var _point:FlxPoint;
-	
+
 	public function new(LvlNum:Int) 
 	{
 		super();
@@ -108,7 +108,7 @@ class PlayState extends FlxState
 		selected.visible = false;
 		
 		Fun.program = fun1;
-		
+
 		super.create();
 	}
 	
@@ -248,6 +248,11 @@ class PlayState extends FlxState
 		if (selected.visible) {
 			selected.x = _point.x - CmdIcon.Size / 2;
 			selected.y = _point.y - CmdIcon.Size / 2;
+		}
+
+		if (player.numCoins == world.numCoins)
+		{
+			FlxG.switchState(new LevelEnd(levelNum));
 		}
 		
 		super.update();

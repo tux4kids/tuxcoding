@@ -11,6 +11,7 @@ import org.flixel.FlxObject;
 import org.flixel.FlxTilemap;
 import org.flixel.util.FlxPoint;
 import tileobjs.TileObj;
+import tileobjs.Coin;
 
 /**
  * contains all information needed by a Cmd
@@ -21,13 +22,20 @@ class World
 	public var map(default, null):FlxTilemap;
 	public var startPos(default, null):FlxPoint;
 	public var objects(default, null):Array<TileObj>;
-	
+	public var numCoins (default, null):Int;
+
 	public function new(player:Player, map:FlxTilemap, objs:Array<TileObj>, startX:Int, startY:Int) 
 	{
 		this.player = player;
 		this.map = map;
 		startPos = new FlxPoint(startX, startY);
 		objects = objs;
+
+		// count number of coins in level
+		for (obj in objects)
+		{
+			if (Std.is(obj, Coin)) numCoins++;
+		}
 	}
 	
 	public function restart():Void
