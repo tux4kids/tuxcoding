@@ -88,16 +88,17 @@ class MenuState extends FlxState
 		{
 			// screen navigation buttons
 			leftNavigator = new FlxButton(0,0, "", onNavigateLeft);
-			leftNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
+			leftNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 93, 105);
 			leftNavigator.x = window.x - leftNavigator.width/2;
 			leftNavigator.y = window.y + window.height/2 - leftNavigator.height/2;
+			leftNavigator.facing = FlxObject.LEFT;
 			add(leftNavigator);
 
 			rightNavigator = new FlxButton(0,0, "", onNavigateRight);
-			rightNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 60, 68);
+			rightNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 93, 105);
 			rightNavigator.x = window.x + window.width - rightNavigator.width/2;
 			rightNavigator.y = window.y + window.height/2 - rightNavigator.height/2;
-			rightNavigator.facing = FlxObject.LEFT; //TODO update button graphics to match flixel facing
+
 			add(rightNavigator);
 		}
 
