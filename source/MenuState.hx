@@ -60,12 +60,6 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		numScreens = Math.ceil(numLevels/(numRows*numCols));
-
-		#if !mobile
-		FlxG.mouse.show();
-		#end
-
-		Registry.init();
 		
 		add(new FlxSprite(0, 0, AssetNames.Background));
 		
@@ -132,10 +126,6 @@ class MenuState extends FlxState
 
 			curScreen = 0;
 		}
-
-		add(new FlxText(10, 10, 100, "V. 0.2.7").setFormat(null, 16, 0xffffff));
-		
-		FlxG.camera.antialiasing = true;
 
 		super.create();
 	}
