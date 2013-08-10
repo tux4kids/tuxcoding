@@ -53,6 +53,8 @@ class PlayState extends FlxState
 	
 	private var _point:FlxPoint;
 
+	private var pauseMsg:MessageBox;
+
 	public function new(LvlNum:Int) 
 	{
 		super();
@@ -75,13 +77,12 @@ class PlayState extends FlxState
 		add(objects = new FlxGroup());
 
 		initWorld();
-		
-		var exitBtn:FlxButton;
-		add(exitBtn = new FlxButton(FlxG.width - 85, FlxG.height - 85*2, null, onExit));
-		exitBtn.loadGraphic(AssetNames.ExitBtn, true);
 
-		add(runBtn = new FlxButton(FlxG.width - 85, FlxG.height - 85, null, onRun));
-		runBtn.loadGraphic(AssetNames.RunBtn, true);
+		add(new FlxButton(FlxG.width - 103, 10, null, onPause)
+			.loadGraphic(AssetNames.PauseBtn, true, 93, 105));
+
+		add(runBtn = new FlxButton(FlxG.width - 103, FlxG.height - 115, null, onRun));
+		runBtn.loadGraphic(AssetNames.PlayBtn, true, 93, 105);
 
 		var program_numr:Int = 3;
 		var program_numc:Int = 6;
@@ -106,7 +107,10 @@ class PlayState extends FlxState
 		
 		add(selected = new CmdIcon());
 		selected.visible = false;
-		
+
+		add(pauseMsg = new MessageBox("Game Paused", onExit, onReload, onPlay));
+		pauseMsg.active = pauseMsg.visible = false;
+
 		Fun.program = fun1;
 
 		super.create();
@@ -181,6 +185,12 @@ class PlayState extends FlxState
 	
 	override public function update():Void 
 	{
+		if (pauseMsg.active)
+		{
+			pauseMsg.update();
+			return;
+		}
+
 		var mp:Bool = false;
 		var mjp:Bool = false;
 		
@@ -258,9 +268,24 @@ class PlayState extends FlxState
 		super.update();
 	}
 
+	function onPause()
+	{
+		pauseMsg.visible = pauseMsg.active = true;
+	}
+
 	function onExit() 
 	{
 		FlxG.switchState(new MenuState());
+	}
+
+	function onReload()
+	{
+		FlxG.switchState(new PlayState(levelNum));
+	}
+
+	function onPlay()
+	{
+		pauseMsg.active = pauseMsg.visible = false;
 	}
 	
 	function onRun() 

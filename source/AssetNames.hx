@@ -16,9 +16,10 @@ class AssetNames
 	public static var LevelsXML:String = "assets/levels/tuxcoding/Level_levels.xml";
 	public static var Tiles:String = "assets/levels/blocks.png";
 	
-	public static var RunBtn:String = "assets/gui/run-btn.png";
+	public static var GameTitle:String = "assets/gameTitle.png";
+	
 	public static var LvlBtn:String = "assets/gui/level-btn.png";
-	public static var ExitBtn:String = "assets/gui/exit-btn.png";
+	public static var PauseBtn:String = "assets/gui/pause-btn.png";
 	public static var Cmds:String = "assets/gui/cmds.png";
 	
 	public static var Player:String = "assets/player01.png";
@@ -38,7 +39,7 @@ class AssetNames
 	public static var LevelScreenIndicator:String = "assets/gui/level-screen-indicator.png";
 
 	public static var MessageWidow:String = "assets/gui/message-window.png";
-	public static var PlayNextBtn:String = "assets/gui/playnext-btn.png";
+	public static var PlayBtn:String = "assets/gui/playnext-btn.png";
 	public static var ReplayBtn:String = "assets/gui/replay-btn.png";
 	public static var ReturnLevelsBtn:String = "assets/gui/return2levels-btn.png";
 }
