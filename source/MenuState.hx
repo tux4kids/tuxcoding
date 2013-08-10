@@ -8,18 +8,13 @@
 
 package;
 
-import flash.geom.Rectangle;
-import flash.net.SharedObject;
 import org.flixel.FlxButton;
 import org.flixel.FlxG;
-import org.flixel.FlxPath;
-import org.flixel.FlxSave;
+import org.flixel.FlxGroup;
+import org.flixel.FlxObject;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
-import org.flixel.FlxObject;
-import flash.ui.Mouse;
-import org.flixel.FlxGroup;
 
 class MenuState extends FlxState
 {
