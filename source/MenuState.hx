@@ -20,6 +20,7 @@ import org.flixel.FlxText;
 import org.flixel.FlxObject;
 import flash.ui.Mouse;
 import org.flixel.FlxGroup;
+import haxe.Log;
 
 class MenuState extends FlxState
 {
@@ -64,6 +65,8 @@ class MenuState extends FlxState
 
 	override public function create():Void
 	{
+		Log.clear();
+
 		numScreens = Math.ceil(numLevels/(numRows*numCols));
 		
 		add(new FlxSprite(0, 0, AssetNames.Background));

@@ -39,19 +39,33 @@ class MessageBox extends FlxGroup
 		msgWin.y = (FlxG.height - msgWin.height)/2;
 		add(msgWin);
 
+		for (i in 0...3) {
+			var marker:FlxSprite = new FlxSprite(msgWin.x+ 30, msgWin.y+ 100+i*60)
+				.loadGraphic(AssetNames.ChallengeMarker, true);
+			marker.frame = Std.random(2);
+			add(marker);
+		}
+
+		add(new FlxText(msgWin.x+ 100, msgWin.y+ 100, Std.int(msgWin.width - 120), "Collect 10 Coins")
+			.setFormat(AssetNames.TextFont, 35, 0x000000));
+		add(new FlxText(msgWin.x+ 100, msgWin.y+ 160, Std.int(msgWin.width - 120), "Collect All Coins")
+			.setFormat(AssetNames.TextFont, 35, 0x000000));
+		add(new FlxText(msgWin.x+ 100, msgWin.y+ 220, Std.int(msgWin.width - 100), "Use 10 commands to collect all coins")
+			.setFormat(AssetNames.TextFont, 35, 0x000000));
+
 		var quitBtn:FlxButton = new FlxButton(0, 0, "", quitFun);
 		quitBtn.loadGraphic(AssetNames.ReturnLevelsBtn, true, false, 93, 105);
-		quitBtn.y = msgWin.y + msgWin.height - quitBtn.height - 60;
+		quitBtn.y = msgWin.y + msgWin.height - quitBtn.height - 50;
 		add(quitBtn);
 
 		var replayBtn:FlxButton = new FlxButton(0, 0, "", replayFun);
 		replayBtn.loadGraphic(AssetNames.ReplayBtn, true, false, 93, 105);
-		replayBtn.y = msgWin.y + msgWin.height - replayBtn.height - 60;
+		replayBtn.y = msgWin.y + msgWin.height - replayBtn.height - 50;
 		add(replayBtn);
 
 		var nextBtn:FlxButton = new FlxButton(0, 0, "", playFun);
 		nextBtn.loadGraphic(AssetNames.PlayBtn, true, false, 93, 105);
-		nextBtn.y = msgWin.y + msgWin.height - nextBtn.height - 60;
+		nextBtn.y = msgWin.y + msgWin.height - nextBtn.height - 50;
 		add(nextBtn);
 
 		var btnPad:Float = (msgWin.width - quitBtn.width*3)/4;
@@ -60,7 +74,7 @@ class MessageBox extends FlxGroup
 		replayBtn.x = quitBtn.x + quitBtn.width + btnPad;
 		nextBtn.x = replayBtn.x + replayBtn.width + btnPad;
 
-		add(new FlxText(msgWin.x, msgWin.y+75, Std.int(msgWin.width), message)
-			.setFormat(AssetNames.TextFont, 64, 0xd1535e, "center"));
+		add(new FlxText(msgWin.x, msgWin.y+25, Std.int(msgWin.width), message)
+			.setFormat(AssetNames.TextFont, 54, 0xd1535e, "center"));
 	}
 }

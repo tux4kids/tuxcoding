@@ -23,6 +23,7 @@ import tileobjs.Coin;
 import tileobjs.Key;
 import tileobjs.Lock;
 import tileobjs.TileObj;
+import haxe.Log;
 
 /**
  * Main game state
@@ -67,6 +68,10 @@ class PlayState extends FlxState
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xffaaaaaa));
 		
 		var mapName:String = "Map" + (levelNum + 1);
+
+		// load map properties
+		var map = Registry.xmlMaps[levelNum];
+		Log.trace("map.id: "+map.att.id+", name: "+map.att.name+", has properties: "+map.hasNode.properties);
 
 		mapTilemap = Registry.getTilemap(mapName);
 		mapTilemap.x = (FlxG.width - mapTilemap.width) / 2;
