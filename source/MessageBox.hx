@@ -21,13 +21,25 @@ class MessageBox extends FlxGroup
 	private var playFun:Dynamic;
 	private var message:String;
 
-	public function new(Message:String, QuitFun:Dynamic, ReplayFun:Dynamic, PlayFun:Dynamic) 
+	private var numCoins:Int;
+	private var numCommands:Int;
+
+	private var challenges:Array<Bool>;
+
+	public function new(Message:String, NumCoins:Int, NumCommands:Int, 
+		QuitFun:Dynamic, ReplayFun:Dynamic, PlayFun:Dynamic, 
+		Challenge1:Bool = false, Challenge2:Bool = false, Challenge3:Bool = false) 
 	{
 		super();
 		message = Message;
 		quitFun = QuitFun;
 		replayFun = ReplayFun;
 		playFun = PlayFun;
+
+		numCoins = NumCoins;
+		numCommands = NumCommands;
+
+		challenges = [Challenge1, Challenge2, Challenge3];
 
 		init();
 	}
@@ -42,15 +54,17 @@ class MessageBox extends FlxGroup
 		for (i in 0...3) {
 			var marker:FlxSprite = new FlxSprite(msgWin.x+ 30, msgWin.y+ 100+i*60)
 				.loadGraphic(AssetNames.ChallengeMarker, true);
-			marker.frame = Std.random(2);
+			marker.frame = challenges[i] ? 1:0;
 			add(marker);
 		}
 
-		add(new FlxText(msgWin.x+ 100, msgWin.y+ 100, Std.int(msgWin.width - 120), "Collect 10 Coins")
+		add(new FlxText(msgWin.x+ 100, msgWin.y+ 100, Std.int(msgWin.width - 120), 
+			"Collect "+numCoins+" Coins")
 			.setFormat(AssetNames.TextFont, 35, 0x000000));
 		add(new FlxText(msgWin.x+ 100, msgWin.y+ 160, Std.int(msgWin.width - 120), "Collect All Coins")
 			.setFormat(AssetNames.TextFont, 35, 0x000000));
-		add(new FlxText(msgWin.x+ 100, msgWin.y+ 220, Std.int(msgWin.width - 100), "Use 10 commands to collect all coins")
+		add(new FlxText(msgWin.x+ 100, msgWin.y+ 220, Std.int(msgWin.width - 100), 
+			"Use "+numCommands+" commands to collect all coins")
 			.setFormat(AssetNames.TextFont, 35, 0x000000));
 
 		var quitBtn:FlxButton = new FlxButton(0, 0, "", quitFun);

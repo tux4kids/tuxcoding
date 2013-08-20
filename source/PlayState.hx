@@ -56,6 +56,9 @@ class PlayState extends FlxState
 
 	private var pauseMsg:MessageBox;
 
+	private var challenge_numCoins:Int; // min number of coins to collect
+	private var challenge_numCommands:Int; // max number of commands to collect all coins
+
 	public function new(LvlNum:Int) 
 	{
 		super();
@@ -69,6 +72,12 @@ class PlayState extends FlxState
 
 		// load map properties
 		var map = Registry.xmlMaps[levelNum];
+		if (map.hasNode.properties) {
+			for (p in map.node.properties.nodes.type) {
+				if (p.att.name == "numCoins") challenge_numCoins = Std.parseInt(p.att.value);
+				if (p.att.name == "numCommands") challenge_numCommands = Std.parseInt(p.att.value);
+			}
+		}
 
 		// load map
 		var mapData:String = Registry.getMapData(levelNum);
@@ -114,7 +123,8 @@ class PlayState extends FlxState
 		add(selected = new CmdIcon());
 		selected.visible = false;
 
-		add(pauseMsg = new MessageBox("Game Paused", onExit, onReload, onPlay));
+		add(pauseMsg = new MessageBox("Game Paused", 
+			challenge_numCoins, challenge_numCommands, onExit, onReload, onPlay));
 		pauseMsg.active = pauseMsg.visible = false;
 
 		Fun.program = fun1;
@@ -268,7 +278,8 @@ class PlayState extends FlxState
 
 		if (player.numCoins == world.numCoins)
 		{
-			FlxG.switchState(new LevelEnd(levelNum));
+			FlxG.switchState(new LevelEnd(levelNum, challenge_numCoins, challenge_numCommands,
+				true, true, false));
 		}
 		
 		super.update();

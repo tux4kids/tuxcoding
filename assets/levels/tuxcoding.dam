@@ -8,6 +8,10 @@
   <layers>
     <group name="levels" id="0" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
       <maplayer name="Map1" id="0" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="1" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="5" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -18,6 +22,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map2" id="1" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="2" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="6" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -28,6 +36,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map3" id="2" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="4" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="9" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -38,6 +50,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map4" id="3" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="1" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="5" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -48,6 +64,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map5" id="4" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="2" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="8" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -58,6 +78,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map6" id="5" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="2" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="8" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -68,6 +92,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map7" id="6" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="3" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="10" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -78,6 +106,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,9,9,9,9</row>
       </maplayer>
       <maplayer name="Map8" id="7" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="2" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="12" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -90,7 +122,7 @@
       <maplayer name="Map9" id="8" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false" selected="true">
         <properties>
           <type typeof="Int" name="numCoins" value="1" hidden="false"/>
-          <type typeof="Int" name="numCommands" value="0" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="8" hidden="false"/>
         </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -102,6 +134,10 @@
         <row>9,9,9,9,9,9,9,9,9,9,9,13,9,9,9</row>
       </maplayer>
       <maplayer name="Map10" id="9" xScroll="1" yScroll="1" x="0" y="0" width="15" height="8" tileset="blocks.png" tileWidth="35" tileHeight="35" visible="false" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="35" tileSpacingY="35" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <properties>
+          <type typeof="Int" name="numCoins" value="1" hidden="false"/>
+          <type typeof="Int" name="numCommands" value="13" hidden="false"/>
+        </properties>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
