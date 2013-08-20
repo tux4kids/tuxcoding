@@ -9,7 +9,6 @@
 package ;
 
 import openfl.Assets;
-import org.flixel.FlxTilemap;
 import haxe.xml.Fast;
 
 class Registry
@@ -33,12 +32,16 @@ class Registry
 		initialized = true;
 	}
 	
-	public static function getTilemap(mapName: String):FlxTilemap
+	public static function getMapData(mapNum:Int):String
 	{
-		var tilemap:FlxTilemap = new FlxTilemap();
-		var mapData:String = Assets.getText("assets/levels/tuxcoding/mapCSV_levels_" + mapName + ".csv");
-		tilemap.loadMap(mapData, AssetNames.Tiles);
-		return tilemap;
+		// extract map data from xml file
+		var map = xmlMaps[mapNum];
+		var mapData:String = "";
+		for (row in map.nodes.row) {
+			mapData += row.innerData + "\n";
+		}
+
+		return mapData;
 	}
 	
 }

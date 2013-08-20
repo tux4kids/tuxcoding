@@ -66,14 +66,15 @@ class PlayState extends FlxState
 	override public function create():Void 
 	{
 		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xffaaaaaa));
-		
-		var mapName:String = "Map" + (levelNum + 1);
 
 		// load map properties
 		var map = Registry.xmlMaps[levelNum];
-		Log.trace("map.id: "+map.att.id+", name: "+map.att.name+", has properties: "+map.hasNode.properties);
 
-		mapTilemap = Registry.getTilemap(mapName);
+		// load map
+		var mapData:String = Registry.getMapData(levelNum);
+
+		mapTilemap = new FlxTilemap();
+		mapTilemap.loadMap(mapData, AssetNames.Tiles);
 		mapTilemap.x = (FlxG.width - mapTilemap.width) / 2;
 		mapTilemap.y = 10;
 		
