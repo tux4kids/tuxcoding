@@ -7,11 +7,10 @@
  */
 
 package ;
-import org.flixel.FlxObject;
 import org.flixel.FlxTilemap;
 import org.flixel.util.FlxPoint;
-import tileobjs.TileObj;
 import tileobjs.Coin;
+import tileobjs.TileObj;
 
 /**
  * contains all information needed by a Cmd
