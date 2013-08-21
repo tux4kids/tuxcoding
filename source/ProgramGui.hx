@@ -85,6 +85,32 @@ class ProgramGui extends FlxGroup
 		return cmd;
 	}
 	
+	public function setCmdIds(cmds:Array<Int>)
+	{
+		var index:Int = 0;
+
+		for (obj in members) {
+			var cmd:CmdIcon = cast(obj, CmdIcon);
+			if (cmd != null) {
+				if (index < cmds.length) cmd.type = cmds[index++];
+				else cmd.type = -1;
+			}
+		}
+	}
+
+	public function getCmdIds():Array<Int>
+	{
+		var ids:Array<Int> = [];
+		for (obj in members) {
+			var cmd:CmdIcon = cast(obj, CmdIcon);
+			if (cmd != null && cmd.type != -1) {
+				ids.push(cmd.type);
+			}
+		}
+		
+		return ids;
+	}
+
 	public function getCommands():Array<Cmd>
 	{
 		var cmds:Array<Cmd> = [];

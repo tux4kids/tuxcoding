@@ -115,10 +115,16 @@ class PlayState extends FlxState
 		
 		add(new FlxText(10, toolbar.y+toolbar.height+10, 100, "Main:").setFormat(null, 16, 0));
 		add(program = new ProgramGui(world, 3, 6, 10, toolbar.y+toolbar.height+40));
+		if (ProjectClass.getProgram(levelNum) != null) {
+			program.setCmdIds(ProjectClass.getProgram(levelNum));
+		}
 
 		add(new FlxText(400, toolbar.y+toolbar.height+10, 110, "Function 1:").setFormat(null, 16, 0));
 		add(fun1 = new ProgramGui(world, 3, 6, 20+program_numc*CmdIcon.Size, toolbar.y+toolbar.height+40));
 		fun1.active = false; // don't call update() automatically
+		if (ProjectClass.getFun1(levelNum) != null) {
+			fun1.setCmdIds(ProjectClass.getFun1(levelNum));
+		}
 		
 		add(selected = new CmdIcon());
 		selected.visible = false;
@@ -297,6 +303,8 @@ class PlayState extends FlxState
 		var numStars:Int = (challenge1 ? 1:0) + (challenge2 ? 1:0) + (challenge3 ? 1:0);
 		if (numStars > ProjectClass.getStars(levelNum)) {
 			ProjectClass.setStars(levelNum, numStars);
+			ProjectClass.setProgram(levelNum, program.getCmdIds());
+			ProjectClass.setFun1(levelNum, fun1.getCmdIds());
 		}
 
 		FlxG.switchState(new LevelEnd(levelNum, challenge_numCoins, challenge_numCommands,

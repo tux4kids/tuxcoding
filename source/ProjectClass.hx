@@ -15,6 +15,8 @@ import haxe.Log;
 
 class ProjectClass extends FlxGame
 {	
+	public static inline var version:String = "V. 0.2.8";
+
 	private static var save:FlxSave;
 
 	public static var lastUnlocked (get, set):Int;
@@ -34,6 +36,20 @@ class ProjectClass extends FlxGame
 		save.data.stars[levelNum] = numStars;
 	}
 
+	public static function getProgram(levelNum:Int):Array<Int> {
+		return save.data.programs[levelNum];
+	}
+	public static function setProgram(levelNum:Int, program:Array<Int>) {
+		save.data.programs[levelNum] = program;
+	}
+
+	public static function getFun1(levelNum:Int):Array<Int> {
+		return save.data.fun1s[levelNum];
+	}
+	public static function setFun1(levelNum:Int, fun:Array<Int>) {
+		save.data.fun1s[levelNum] = fun;
+	}
+
 	public function new()
 	{
 		var Width:Int = Lib.current.stage.stageWidth;
@@ -49,14 +65,15 @@ class ProjectClass extends FlxGame
 
 		save = new FlxSave();
 		save.bind("tuxcoding");
-		// save.data.lastUnlocked = null;
+		Log.trace(save.data);
 
-		if (save.data.lastUnlocked == null) {
-			// no savegame found, init save date
+		if (save.data.version == null || save.data.version != version) {
+			// no savegame found (or save format changed), init save date
+			save.data.version = version;
 			save.data.lastUnlocked = 0;
 			save.data.stars = [];
+			save.data.programs = [];
+			save.data.fun1s = [];
 		}
-
-		Log.trace("save.lastUnlocked: "+save.data.lastUnlocked);
 	}
 }

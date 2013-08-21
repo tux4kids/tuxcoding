@@ -38,7 +38,7 @@ class TitleState extends FlxState
 		playBtn.y = FlxG.height * 2/3;
 		add(playBtn);
 
-		add(new FlxText(10, 10, 100, "V. 0.2.7").setFormat(null, 16, 0xffffff));
+		add(new FlxText(10, 10, 100, ProjectClass.version).setFormat(null, 16, 0xffffff));
 		
 		FlxG.camera.antialiasing = true;
 
