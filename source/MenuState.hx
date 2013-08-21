@@ -49,7 +49,7 @@ class MenuState extends FlxState
 				lvlBtn.num = lvlNum;
 				lvlBtn.visible = lvlBtn.active = lvlNum < numLevels;
 				// locked, numStars should be loaded/saved from player progress
-				lvlBtn.locked = lvlNum > 9;
+				lvlBtn.locked = lvlNum > ProjectClass.lastUnlocked;
 				lvlBtn.numStars = lvlNum < 10 ? Std.int(Math.min(lvlNum, 3)) : 0;
 			}
 		}

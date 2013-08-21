@@ -289,6 +289,11 @@ class PlayState extends FlxState
 		var challenge1:Bool = player.numCoins >= challenge_numCoins;
 		var challenge2:Bool = player.numCoins == world.numCoins;
 		var challenge3:Bool = (program.getCommands().length + fun1.getCommands().length) <= challenge_numCommands;
+		
+		if (levelNum == ProjectClass.lastUnlocked) {
+			ProjectClass.lastUnlocked++;
+		}
+
 		FlxG.switchState(new LevelEnd(levelNum, challenge_numCoins, challenge_numCommands,
 			challenge1, challenge2, challenge3));
 	}
