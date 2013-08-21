@@ -27,6 +27,13 @@ class ProjectClass extends FlxGame
 		return lu;
 	}
 
+	public static function getStars(levelNum:Int):Int {
+		return save.data.stars[levelNum];
+	}
+	public static function setStars(levelNum:Int, numStars:Int) {
+		save.data.stars[levelNum] = numStars;
+	}
+
 	public function new()
 	{
 		var Width:Int = Lib.current.stage.stageWidth;
@@ -42,9 +49,12 @@ class ProjectClass extends FlxGame
 
 		save = new FlxSave();
 		save.bind("tuxcoding");
+		// save.data.lastUnlocked = null;
+
 		if (save.data.lastUnlocked == null) {
 			// no savegame found, init save date
 			save.data.lastUnlocked = 0;
+			save.data.stars = [];
 		}
 
 		Log.trace("save.lastUnlocked: "+save.data.lastUnlocked);

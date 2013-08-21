@@ -294,6 +294,11 @@ class PlayState extends FlxState
 			ProjectClass.lastUnlocked++;
 		}
 
+		var numStars:Int = (challenge1 ? 1:0) + (challenge2 ? 1:0) + (challenge3 ? 1:0);
+		if (numStars > ProjectClass.getStars(levelNum)) {
+			ProjectClass.setStars(levelNum, numStars);
+		}
+
 		FlxG.switchState(new LevelEnd(levelNum, challenge_numCoins, challenge_numCommands,
 			challenge1, challenge2, challenge3));
 	}
