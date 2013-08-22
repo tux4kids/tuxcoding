@@ -23,7 +23,6 @@ import tileobjs.Coin;
 import tileobjs.Key;
 import tileobjs.Lock;
 import tileobjs.TileObj;
-import haxe.Log;
 
 /**
  * Main game state

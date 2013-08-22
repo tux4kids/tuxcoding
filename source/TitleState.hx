@@ -13,6 +13,7 @@ import org.flixel.FlxG;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
+import haxe.Log;
 
 class TitleState extends FlxState
 {
@@ -39,6 +40,7 @@ class TitleState extends FlxState
 		add(playBtn);
 
 		add(new FlxText(10, 10, 100, ProjectClass.version).setFormat(null, 16, 0xffffff));
+		Log.trace("starting: "+ProjectClass.version);
 		
 		FlxG.camera.antialiasing = true;
 

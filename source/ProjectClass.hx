@@ -26,6 +26,7 @@ class ProjectClass extends FlxGame
 	}
 	private static function set_lastUnlocked(lu:Int):Int {
 		save.data.lastUnlocked = lu;
+		save.flush();
 		return lu;
 	}
 
@@ -34,6 +35,7 @@ class ProjectClass extends FlxGame
 	}
 	public static function setStars(levelNum:Int, numStars:Int) {
 		save.data.stars[levelNum] = numStars;
+		save.flush();
 	}
 
 	public static function getProgram(levelNum:Int):Array<Int> {
@@ -41,6 +43,7 @@ class ProjectClass extends FlxGame
 	}
 	public static function setProgram(levelNum:Int, program:Array<Int>) {
 		save.data.programs[levelNum] = program;
+		save.flush();
 	}
 
 	public static function getFun1(levelNum:Int):Array<Int> {
@@ -48,6 +51,7 @@ class ProjectClass extends FlxGame
 	}
 	public static function setFun1(levelNum:Int, fun:Array<Int>) {
 		save.data.fun1s[levelNum] = fun;
+		save.flush();
 	}
 
 	public function new()
