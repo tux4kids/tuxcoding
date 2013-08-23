@@ -284,6 +284,7 @@ class PlayState extends FlxState
 		if (player.numCoins == world.numCoins)
 		{
 			levelWon();
+			return;
 		}
 		
 		super.update();

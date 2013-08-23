@@ -69,10 +69,10 @@ class ProjectClass extends FlxGame
 
 		save = new FlxSave();
 		save.bind("tuxcoding");
-		Log.trace(save.data);
 
 		if (save.data.version == null || save.data.version != version) {
 			// no savegame found (or save format changed), init save date
+			Log.trace('No SaveGame fo current version found, creating new one');
 			save.data.version = version;
 			save.data.lastUnlocked = 0;
 			save.data.stars = [];
