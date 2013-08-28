@@ -18,7 +18,7 @@ import org.flixel.FlxText;
 
 class MenuState extends FlxState
 {
-	private static inline var numLevels:Int = 50;
+	private static inline var numLevels:Int = 10;
 	private static inline var numRows:Int = 3;
 	private static inline var numCols:Int = 5;
 
@@ -31,16 +31,7 @@ class MenuState extends FlxState
 
 	private var levelBtns:FlxGroup;
 
-	private function set_curScreen(cs:Int):Int
-	{
-		cast(screenIndicators.members[curScreen], FlxSprite).frame = 0;
-		curScreen = cs;
-		cast(screenIndicators.members[curScreen], FlxSprite).frame = 1;
-
-		leftNavigator.visible = leftNavigator.active = curScreen > 0;
-
-		rightNavigator.visible = rightNavigator.active = curScreen < numScreens-1;
-
+	private function updateLevelButtons() {
 		// update level button numbers
 		for (r in 0...numRows) {
 			for (c in 0...numCols) {
@@ -53,6 +44,19 @@ class MenuState extends FlxState
 				lvlBtn.numStars = ProjectClass.getStars(lvlNum);
 			}
 		}
+	}
+
+	private function set_curScreen(cs:Int):Int
+	{
+		cast(screenIndicators.members[curScreen], FlxSprite).frame = 0;
+		curScreen = cs;
+		cast(screenIndicators.members[curScreen], FlxSprite).frame = 1;
+
+		leftNavigator.visible = leftNavigator.active = curScreen > 0;
+
+		rightNavigator.visible = rightNavigator.active = curScreen < numScreens-1;
+
+		updateLevelButtons();
 
 		return curScreen;
 	}
@@ -125,6 +129,8 @@ class MenuState extends FlxState
 			}
 
 			curScreen = 0;
+		} else {
+			updateLevelButtons();
 		}
 
 		super.create();

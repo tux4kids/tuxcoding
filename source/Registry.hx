@@ -16,6 +16,12 @@ class Registry
 	private static var initialized:Bool = false;
 	public static var xmlMaps:Array<Fast>;
 	
+	public static var numLevels (get, null) : Int;
+
+	private static function get_numLevels():Int {
+		return xmlMaps.length;
+	}
+	
 	public static function init() 
 	{
 		if (initialized) return;

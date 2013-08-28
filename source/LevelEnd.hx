@@ -54,6 +54,10 @@ class LevelEnd extends FlxState
 
 	private function playNextFun():Void
 	{
-		FlxG.switchState(new PlayState(levelNum+1));
+		levelNum++;
+		if (levelNum < Registry.numLevels)
+			FlxG.switchState(new PlayState(levelNum));
+		else
+			FlxG.switchState(new CongratState());
 	}
 }
