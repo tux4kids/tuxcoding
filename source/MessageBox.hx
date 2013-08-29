@@ -59,7 +59,7 @@ class MessageBox extends FlxGroup
 		}
 
 		add(new FlxText(msgWin.x+ 100, msgWin.y+ 100, Std.int(msgWin.width - 120), 
-			"Collect "+numCoins+" Coins")
+			"Reach the exit door")
 			.setFormat(AssetNames.TextFont, 35, 0x000000));
 		add(new FlxText(msgWin.x+ 100, msgWin.y+ 160, Std.int(msgWin.width - 120), "Collect All Coins")
 			.setFormat(AssetNames.TextFont, 35, 0x000000));

@@ -20,14 +20,16 @@ class World
 	public var player(default, null):Player;
 	public var map(default, null):FlxTilemap;
 	public var startPos(default, null):FlxPoint;
+	public var endPos(default, null):FlxPoint;
 	public var objects(default, null):Array<TileObj>;
 	public var numCoins (default, null):Int;
 
-	public function new(player:Player, map:FlxTilemap, objs:Array<TileObj>, startX:Int, startY:Int) 
+	public function new(player:Player, map:FlxTilemap, objs:Array<TileObj>, Start:FlxPoint, End:FlxPoint) 
 	{
 		this.player = player;
 		this.map = map;
-		startPos = new FlxPoint(startX, startY);
+		startPos = Start;
+		endPos = End;
 		objects = objs;
 
 		// count number of coins in level
@@ -64,7 +66,7 @@ class World
 	
 	public function isEmpty(tileX:Int, tileY:Int):Bool
 	{
-		if (map.getTile(tileX, tileY) != 0) return false;
+		if (map.getTile(tileX, tileY) != 0 ) return false;
 		var obj = getObject(tileX, tileY);
 		return obj == null || obj.canBeWalked;
 	}

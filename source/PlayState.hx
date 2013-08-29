@@ -23,21 +23,25 @@ import tileobjs.Coin;
 import tileobjs.Key;
 import tileobjs.Lock;
 import tileobjs.TileObj;
+import tileobjs.Door;
 
 /**
  * Main game state
  */
 class PlayState extends FlxState
 {
+	public inline static var LockTile:Int = 4;
 	public inline static var PlayerTile:Int = 14;
 	public inline static var CoinTile:Int = 15;
 	public inline static var KeyTile:Int = 16;
-	public inline static var LockTile:Int = 17;
+	public inline static var ExitTile:Int = 17;
+
 	public inline static var TileSize:Int = 35;
 	
 	private var levelNum:Int;
 	private var mapTilemap:FlxTilemap;
-	private var objects:FlxGroup;
+	private var backObjs:FlxGroup;
+	private var frontObjs:FlxGroup;
 	
 	private var toolbar:FlxSprite;
 	public var selected:CmdIcon;
@@ -82,13 +86,14 @@ class PlayState extends FlxState
 		var mapData:String = Registry.getMapData(levelNum);
 
 		mapTilemap = new FlxTilemap();
-		mapTilemap.loadMap(mapData, AssetNames.Tiles);
+		mapTilemap.loadMap(mapData, AssetNames.Tiles, TileSize, TileSize);
 		mapTilemap.x = (FlxG.width - mapTilemap.width) / 2;
 		mapTilemap.y = 10;
 		
 		add(mapTilemap);
+		add(backObjs = new FlxGroup());
 		add(player = new Player());
-		add(objects = new FlxGroup());
+		add(frontObjs = new FlxGroup());
 
 		initWorld();
 
@@ -139,8 +144,10 @@ class PlayState extends FlxState
 	
 	private function initWorld():Void
 	{
-		var startR:Int = -1;
-		var startC:Int = -1;
+		// var startR:Int = -1;
+		// var startC:Int = -1;
+		var start:FlxPoint = null;
+		var end:FlxPoint = null;
 		var objs:Array<TileObj> = [];
 		
 		// find starting position and coins
@@ -150,22 +157,27 @@ class PlayState extends FlxState
 				var tile = mapTilemap.getTileByIndex(index);
 				var clean = false;
 				if (tile == PlayerTile) {
-					startR = r;
-					startC = c;
+					start = new FlxPoint(c, r);
 					clean = true;
-				} else if (tile == CoinTile) {
+				} else if (tile == ExitTile) {
+					end = new FlxPoint(c, r);
+					var door = new Door(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					backObjs.add(door);
+					objs.push(door);
+					clean = true;
+				}else if (tile == CoinTile) {
 					var coin = new Coin(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
-					objects.add(coin);
+					frontObjs.add(coin);
 					objs.push(coin);
 					clean = true;
 				} else if (tile == KeyTile) {
 					var key = new Key(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
-					objects.add(key);
+					frontObjs.add(key);
 					objs.push(key);
 					clean = true;
 				} else if (tile == LockTile) {
 					var lock = new Lock(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
-					objects.add(lock);
+					frontObjs.add(lock);
 					objs.push(lock);
 					clean = true;
 				}
@@ -175,12 +187,15 @@ class PlayState extends FlxState
 			}
 		}
 		
-		if (startR == -1) {
+		if (start == null) {
 			throw "Error, map doesn't contain a starting position";
+			return;
+		} else if (end == null) {
+			throw "Error, map doesn't contain a exit door";
 			return;
 		}
 
-		world = new World(player, mapTilemap, objs, startC, startR);
+		world = new World(player, mapTilemap, objs, start, end);
 		world.restart();
 	}
 	
@@ -281,7 +296,7 @@ class PlayState extends FlxState
 			selected.y = _point.y - CmdIcon.Size / 2;
 		}
 
-		if (player.numCoins == world.numCoins)
+		if (player.idle && player.tileX == world.endPos.x && player.tileY == world.endPos.y)
 		{
 			levelWon();
 			return;
@@ -292,9 +307,10 @@ class PlayState extends FlxState
 
 	function levelWon()
 	{
-		var challenge1:Bool = player.numCoins >= challenge_numCoins;
+		var challenge1:Bool = true; // player always reaches the exit door
 		var challenge2:Bool = player.numCoins == world.numCoins;
-		var challenge3:Bool = (program.getCommands().length + fun1.getCommands().length) <= challenge_numCommands;
+		var challenge3:Bool = challenge2 &&
+			(program.getCommands().length + fun1.getCommands().length) <= challenge_numCommands;
 		
 		if (levelNum == ProjectClass.lastUnlocked) {
 			ProjectClass.lastUnlocked++;

@@ -26,6 +26,7 @@ class AssetNames
 	public static var Coin:String = "assets/coinGold.png";
 	public static var Key:String = "assets/keyBlue.png";
 	public static var Lock:String = "assets/lock_blue.png";
+	public static var Exit:String = "assets/exit.png";
 	
 	public static var Stars:String = "assets/gui/level-select-stars.png";
 

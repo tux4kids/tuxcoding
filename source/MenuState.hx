@@ -37,11 +37,13 @@ class MenuState extends FlxState
 			for (c in 0...numCols) {
 				var lvlNum = r * numCols + c + curScreen * (numRows*numCols);
 				var lvlBtn:LevelBtn = cast(levelBtns.members[r*numCols + c], LevelBtn);
-				lvlBtn.num = lvlNum;
-				lvlBtn.visible = lvlBtn.active = lvlNum < numLevels;
-				// locked, numStars should be loaded/saved from player progress
-				lvlBtn.locked = lvlNum > ProjectClass.lastUnlocked;
-				lvlBtn.numStars = ProjectClass.getStars(lvlNum);
+				if (lvlBtn != null) {
+					lvlBtn.num = lvlNum;
+					lvlBtn.visible = lvlBtn.active = lvlNum < numLevels;
+					// locked, numStars should be loaded/saved from player progress
+					lvlBtn.locked = lvlNum > ProjectClass.lastUnlocked;
+					lvlBtn.numStars = ProjectClass.getStars(lvlNum);
+				}
 			}
 		}
 	}
