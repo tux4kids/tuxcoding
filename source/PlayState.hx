@@ -19,11 +19,7 @@ import org.flixel.FlxText;
 import org.flixel.FlxTilemap;
 import org.flixel.system.input.FlxTouch;
 import org.flixel.util.FlxPoint;
-import tileobjs.Coin;
-import tileobjs.Key;
-import tileobjs.Lock;
-import tileobjs.TileObj;
-import tileobjs.Door;
+import tileobjs.*;
 
 /**
  * Main game state
@@ -31,6 +27,7 @@ import tileobjs.Door;
 class PlayState extends FlxState
 {
 	public inline static var LockTile:Int = 4;
+	public inline static var CrateTile:Int = 10;
 	public inline static var PlayerTile:Int = 14;
 	public inline static var CoinTile:Int = 15;
 	public inline static var KeyTile:Int = 16;
@@ -144,8 +141,6 @@ class PlayState extends FlxState
 	
 	private function initWorld():Void
 	{
-		// var startR:Int = -1;
-		// var startC:Int = -1;
 		var start:FlxPoint = null;
 		var end:FlxPoint = null;
 		var objs:Array<TileObj> = [];
@@ -179,6 +174,11 @@ class PlayState extends FlxState
 					var lock = new Lock(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
 					frontObjs.add(lock);
 					objs.push(lock);
+					clean = true;
+				} else if (tile == CrateTile) {
+					var crate = new Crate(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					backObjs.add(crate);
+					objs.push(crate);
 					clean = true;
 				}
 				

@@ -133,11 +133,13 @@ class ProgramGui extends FlxGroup
 		
 		curCmd = 0;
 		if (cmds.length > 0) {
-			runCmd();
+			//runCmd();
+			curTime = .5;
 			running = true;
+			return true;
 		}
 		
-		return cmds.length > 0;
+		return false;
 	}
 
 	public function runCmd() 

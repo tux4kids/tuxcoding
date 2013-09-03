@@ -71,6 +71,16 @@ class World
 		return obj == null || obj.canBeWalked;
 	}
 	
+	public function insideMapAndEmpty(tileX:Int, tileY:Int):Bool
+	{
+		return insideMap(tileX, tileY) && isEmpty(tileX, tileY);
+	}
+	
+	public function insideMapAndFull(tileX:Int, tileY:Int):Bool
+	{
+		return insideMap(tileX, tileY) && !isEmpty(tileX, tileY);
+	}
+	
 	public function getObject(tileX:Int, tileY:Int):TileObj
 	{
 		for (obj in objects) {

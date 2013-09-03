@@ -92,9 +92,6 @@ class Player extends FlxSprite
 	
 	public function walk():Void 
 	{
-		// curAnim = "walk";
-		// velocity.x = facingLeft ? -50 : 50;
-		// walkingDist = PlayState.TileSize;
 		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
 		
 		tileX += facingLeft ? -1:1;
@@ -102,10 +99,6 @@ class Player extends FlxSprite
 	
 	public function jumpUp():Void
 	{
-		// curAnim = "jump";
-		// var ts:Float = PlayState.TileSize;
-		// followPath(new FlxPath([
-		// 	new FlxPoint(x + width * .5 + (facingLeft ? -ts:ts), y + height * .5 - ts)]));
 		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
 		y -= PlayState.TileSize;
 
@@ -113,44 +106,25 @@ class Player extends FlxSprite
 		tileY--;
 	}
 	
+	public function stepUp():Void
+	{
+		y -= PlayState.TileSize;
+		tileY--;
+	}
+	
+	public function stepDown():Void
+	{
+		y += PlayState.TileSize;
+		tileY++;
+	}
+	
 	public function jumpDown():Void
 	{
-		// curAnim = "jump";
-		// var ts:Float = PlayState.TileSize;
-		// followPath(new FlxPath([
-		// 	new FlxPoint(x + width * .5 + (facingLeft ? -ts:ts), y + height * .5 + ts)]));
 		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
 		y += PlayState.TileSize;
 
 		tileX += facingLeft ? -1:1;
 		tileY++;
 	}
-	
-	/*
-	override public function update():Void 
-	{
-		var oldx:Float = x;
-		super.update();
-		if (curAnim == "walk")
-			walkingDist -= Math.abs(x - oldx);
-
-		if (curAnim == "walk")
-		{
-			if (walkingDist <= 0) {
-				curAnim = "idle";
-				velocity.x = 0;
-				if (walkingDist < 0)
-				{
-					// make sure we don't walk more than walkingDist
-					x += facing == FlxObject.LEFT ? -walkingDist : walkingDist;
-				}
-			}
-		}
-		else if (curAnim == "jump")
-		{
-			if (pathSpeed == 0) curAnim = "idle";
-		}
-	}
-	*/
 
 }

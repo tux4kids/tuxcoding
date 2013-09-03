@@ -15,7 +15,7 @@ import haxe.Log;
 
 class ProjectClass extends FlxGame
 {	
-	public static inline var version:String = "V. 0.2.13";
+	public static inline var version:String = "V. 0.2.14";
 
 	private static var save:FlxSave;
 
