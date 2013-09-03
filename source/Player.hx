@@ -99,10 +99,10 @@ class Player extends FlxSprite
 	
 	public function jumpUp():Void
 	{
-		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
+		x += facing == FlxObject.LEFT ? -PlayState.TileSize*3 : PlayState.TileSize*3;
 		y -= PlayState.TileSize;
 
-		tileX += facingLeft ? -1:1;
+		tileX += facingLeft ? -3:3;
 		tileY--;
 	}
 	
@@ -120,10 +120,10 @@ class Player extends FlxSprite
 	
 	public function jumpDown():Void
 	{
-		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
+		x += facing == FlxObject.LEFT ? -PlayState.TileSize*3 : PlayState.TileSize*3;
 		y += PlayState.TileSize;
 
-		tileX += facingLeft ? -1:1;
+		tileX += facingLeft ? -3:3;
 		tileY++;
 	}
 

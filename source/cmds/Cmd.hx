@@ -10,7 +10,7 @@ package cmds;
 
 class Cmd
 {
-	public inline static var NumCmds:Int = 8;
+	public inline static var NumCmds:Int = 9;
 
 	public var active:Bool; // true is this command is part of the program
 	
@@ -47,17 +47,19 @@ class Cmd
 			case 1:
 				return Turn;
 			case 2:
-				return Jump;
+				return JumpDown;
 			case 3:
-				return Take;
+				return JumpUp;
 			case 4:
-				return Unlock;
+				return Take;
 			case 5:
-				return Fun;
+				return Unlock;
 			case 6:
-				return StepUp;
+				return Fun;
 			case 7:
 				return StepDown;
+			case 8:
+				return StepUp;
 			default:
 				return null;
 		}

@@ -34,7 +34,7 @@ class Walk extends Cmd
 		var tileX:Int = player.tileX + (player.facingLeft ? -1 : 1);
 		
 		if (!world.insideMap(tileX, player.tileY)) return false;
-		if (!world.isEmpty(tileX, player.tileY)) return false;
-		return !world.insideMap(tileX, player.tileY + 1) || !world.isEmpty(tileX, player.tileY + 1);
+		if (!world.canWalkOn(tileX, player.tileY)) return false;
+		return world.insideMapAndFull(tileX, player.tileY+1);
 	}
 }

@@ -68,6 +68,13 @@ class World
 	{
 		if (map.getTile(tileX, tileY) != 0 ) return false;
 		var obj = getObject(tileX, tileY);
+		return obj == null;
+	}
+	
+	public function canWalkOn(tileX:Int, tileY:Int):Bool
+	{
+		if (map.getTile(tileX, tileY) != 0 ) return false;
+		var obj = getObject(tileX, tileY);
 		return obj == null || obj.canBeWalked;
 	}
 	
