@@ -92,19 +92,22 @@ class Player extends FlxSprite
 	
 	public function walk():Void 
 	{
-		curAnim = "walk";
-		velocity.x = facingLeft ? -50 : 50;
-		walkingDist = PlayState.TileSize;
+		// curAnim = "walk";
+		// velocity.x = facingLeft ? -50 : 50;
+		// walkingDist = PlayState.TileSize;
+		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
 		
 		tileX += facingLeft ? -1:1;
 	}
 	
 	public function jumpUp():Void
 	{
-		curAnim = "jump";
-		var ts:Float = PlayState.TileSize;
-		followPath(new FlxPath([
-			new FlxPoint(x + width * .5 + (facingLeft ? -ts:ts), y + height * .5 - ts)]));
+		// curAnim = "jump";
+		// var ts:Float = PlayState.TileSize;
+		// followPath(new FlxPath([
+		// 	new FlxPoint(x + width * .5 + (facingLeft ? -ts:ts), y + height * .5 - ts)]));
+		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
+		y -= PlayState.TileSize;
 
 		tileX += facingLeft ? -1:1;
 		tileY--;
@@ -112,15 +115,18 @@ class Player extends FlxSprite
 	
 	public function jumpDown():Void
 	{
-		curAnim = "jump";
-		var ts:Float = PlayState.TileSize;
-		followPath(new FlxPath([
-			new FlxPoint(x + width * .5 + (facingLeft ? -ts:ts), y + height * .5 + ts)]));
+		// curAnim = "jump";
+		// var ts:Float = PlayState.TileSize;
+		// followPath(new FlxPath([
+		// 	new FlxPoint(x + width * .5 + (facingLeft ? -ts:ts), y + height * .5 + ts)]));
+		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
+		y += PlayState.TileSize;
 
 		tileX += facingLeft ? -1:1;
 		tileY++;
 	}
 	
+	/*
 	override public function update():Void 
 	{
 		var oldx:Float = x;
@@ -145,5 +151,6 @@ class Player extends FlxSprite
 			if (pathSpeed == 0) curAnim = "idle";
 		}
 	}
+	*/
 
 }

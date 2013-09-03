@@ -147,7 +147,7 @@ class ProgramGui extends FlxGroup
 		{
 			if (!cmds[curCmd].run())
 				curCmd++;
-			curTime = 1;
+			curTime = .5;
 		}
 		
 		if (!canRun || curCmd == cmds.length)
