@@ -18,6 +18,10 @@ import haxe.Log;
 class TitleState extends FlxState
 {
 
+	private var logo:FlxSprite;
+
+	private static inline var credits:String = "A Tux4Kids Game\nGSoC'2013\nProgramming:\nAbdelhakim Deneche\nMentored by:\nScott McCreary";
+
 	override public function create():Void
 	{
 		#if !mobile
@@ -27,7 +31,11 @@ class TitleState extends FlxState
 		Registry.init();
 		
 		add(new FlxSprite(0, 0, AssetNames.Background));
+		add(logo = new FlxSprite(20, 0, AssetNames.Tux));
+		logo.y = FlxG.height - logo.height;
 		
+		add(new FlxText(0, 20, FlxG.width, credits).setFormat(AssetNames.TextFont, 32, 0xd2343f, "center"));
+
 		var title:FlxSprite = new FlxSprite(0,0, AssetNames.GameTitle);
 		title.x = (FlxG.width - title.width)/2;
 		title.y = (FlxG.height - title.height)/2;
@@ -40,7 +48,6 @@ class TitleState extends FlxState
 		add(playBtn);
 
 		add(new FlxText(10, 10, 100, ProjectClass.version).setFormat(null, 16, 0xffffff));
-		Log.trace("starting: "+ProjectClass.version);
 		
 		FlxG.camera.antialiasing = true;
 

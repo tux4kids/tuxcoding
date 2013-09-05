@@ -13,6 +13,8 @@ package ;
  */
 class AssetNames
 {
+	public static var Tux:String = "assets/Tux-G2.png";
+
 	public static var LevelsXML:String = "assets/levels/tuxcoding/Level_levels.xml";
 	public static var Tiles:String = "assets/levels/blocks.png";
 	
