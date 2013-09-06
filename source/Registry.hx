@@ -38,13 +38,36 @@ class Registry
 		initialized = true;
 	}
 	
-	public static function getMapData(mapNum:Int):String
+	public static function getMapDataString(mapNum:Int):String
 	{
 		// extract map data from xml file
 		var map = xmlMaps[mapNum];
 		var mapData:String = "";
 		for (row in map.nodes.row) {
 			mapData += row.innerData + "\n";
+		}
+
+		return mapData;
+	}
+	
+	public static function getMapData(mapNum:Int):Array<Array<Int>>
+	{
+		// extract map data from xml file
+		var map = xmlMaps[mapNum];
+		var mapData:Array<Array<Int>> = [];
+
+		var rInd = 0;
+		for (row in map.nodes.row) {
+			var rowData:Array<String> = StringTools.trim(row.innerData).split(",");
+			mapData[rInd] = [];
+
+			var cInd = 0;
+			for (col in rowData) {
+				mapData[rInd][cInd] = Std.parseInt(rowData[cInd]);
+				cInd++;
+			}
+
+			rInd++;
 		}
 
 		return mapData;

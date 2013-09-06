@@ -36,7 +36,8 @@ class PlayState extends FlxState
 	public inline static var TileSize:Int = 35;
 	
 	private var levelNum:Int;
-	private var mapTilemap:FlxTilemap;
+	private var mapData:Array<Array<Int>>;
+	private var mapSprite:FlxSprite;
 	private var backObjs:FlxGroup;
 	private var frontObjs:FlxGroup;
 	
@@ -80,14 +81,14 @@ class PlayState extends FlxState
 		}
 
 		// load map
-		var mapData:String = Registry.getMapData(levelNum);
+		var mapDataStr:String = Registry.getMapDataString(levelNum);
+		mapData = Registry.getMapData(levelNum);
 
-		mapTilemap = new FlxTilemap();
-		mapTilemap.loadMap(mapData, AssetNames.Tiles, TileSize, TileSize);
-		mapTilemap.x = (FlxG.width - mapTilemap.width) / 2;
-		mapTilemap.y = 10;
-		
-		add(mapTilemap);
+		var mapWidth = TileSize*mapData[0].length;
+		var mapHeight = TileSize*mapData.length;
+
+		add(mapSprite = new FlxSprite((FlxG.width - mapWidth) / 2, 10).makeGraphic(mapWidth, mapHeight, 0xffd0f4f7));
+
 		add(backObjs = new FlxGroup());
 		add(player = new Player());
 		add(frontObjs = new FlxGroup());
@@ -104,7 +105,7 @@ class PlayState extends FlxState
 		var program_numc:Int = 6;
 
 		// compute available height for program+toolbar
-		var availableHeight:Float = FlxG.height - mapTilemap.y - mapTilemap.height - 10 - 40 - 10;
+		var availableHeight:Float = FlxG.height - mapSprite.y - mapSprite.height - 10 - 40 - 10;
 		var availableWidth:Float = FlxG.width - 85 - 10 - 30;
 		// compute the size of CmdIcon
 		CmdIcon.Size = Math.floor(Math.min(
@@ -112,7 +113,7 @@ class PlayState extends FlxState
 			Math.floor( availableWidth / (program_numc*2))
 		));
 
-		prepareToolbar(10, mapTilemap.y + mapTilemap.height + 10);
+		prepareToolbar(10, mapSprite.y + mapSprite.height + 10);
 		
 		add(new FlxText(10, toolbar.y+toolbar.height+10, 100, "Main:").setFormat(null, 16, 0));
 		add(program = new ProgramGui(world, 3, 6, 10, toolbar.y+toolbar.height+40));
@@ -144,46 +145,55 @@ class PlayState extends FlxState
 		var start:FlxPoint = null;
 		var end:FlxPoint = null;
 		var objs:Array<TileObj> = [];
-		
+
+		var heightInTiles = mapData.length;
+		var widthInTiles = mapData[0].length;
+
+		var mapTiles = new FlxSprite().loadGraphic(AssetNames.Tiles, true, TileSize, TileSize);
+
 		// find starting position and coins
-		for (r in 0...mapTilemap.heightInTiles) {
-			for (c in 0...mapTilemap.widthInTiles) {
-				var index = r * mapTilemap.widthInTiles + c;
-				var tile = mapTilemap.getTileByIndex(index);
+		for (r in 0...heightInTiles) {
+			for (c in 0...widthInTiles) {
+				var tile = mapData[r][c];
+
 				var clean = false;
 				if (tile == PlayerTile) {
 					start = new FlxPoint(c, r);
 					clean = true;
 				} else if (tile == ExitTile) {
 					end = new FlxPoint(c, r);
-					var door = new Door(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					var door = new Door(mapSprite.x + c * TileSize, mapSprite.y + r * TileSize, c, r);
 					backObjs.add(door);
 					objs.push(door);
 					clean = true;
 				}else if (tile == CoinTile) {
-					var coin = new Coin(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					var coin = new Coin(mapSprite.x + c * TileSize, mapSprite.y + r * TileSize, c, r);
 					frontObjs.add(coin);
 					objs.push(coin);
 					clean = true;
 				} else if (tile == KeyTile) {
-					var key = new Key(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					var key = new Key(mapSprite.x + c * TileSize, mapSprite.y + r * TileSize, c, r);
 					frontObjs.add(key);
 					objs.push(key);
 					clean = true;
 				} else if (tile == LockTile) {
-					var lock = new Lock(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					var lock = new Lock(mapSprite.x + c * TileSize, mapSprite.y + r * TileSize, c, r);
 					frontObjs.add(lock);
 					objs.push(lock);
 					clean = true;
 				} else if (tile == CrateTile) {
-					var crate = new Crate(mapTilemap.x + c * TileSize, mapTilemap.y + r * TileSize, c, r);
+					var crate = new Crate(mapSprite.x + c * TileSize, mapSprite.y + r * TileSize, c, r);
 					backObjs.add(crate);
 					objs.push(crate);
 					clean = true;
 				}
 				
-				if (clean)
-					mapTilemap.setTileByIndex(index, 0);
+				if (clean) 
+					mapData[r][c] = 0;
+				else {
+					mapTiles.frame = mapData[r][c];
+					mapSprite.stamp(mapTiles, c*TileSize, r*TileSize);
+				}
 			}
 		}
 		
@@ -195,7 +205,7 @@ class PlayState extends FlxState
 			return;
 		}
 
-		world = new World(player, mapTilemap, objs, start, end);
+		world = new World(player, mapSprite, mapData, objs, start, end);
 		world.restart();
 	}
 	
@@ -211,12 +221,6 @@ class PlayState extends FlxState
 		}
 
 		add(toolbar);
-	}
-	
-	override public function destroy():Void 
-	{
-		remove(mapTilemap);
-		super.destroy();
 	}
 	
 	override public function update():Void 

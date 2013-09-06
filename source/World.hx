@@ -7,7 +7,7 @@
  */
 
 package ;
-import org.flixel.FlxTilemap;
+import org.flixel.FlxSprite;
 import org.flixel.util.FlxPoint;
 import tileobjs.Coin;
 import tileobjs.TileObj;
@@ -18,16 +18,19 @@ import tileobjs.TileObj;
 class World
 {
 	public var player(default, null):Player;
-	public var map(default, null):FlxTilemap;
 	public var startPos(default, null):FlxPoint;
 	public var endPos(default, null):FlxPoint;
 	public var objects(default, null):Array<TileObj>;
 	public var numCoins (default, null):Int;
 
-	public function new(player:Player, map:FlxTilemap, objs:Array<TileObj>, Start:FlxPoint, End:FlxPoint) 
+	private var mapSprite:FlxSprite;
+	private var mapData:Array<Array<Int>>;
+
+	public function new(player:Player, mapSprite:FlxSprite, mapData:Array<Array<Int>>, objs:Array<TileObj>, Start:FlxPoint, End:FlxPoint) 
 	{
 		this.player = player;
-		this.map = map;
+		this.mapData = mapData;
+		this.mapSprite = mapSprite;
 		startPos = Start;
 		endPos = End;
 		objects = objs;
@@ -42,8 +45,8 @@ class World
 	public function restart():Void
 	{
 		player.setPos(Std.int(startPos.x), Std.int(startPos.y), 
-			map.x + (startPos.x + .5) * PlayState.TileSize,
-			map.y + (startPos.y + 1) * PlayState.TileSize);	
+			mapSprite.x + (startPos.x + .5) * PlayState.TileSize,
+			mapSprite.y + (startPos.y + 1) * PlayState.TileSize);	
 		player.restart();
 		
 		for (obj in objects) 
@@ -59,21 +62,21 @@ class World
 	 */
 	public function insideMap(tileX:Int, tileY:Int):Bool
 	{
-		if (tileX < 0 || tileX >= map.widthInTiles) return false;
-		if (tileY < 0 || tileY >= map.heightInTiles) return false;
+		if (tileX < 0 || tileX >= mapData[0].length) return false;
+		if (tileY < 0 || tileY >= mapData.length) return false;
 		return true;
 	}
 	
 	public function isEmpty(tileX:Int, tileY:Int):Bool
 	{
-		if (map.getTile(tileX, tileY) != 0 ) return false;
+		if (mapData[tileY][tileX] != 0 ) return false;
 		var obj = getObject(tileX, tileY);
 		return obj == null;
 	}
 	
 	public function canWalkOn(tileX:Int, tileY:Int):Bool
 	{
-		if (map.getTile(tileX, tileY) != 0 ) return false;
+		if (mapData[tileY][tileX] != 0 ) return false;
 		var obj = getObject(tileX, tileY);
 		return obj == null || obj.canBeWalked;
 	}
