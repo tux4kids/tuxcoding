@@ -15,4 +15,9 @@ class Door extends TileObj
 		super(X, Y-35, TileX, TileY, AssetNames.Exit);
 		this.canBeWalked = true;
 	}
+
+	override public function setPos(TileX:Int, TileY:Int, mapX:Float, mapY:Float, tSize:Float) {
+		super.setPos(TileX, TileY, mapX, mapY, tSize);
+		y -= tSize;
+	}
 }

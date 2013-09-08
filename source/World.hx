@@ -17,20 +17,21 @@ import tileobjs.TileObj;
  */
 class World
 {
-	public var player(default, null):Player;
-	public var startPos(default, null):FlxPoint;
-	public var endPos(default, null):FlxPoint;
-	public var objects(default, null):Array<TileObj>;
+	private var playState:PlayState;
+
+	public var player (get, null):Player;
+	public var startPos (default, null):FlxPoint;
+	public var endPos (default, null):FlxPoint;
+	public var objects (default, null):Array<TileObj>;
 	public var numCoins (default, null):Int;
 
-	private var mapSprite:FlxSprite;
-	private var mapData:Array<Array<Int>>;
+	public function get_player():Player {
+		return playState.player;
+	}
 
-	public function new(player:Player, mapSprite:FlxSprite, mapData:Array<Array<Int>>, objs:Array<TileObj>, Start:FlxPoint, End:FlxPoint) 
+	public function new(playState:PlayState, objs:Array<TileObj>, Start:FlxPoint, End:FlxPoint) 
 	{
-		this.player = player;
-		this.mapData = mapData;
-		this.mapSprite = mapSprite;
+		this.playState = playState;
 		startPos = Start;
 		endPos = End;
 		objects = objs;
@@ -44,9 +45,7 @@ class World
 	
 	public function restart():Void
 	{
-		player.setPos(Std.int(startPos.x), Std.int(startPos.y), 
-			mapSprite.x + (startPos.x + .5) * PlayState.TileSize,
-			mapSprite.y + (startPos.y + 1) * PlayState.TileSize);	
+		player.setPos(Std.int(startPos.x), Std.int(startPos.y));
 		player.restart();
 		
 		for (obj in objects) 
@@ -54,6 +53,7 @@ class World
 			obj.visible = true;
 		}
 	}
+
 	/**
 	 * checks if the tile is inside the map boundaries
 	 * @param	tileX
@@ -62,21 +62,21 @@ class World
 	 */
 	public function insideMap(tileX:Int, tileY:Int):Bool
 	{
-		if (tileX < 0 || tileX >= mapData[0].length) return false;
-		if (tileY < 0 || tileY >= mapData.length) return false;
+		if (tileX < 0 || tileX >= playState.mapData[0].length) return false;
+		if (tileY < 0 || tileY >= playState.mapData.length) return false;
 		return true;
 	}
 	
 	public function isEmpty(tileX:Int, tileY:Int):Bool
 	{
-		if (mapData[tileY][tileX] != 0 ) return false;
+		if (playState.mapData[tileY][tileX] != 0 ) return false;
 		var obj = getObject(tileX, tileY);
 		return obj == null;
 	}
 	
 	public function canWalkOn(tileX:Int, tileY:Int):Bool
 	{
-		if (mapData[tileY][tileX] != 0 ) return false;
+		if (playState.mapData[tileY][tileX] != 0 ) return false;
 		var obj = getObject(tileX, tileY);
 		return obj == null || obj.canBeWalked;
 	}

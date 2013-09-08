@@ -33,11 +33,11 @@ class PlayState extends FlxState
 	public inline static var KeyTile:Int = 16;
 	public inline static var ExitTile:Int = 17;
 
-	public inline static var TileSize:Int = 35;
+	private inline static var TileSize:Int = 35;
 	
 	private var levelNum:Int;
-	private var mapData:Array<Array<Int>>;
-	private var mapSprite:FlxSprite;
+	public var mapData:Array<Array<Int>>;
+	public var mapSprite:FlxSprite;
 	private var backObjs:FlxGroup;
 	private var frontObjs:FlxGroup;
 	
@@ -49,7 +49,7 @@ class PlayState extends FlxState
 	private var program:ProgramGui;
 	private var fun1:ProgramGui;
 	
-	private var player:Player;
+	public var player (default, null):Player;
 	
 	private var world:World;
 	
@@ -59,6 +59,18 @@ class PlayState extends FlxState
 
 	private var challenge_numCoins:Int; // min number of coins to collect
 	private var challenge_numCommands:Int; // max number of commands to collect all coins
+
+	private var zoomedIn:Bool = false;
+
+	public var scale (get, null) : Float;
+	public var tileSize (get, null) : Float;
+
+	private function get_scale():Float {
+		return zoomedIn ? 1.5 : 1;
+	}
+	private function get_tileSize():Float {
+		return scale * TileSize;
+	}
 
 	public function new(LvlNum:Int) 
 	{
@@ -87,11 +99,13 @@ class PlayState extends FlxState
 		var mapWidth = TileSize*mapData[0].length;
 		var mapHeight = TileSize*mapData.length;
 
-		add(mapSprite = new FlxSprite((FlxG.width - mapWidth) / 2, 10).makeGraphic(mapWidth, mapHeight, 0xffd0f4f7));
+		mapSprite = new FlxSprite((FlxG.width - mapWidth) / 2, 10)
+			.makeGraphic(mapWidth, mapHeight, 0xffd0f4f7);
+		mapSprite.origin.make();
 
-		add(backObjs = new FlxGroup());
-		add(player = new Player());
-		add(frontObjs = new FlxGroup());
+		backObjs = new FlxGroup();
+		player = new Player(this);
+		frontObjs = new FlxGroup();
 
 		initWorld();
 
@@ -128,6 +142,11 @@ class PlayState extends FlxState
 			fun1.setCmdIds(ProjectClass.getFun1(levelNum));
 		}
 		
+		add(mapSprite);
+		add(backObjs);
+		add(player);
+		add(frontObjs);
+
 		add(selected = new CmdIcon());
 		selected.visible = false;
 
@@ -166,7 +185,9 @@ class PlayState extends FlxState
 					backObjs.add(door);
 					objs.push(door);
 					clean = true;
-				}else if (tile == CoinTile) {
+				} else if (tile == ExitTile+1) {
+					clean = true;
+				} else if (tile == CoinTile) {
 					var coin = new Coin(mapSprite.x + c * TileSize, mapSprite.y + r * TileSize, c, r);
 					frontObjs.add(coin);
 					objs.push(coin);
@@ -205,7 +226,7 @@ class PlayState extends FlxState
 			return;
 		}
 
-		world = new World(player, mapSprite, mapData, objs, start, end);
+		world = new World(this, objs, start, end);
 		world.restart();
 	}
 	
@@ -305,8 +326,29 @@ class PlayState extends FlxState
 			levelWon();
 			return;
 		}
+
+		if (mjp && mapSprite.overlapsPoint(_point)) {
+			switchZoom();
+		}
 		
 		super.update();
+	}
+
+	function switchZoom() {
+		zoomedIn = !zoomedIn;
+
+		mapSprite.scale.make(scale, scale);
+		mapSprite.x = (FlxG.width-mapSprite.width*scale)/2;
+		if (zoomedIn) mapSprite.y = (FlxG.height-mapSprite.height*scale)/2;
+		else mapSprite.y = 20;
+
+		for (obj in world.objects) {
+			obj.setPos(obj.tileX, obj.tileY, mapSprite.x, mapSprite.y, tileSize);
+			obj.scale.make(scale, scale);
+		}
+
+		player.scale.make(scale, scale);
+		player.setPos(player.tileX, player.tileY);
 	}
 
 	function levelWon()

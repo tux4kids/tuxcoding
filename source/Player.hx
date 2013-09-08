@@ -19,6 +19,8 @@ import tileobjs.Coin;
 
 class Player extends FlxSprite
 {
+	private var playState:PlayState;
+
 	private var walkingDist:Float;
 	
 	public var idle(get, null):Bool;
@@ -43,9 +45,10 @@ class Player extends FlxSprite
 		hasKey = false;
 	}
 	
-	public function new() 
+	public function new(playState:PlayState) 
 	{
 		super();
+		this.playState = playState;
 
 		loadGraphic(AssetNames.Player, true, true, 35, 47);
 		addAnimation("idle", [0]);
@@ -53,14 +56,18 @@ class Player extends FlxSprite
 		addAnimation("walk", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 15);
 		
 		maxVelocity.y = 300;
+		origin.make();
 	}
 	
-	public function setPos(TileX:Int, TileY:Int, Xcenter:Float, Ybottom:Float):Void {
-		x = Xcenter - width / 2;
-		y = Ybottom - height;
-		
+	public function setPos(TileX:Int, TileY:Int):Void {
 		tileX = TileX;
 		tileY = TileY;
+
+		var Xcenter = playState.mapSprite.x + (tileX + .5) * playState.tileSize;
+		var Ybottom = playState.mapSprite.y + (tileY + 1) * playState.tileSize;
+
+		x = Xcenter - width*scale.x / 2;
+		y = Ybottom - height*scale.y;
 	}
 	
 	/**
@@ -92,15 +99,15 @@ class Player extends FlxSprite
 	
 	public function walk():Void 
 	{
-		x += facing == FlxObject.LEFT ? -PlayState.TileSize : PlayState.TileSize;
+		x += facing == FlxObject.LEFT ? -playState.tileSize : playState.tileSize;
 		
 		tileX += facingLeft ? -1:1;
 	}
 	
 	public function jumpUp():Void
 	{
-		x += facing == FlxObject.LEFT ? -PlayState.TileSize*3 : PlayState.TileSize*3;
-		y -= PlayState.TileSize;
+		x += facing == FlxObject.LEFT ? -playState.tileSize*3 : playState.tileSize*3;
+		y -= playState.tileSize;
 
 		tileX += facingLeft ? -3:3;
 		tileY--;
@@ -108,20 +115,20 @@ class Player extends FlxSprite
 	
 	public function stepUp():Void
 	{
-		y -= PlayState.TileSize;
+		y -= playState.tileSize;
 		tileY--;
 	}
 	
 	public function stepDown():Void
 	{
-		y += PlayState.TileSize;
+		y += playState.tileSize;
 		tileY++;
 	}
 	
 	public function jumpDown():Void
 	{
-		x += facing == FlxObject.LEFT ? -PlayState.TileSize*3 : PlayState.TileSize*3;
-		y += PlayState.TileSize;
+		x += facing == FlxObject.LEFT ? -playState.tileSize*3 : playState.tileSize*3;
+		y += playState.tileSize;
 
 		tileX += facingLeft ? -3:3;
 		tileY++;

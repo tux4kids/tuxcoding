@@ -34,8 +34,17 @@ class TileObj extends FlxSprite
 	public function new(X:Float, Y:Float, TileX:Int, TileY:Int, SimpleGraphic:Dynamic) 
 	{
 		super(X, Y, SimpleGraphic);
+		origin.make();
 		tileX = TileX;
 		tileY = TileY;
+	}
+
+	public function setPos(TileX:Int, TileY:Int, mapX:Float, mapY:Float, tSize:Float) {
+		tileX = TileX;
+		tileY = TileY;
+
+		x = mapX + tileX*tSize;
+		y = mapY + tileY*tSize;
 	}
 	
 }
