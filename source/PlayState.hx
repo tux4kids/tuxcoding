@@ -45,6 +45,7 @@ class PlayState extends FlxState
 	public var selected:CmdIcon;
 	
 	private var runBtn:FlxButton;
+	private var zoomBtn:FlxButton;
 	
 	private var program:ProgramGui;
 	private var fun1:ProgramGui;
@@ -112,6 +113,8 @@ class PlayState extends FlxState
 		add(new FlxButton(FlxG.width - 103, 10, null, onPause)
 			.loadGraphic(AssetNames.PauseBtn, true, 93, 105));
 
+		add(zoomBtn = new FlxButton(FlxG.width - 103, FlxG.height - 225, null, onZoom));
+		zoomBtn.loadGraphic(AssetNames.ZoomBtn, true, 93, 105);
 		add(runBtn = new FlxButton(FlxG.width - 103, FlxG.height - 115, null, onRun));
 		runBtn.loadGraphic(AssetNames.PlayBtn, true, 93, 105);
 
@@ -326,10 +329,6 @@ class PlayState extends FlxState
 			levelWon();
 			return;
 		}
-
-		if (mjp && mapSprite.overlapsPoint(_point)) {
-			switchZoom();
-		}
 		
 		super.update();
 	}
@@ -393,6 +392,10 @@ class PlayState extends FlxState
 		pauseMsg.active = pauseMsg.visible = false;
 	}
 	
+	function onZoom() {
+		switchZoom();
+	}
+
 	function onRun() 
 	{
 		world.restart();
