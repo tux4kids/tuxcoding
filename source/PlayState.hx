@@ -33,7 +33,7 @@ class PlayState extends FlxState
 	public inline static var KeyTile:Int = 16;
 	public inline static var ExitTile:Int = 17;
 
-	private inline static var TileSize:Int = 35;
+	private inline static var TileSize:Int = 70;
 	
 	private var levelNum:Int;
 	public var mapData:Array<Array<Int>>;
@@ -67,7 +67,7 @@ class PlayState extends FlxState
 	public var tileSize (get, null) : Float;
 
 	private function get_scale():Float {
-		return zoomedIn ? 1.5 : 1;
+		return zoomedIn ? 1.0 : 0.5;
 	}
 	private function get_tileSize():Float {
 		return scale * TileSize;
@@ -109,6 +109,7 @@ class PlayState extends FlxState
 		frontObjs = new FlxGroup();
 
 		initWorld();
+		switchZoom(false);
 
 		add(new FlxButton(FlxG.width - 103, 10, null, onPause)
 			.loadGraphic(AssetNames.PauseBtn, true, 93, 105));
@@ -122,7 +123,7 @@ class PlayState extends FlxState
 		var program_numc:Int = 6;
 
 		// compute available height for program+toolbar
-		var availableHeight:Float = FlxG.height - mapSprite.y - mapSprite.height - 10 - 40 - 10;
+		var availableHeight:Float = FlxG.height - mapSprite.y - mapSprite.height*mapSprite.scale.y - 10 - 40 - 10;
 		var availableWidth:Float = FlxG.width - 85 - 10 - 30;
 		// compute the size of CmdIcon
 		CmdIcon.Size = Math.floor(Math.min(
@@ -130,7 +131,7 @@ class PlayState extends FlxState
 			Math.floor( availableWidth / (program_numc*2))
 		));
 
-		prepareToolbar(10, mapSprite.y + mapSprite.height + 10);
+		prepareToolbar(10, mapSprite.y + mapSprite.height*mapSprite.scale.y + 10);
 		
 		add(new FlxText(10, toolbar.y+toolbar.height+10, 100, "Main:").setFormat(null, 16, 0));
 		add(program = new ProgramGui(world, 3, 6, 10, toolbar.y+toolbar.height+40));
@@ -333,8 +334,8 @@ class PlayState extends FlxState
 		super.update();
 	}
 
-	function switchZoom() {
-		zoomedIn = !zoomedIn;
+	function switchZoom(ZoomIn:Bool) {
+		zoomedIn = ZoomIn;
 
 		mapSprite.scale.make(scale, scale);
 		mapSprite.x = (FlxG.width-mapSprite.width*scale)/2;
@@ -393,7 +394,7 @@ class PlayState extends FlxState
 	}
 	
 	function onZoom() {
-		switchZoom();
+		switchZoom(!zoomedIn);
 	}
 
 	function onRun() 
