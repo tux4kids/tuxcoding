@@ -24,7 +24,7 @@ class AssetNames
 	public static var PauseBtn:String = "assets/gui/pause-btn.png";
 	public static var Cmds:String = "assets/gui/cmds.png";
 	
-	public static var Player:String = "assets/player01.png";
+	public static var Player:String = "assets/player.png";
 	public static var Coin:String = "assets/coinGold.png";
 	public static var Key:String = "assets/keyBlue.png";
 	public static var Lock:String = "assets/lock_blue.png";

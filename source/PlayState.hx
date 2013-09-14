@@ -114,11 +114,6 @@ class PlayState extends FlxState
 		add(new FlxButton(FlxG.width - 103, 10, null, onPause)
 			.loadGraphic(AssetNames.PauseBtn, true, 93, 105));
 
-		add(zoomBtn = new FlxButton(FlxG.width - 103, FlxG.height - 225, null, onZoom));
-		zoomBtn.loadGraphic(AssetNames.ZoomBtn, true, 93, 105);
-		add(runBtn = new FlxButton(FlxG.width - 103, FlxG.height - 115, null, onRun));
-		runBtn.loadGraphic(AssetNames.PlayBtn, true, 93, 105);
-
 		var program_numr:Int = 3;
 		var program_numc:Int = 6;
 
@@ -150,6 +145,11 @@ class PlayState extends FlxState
 		add(backObjs);
 		add(player);
 		add(frontObjs);
+
+		add(zoomBtn = new FlxButton(FlxG.width - 103, FlxG.height - 225, null, onZoom));
+		zoomBtn.loadGraphic(AssetNames.ZoomBtn, true, 93, 105);
+		add(runBtn = new FlxButton(FlxG.width - 103, FlxG.height - 115, null, onRun));
+		runBtn.loadGraphic(AssetNames.PlayBtn, true, 93, 105);
 
 		add(selected = new CmdIcon());
 		selected.visible = false;

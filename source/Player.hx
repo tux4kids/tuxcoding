@@ -50,10 +50,11 @@ class Player extends FlxSprite
 		super();
 		this.playState = playState;
 
-		loadGraphic(AssetNames.Player, true, true, 35, 47);
-		addAnimation("idle", [0]);
-		addAnimation("jump", [3]);
-		addAnimation("walk", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 15);
+		// loadGraphic(AssetNames.Player, true, true, 35, 47);
+		// addAnimation("idle", [0]);
+		// addAnimation("jump", [3]);
+		// addAnimation("walk", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 15);
+		loadGraphic(AssetNames.Player);
 		
 		maxVelocity.y = 300;
 		origin.make();
