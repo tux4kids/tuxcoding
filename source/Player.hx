@@ -50,11 +50,8 @@ class Player extends FlxSprite
 		super();
 		this.playState = playState;
 
-		// loadGraphic(AssetNames.Player, true, true, 35, 47);
-		// addAnimation("idle", [0]);
-		// addAnimation("jump", [3]);
-		// addAnimation("walk", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 15);
-		loadGraphic(AssetNames.Player);
+		loadGraphic(AssetNames.Player, true, true, 70, 94);
+		addAnimation("idle", [0]);
 		
 		maxVelocity.y = 300;
 		origin.make();
@@ -67,7 +64,7 @@ class Player extends FlxSprite
 		var Xcenter = playState.mapSprite.x + (tileX + .5) * playState.tileSize;
 		var Ybottom = playState.mapSprite.y + (tileY + 1) * playState.tileSize;
 
-		x = Xcenter - width*scale.x / 2;
+		x = Xcenter - width*scale.x/2;
 		y = Ybottom - height*scale.y;
 	}
 	
