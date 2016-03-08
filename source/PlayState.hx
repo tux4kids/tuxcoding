@@ -10,15 +10,15 @@ package ;
 
 import cmds.Cmd;
 import cmds.Fun;
-import org.flixel.FlxButton;
-import org.flixel.FlxG;
-import org.flixel.FlxGroup;
-import org.flixel.FlxSprite;
-import org.flixel.FlxState;
-import org.flixel.FlxText;
-import org.flixel.FlxTilemap;
-import org.flixel.system.input.FlxTouch;
-import org.flixel.util.FlxPoint;
+import flixel.ui.FlxButton;
+import flixel.FlxG;
+import flixel.group.FlxGroup;
+import flixel.FlxSprite;
+import flixel.FlxState;
+import flixel.text.FlxText;
+import flixel.tile.FlxTilemap;
+import flixel.input.touch.FlxTouch;
+import flixel.math.FlxPoint;
 import tileobjs.*;
 
 /**
@@ -102,7 +102,7 @@ class PlayState extends FlxState
 
 		mapSprite = new FlxSprite((FlxG.width - mapWidth) / 2, 10)
 			.makeGraphic(mapWidth, mapHeight, 0xffd0f4f7);
-		mapSprite.origin.make();
+		//mapSprite.origin.make();
 
 		backObjs = new FlxGroup();
 		player = new Player(this);
@@ -216,7 +216,7 @@ class PlayState extends FlxState
 				if (clean) 
 					mapData[r][c] = 0;
 				else {
-					mapTiles.frame = mapData[r][c];
+					mapTiles.animation.frameIndex = mapData[r][c];
 					mapSprite.stamp(mapTiles, c*TileSize, r*TileSize);
 				}
 			}
@@ -248,11 +248,11 @@ class PlayState extends FlxState
 		add(toolbar);
 	}
 	
-	override public function update():Void 
+	override public function update(elapsed:Float):Void 
 	{
 		if (pauseMsg.active)
 		{
-			pauseMsg.update();
+			pauseMsg.update(elapsed);
 			return;
 		}
 
@@ -267,9 +267,9 @@ class PlayState extends FlxState
 				_point.copyFrom(touch);
 			}
 		#else
-			mp = FlxG.mouse.pressed();
-			mjp = FlxG.mouse.justPressed();
-			_point.copyFrom(FlxG.mouse);
+			mp = FlxG.mouse.pressed;
+			mjp = FlxG.mouse.justPressed;
+			_point.copyFrom(FlxG.mouse.getPosition());
 		#end
 		
 		if (!program.running)
@@ -331,23 +331,23 @@ class PlayState extends FlxState
 			return;
 		}
 		
-		super.update();
+		super.update(elapsed);
 	}
 
 	function switchZoom(ZoomIn:Bool) {
 		zoomedIn = ZoomIn;
 
-		mapSprite.scale.make(scale, scale);
+		mapSprite.scale.set(scale, scale);
 		mapSprite.x = (FlxG.width-mapSprite.width*scale)/2;
 		if (zoomedIn) mapSprite.y = (FlxG.height-mapSprite.height*scale)/2;
 		else mapSprite.y = 20;
 
 		for (obj in world.objects) {
 			obj.setPos(obj.tileX, obj.tileY, mapSprite.x, mapSprite.y, tileSize);
-			obj.scale.make(scale, scale);
+			obj.scale.set(scale, scale);
 		}
 
-		player.scale.make(scale, scale);
+		player.scale.set(scale, scale);
 		player.setPos(player.tileX, player.tileY);
 	}
 
@@ -403,13 +403,13 @@ class PlayState extends FlxState
 
 		if (program.run(onRunEnd)) {
 			runBtn.active = false;
-			runBtn.frame = 3;
+			runBtn.animation.frameIndex = 3;
 		}
 	}
 	
 	function onRunEnd()
 	{
 		runBtn.active = true;
-		runBtn.frame = 0;
+		runBtn.animation.frameIndex = 0;
 	}
 }

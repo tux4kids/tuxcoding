@@ -8,11 +8,11 @@
 
 package;
 
-import org.flixel.FlxButton;
-import org.flixel.FlxG;
-import org.flixel.FlxSprite;
-import org.flixel.FlxState;
-import org.flixel.FlxText;
+import flixel.ui.FlxButton;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.FlxState;
+import flixel.text.FlxText;
 import haxe.Log;
 
 class TitleState extends FlxState
@@ -25,7 +25,7 @@ class TitleState extends FlxState
 	override public function create():Void
 	{
 		#if !mobile
-		FlxG.mouse.show();
+		FlxG.mouse.visible = true;
 		#end
 
 		Registry.init();

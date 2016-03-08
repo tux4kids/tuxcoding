@@ -8,11 +8,11 @@
 
 package ;
 
-import org.flixel.FlxState;
-import org.flixel.FlxButton;
-import org.flixel.FlxG;
-import org.flixel.FlxSprite;
-import org.flixel.FlxText;
+import flixel.FlxState;
+import flixel.ui.FlxButton;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.text.FlxText;
 
 class CongratState extends FlxState
 {
@@ -25,7 +25,7 @@ class CongratState extends FlxState
 		add(msgWin);
 
 		var quitBtn:FlxButton = new FlxButton(0, 0, "", quit);
-		quitBtn.loadGraphic(AssetNames.ReturnLevelsBtn, true, false, 93, 105);
+		quitBtn.loadGraphic(AssetNames.ReturnLevelsBtn, true, 93, 105);
 		quitBtn.x = msgWin.x + (msgWin.width - quitBtn.width) / 2;
 		quitBtn.y = msgWin.y + msgWin.height - quitBtn.height - 50;
 		add(quitBtn);

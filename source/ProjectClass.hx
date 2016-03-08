@@ -9,17 +9,22 @@
 package;
 
 import flash.Lib;
-import org.flixel.FlxGame;
-import org.flixel.FlxSave;
+import flixel.FlxGame;
+import flixel.util.FlxSave;
 import haxe.Log;
 
 class ProjectClass extends FlxGame
 {	
 	public static inline var version:String = "V. 0.2.15";
 
+
 	private static var save:FlxSave;
 
 	public static var lastUnlocked (get, set):Int;
+
+	public static var gameWidth:Int = 1024; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	public static var gameHeight:Int = 600; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	public static var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
 
 	private static function get_lastUnlocked():Int {
 		return save.data.lastUnlocked;
@@ -56,16 +61,21 @@ class ProjectClass extends FlxGame
 
 	public function new()
 	{
-		var Width:Int = Lib.current.stage.stageWidth;
-		var Height:Int = Lib.current.stage.stageHeight;
+		var stageWidth:Int = Lib.current.stage.stageWidth;
+		var stageHeight:Int = Lib.current.stage.stageHeight;
+
 		// game is always in landscape orientation
-		var stageWidth:Float = Math.max(Width, Height);
-		var stageHeight:Float = Math.min(Width, Height);
-		
-		var ratioX:Float = stageWidth / 1024;
-		var ratioY:Float = stageHeight / 600;
-		var ratio:Float = Math.min(ratioX, ratioY);
-		super(Math.ceil(stageWidth / ratio), Math.ceil(stageHeight / ratio), TitleState, ratio, 30, 30);
+		if (zoom == -1)
+		{
+			var ratioX:Float = stageWidth / gameWidth;
+			var ratioY:Float = stageHeight / gameHeight;
+			zoom = Math.min(ratioX, ratioY);
+			gameWidth = Math.ceil(stageWidth / zoom);
+			gameHeight = Math.ceil(stageHeight / zoom);
+		}
+
+		//addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		super(gameWidth, gameHeight, TitleState, zoom, 30, 30);
 
 		save = new FlxSave();
 		save.bind("tuxcoding");

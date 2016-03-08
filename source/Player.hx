@@ -8,10 +8,10 @@
 
 package ;
 
-import org.flixel.FlxObject;
-import org.flixel.FlxPath;
-import org.flixel.util.FlxPoint;
-import org.flixel.FlxSprite;
+import flixel.FlxObject;
+import flixel.util.FlxPath;
+import flixel.math.FlxPoint;
+import flixel.FlxSprite;
 import tileobjs.Key;
 import tileobjs.Lock;
 import tileobjs.TileObj;
@@ -31,7 +31,8 @@ class Player extends FlxSprite
 	public var hasKey(default, null):Bool;
 	
 	private function get_idle():Bool {
-		return curAnim == null;
+
+		return animation.curAnim == null;
 	}
 	
 	private function get_facingLeft():Bool {
@@ -50,11 +51,10 @@ class Player extends FlxSprite
 		super();
 		this.playState = playState;
 
-		loadGraphic(AssetNames.Player, true, true, 70, 94);
-		addAnimation("idle", [0]);
-		
+		loadGraphic(AssetNames.Player, true, 70, 94);
+		animation.add("idle", [0]);
 		maxVelocity.y = 300;
-		origin.make();
+		//origin.make();
 	}
 	
 	public function setPos(TileX:Int, TileY:Int):Void {

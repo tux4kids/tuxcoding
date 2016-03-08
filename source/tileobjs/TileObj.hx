@@ -8,7 +8,7 @@
 
 package tileobjs;
 
-import org.flixel.FlxSprite;
+import flixel.FlxSprite;
 
 /**
  * basic tile object.
@@ -34,7 +34,7 @@ class TileObj extends FlxSprite
 	public function new(X:Float, Y:Float, TileX:Int, TileY:Int, SimpleGraphic:Dynamic) 
 	{
 		super(X, Y, SimpleGraphic);
-		origin.make();
+		//origin.make();
 		tileX = TileX;
 		tileY = TileY;
 	}

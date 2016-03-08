@@ -7,7 +7,7 @@
  */
 
 package cmds;
-import org.flixel.FlxG;
+import flixel.FlxG;
 
 /**
  * calls another function (multiple commands)

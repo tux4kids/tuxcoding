@@ -7,8 +7,8 @@
  */
 
 package ;
-import org.flixel.FlxSprite;
-import org.flixel.util.FlxPoint;
+import flixel.FlxSprite;
+import flixel.math.FlxPoint;
 import tileobjs.Coin;
 import tileobjs.TileObj;
 

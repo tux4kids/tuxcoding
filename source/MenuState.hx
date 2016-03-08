@@ -8,13 +8,13 @@
 
 package;
 
-import org.flixel.FlxButton;
-import org.flixel.FlxG;
-import org.flixel.FlxGroup;
-import org.flixel.FlxObject;
-import org.flixel.FlxSprite;
-import org.flixel.FlxState;
-import org.flixel.FlxText;
+import flixel.ui.FlxButton;
+import flixel.FlxG;
+import flixel.group.FlxGroup;
+import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.FlxState;
+import flixel.text.FlxText;
 
 class MenuState extends FlxState
 {
@@ -50,9 +50,9 @@ class MenuState extends FlxState
 
 	private function set_curScreen(cs:Int):Int
 	{
-		cast(screenIndicators.members[curScreen], FlxSprite).frame = 0;
+		cast(screenIndicators.members[curScreen], FlxSprite).animation.frameIndex = 0;
 		curScreen = cs;
-		cast(screenIndicators.members[curScreen], FlxSprite).frame = 1;
+		cast(screenIndicators.members[curScreen], FlxSprite).animation.frameIndex = 1;
 
 		leftNavigator.visible = leftNavigator.active = curScreen > 0;
 
@@ -83,14 +83,14 @@ class MenuState extends FlxState
 		{
 			// screen navigation buttons
 			leftNavigator = new FlxButton(0,0, "", onNavigateLeft);
-			leftNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 93, 105);
+			leftNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, 93, 105);
 			leftNavigator.x = window.x - leftNavigator.width/2;
 			leftNavigator.y = window.y + window.height/2 - leftNavigator.height/2;
 			leftNavigator.facing = FlxObject.LEFT;
 			add(leftNavigator);
 
 			rightNavigator = new FlxButton(0,0, "", onNavigateRight);
-			rightNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, true, 93, 105);
+			rightNavigator.loadGraphic(AssetNames.ScreenNavigationBtn, true, 93, 105);
 			rightNavigator.x = window.x + window.width - rightNavigator.width/2;
 			rightNavigator.y = window.y + window.height/2 - rightNavigator.height/2;
 
@@ -127,7 +127,7 @@ class MenuState extends FlxState
 			for (screen in 0...numScreens)
 			{
 				screenIndicators.add(new FlxSprite(left + (indWidth+pad)*screen, top)
-					.loadGraphic(AssetNames.LevelScreenIndicator, true, false, indWidth, indHeight));
+					.loadGraphic(AssetNames.LevelScreenIndicator, true, indWidth, indHeight));
 			}
 
 			curScreen = 0;

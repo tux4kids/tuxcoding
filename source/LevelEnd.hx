@@ -8,11 +8,11 @@
 
 package ;
 
-import org.flixel.FlxState;
-import org.flixel.FlxButton;
-import org.flixel.FlxG;
-import org.flixel.FlxSprite;
-import org.flixel.FlxText;
+import flixel.FlxState;
+import flixel.ui.FlxButton;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.text.FlxText;
 
 class LevelEnd extends FlxState
 {
