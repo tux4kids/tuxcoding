@@ -10,6 +10,7 @@ package;
 
 import flash.Lib;
 import flixel.FlxGame;
+import flixel.FlxState;
 import flixel.util.FlxSave;
 import haxe.Log;
 
@@ -21,10 +22,15 @@ class ProjectClass extends FlxGame
 	private static var save:FlxSave;
 
 	public static var lastUnlocked (get, set):Int;
-
-	public static var gameWidth:Int = 1024; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	public static var gameHeight:Int = 600; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	public static var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
+	
+	var gameWidth:Int = 1024; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	var gameHeight:Int = 600; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
+	var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
+	var framerate:Int = 60; // How many frames per second the game should run at.
+	var skipSplash:Bool = false; // Whether to skip the flixel splash screen that appears in release mode.
+	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
+	
 
 	private static function get_lastUnlocked():Int {
 		return save.data.lastUnlocked;
@@ -75,7 +81,7 @@ class ProjectClass extends FlxGame
 		}
 
 		//addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
-		super(gameWidth, gameHeight, TitleState, zoom, 30, 30);
+		super(1000, 1000, TitleState, zoom, 30, 30);
 
 		save = new FlxSave();
 		save.bind("tuxcoding");
