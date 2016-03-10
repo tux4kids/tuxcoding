@@ -23,7 +23,7 @@ class MenuState extends FlxState
 	private static inline var numCols:Int = 5;
 
 	private var numScreens:Int;
-	public var curScreen (default, set):Int;
+	public var curScreen (default, set):Int = 0;
 
 	private var screenIndicators:FlxGroup;
 	private var leftNavigator:FlxButton;
@@ -36,8 +36,9 @@ class MenuState extends FlxState
 		for (r in 0...numRows) {
 			for (c in 0...numCols) {
 				var lvlNum = r * numCols + c + curScreen * (numRows*numCols);
+				
+				if (lvlNum < numLevels) {
 				var lvlBtn:LevelBtn = cast(levelBtns.members[r*numCols + c], LevelBtn);
-				if (lvlBtn != null) {
 					lvlBtn.num = lvlNum;
 					lvlBtn.visible = lvlBtn.active = lvlNum < numLevels;
 					// locked, numStars should be loaded/saved from player progress

@@ -42,6 +42,9 @@ class ProjectClass extends FlxGame
 	}
 
 	public static function getStars(levelNum:Int):Int {
+		if(save.data.stars[levelNum] == null)
+			return 0;
+		else 
 		return save.data.stars[levelNum];
 	}
 	public static function setStars(levelNum:Int, numStars:Int) {
