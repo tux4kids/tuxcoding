@@ -51,7 +51,7 @@ class Player extends FlxSprite
 		super();
 		this.playState = playState;
 
-		loadGraphic(AssetNames.Player, true, 70, 94);
+		loadGraphic(AssetNames.Player, true, 67, 94);
 		animation.add("idle", [0]);
 		maxVelocity.y = 300;
 		//origin.make();
