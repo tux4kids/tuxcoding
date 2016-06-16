@@ -8,7 +8,7 @@
 
 package ;
 
-import org.flixel.FlxSprite;
+import flixel.FlxSprite;
 
 class CmdIcon extends FlxSprite
 {
@@ -17,18 +17,18 @@ class CmdIcon extends FlxSprite
 	public var type(default, set_type) : Int;
 	
 	private function set_type(t:Int):Int {
-		frame = t + 1;		
+		animation.frameIndex = t + 1;		
 		return type = t;		
 	}
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super(X, Y);
-		loadGraphic(AssetNames.Cmds, true, false);
+		loadGraphic(AssetNames.Cmds, true);
 		type = -1;
 		scale.x = Size / width;
 		scale.y = Size / height;
-		origin.make();
+		//origin.make();
 		antialiasing = true;
 	}
 }

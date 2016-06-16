@@ -9,17 +9,28 @@
 package;
 
 import flash.Lib;
-import org.flixel.FlxGame;
-import org.flixel.FlxSave;
+import flixel.FlxGame;
+import flixel.FlxState;
+import flixel.util.FlxSave;
 import haxe.Log;
 
 class ProjectClass extends FlxGame
 {	
 	public static inline var version:String = "V. 0.2.15";
 
+
 	private static var save:FlxSave;
 
 	public static var lastUnlocked (get, set):Int;
+	
+	var gameWidth:Int = 1024; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	var gameHeight:Int = 600; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
+	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
+	var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
+	var framerate:Int = 60; // How many frames per second the game should run at.
+	var skipSplash:Bool = false; // Whether to skip the flixel splash screen that appears in release mode.
+	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
+	
 
 	private static function get_lastUnlocked():Int {
 		return save.data.lastUnlocked;
@@ -31,6 +42,9 @@ class ProjectClass extends FlxGame
 	}
 
 	public static function getStars(levelNum:Int):Int {
+		if(save.data.stars[levelNum] == null)
+			return 0;
+		else 
 		return save.data.stars[levelNum];
 	}
 	public static function setStars(levelNum:Int, numStars:Int) {
@@ -56,16 +70,21 @@ class ProjectClass extends FlxGame
 
 	public function new()
 	{
-		var Width:Int = Lib.current.stage.stageWidth;
-		var Height:Int = Lib.current.stage.stageHeight;
+		var stageWidth:Int = Lib.current.stage.stageWidth;
+		var stageHeight:Int = Lib.current.stage.stageHeight;
+
 		// game is always in landscape orientation
-		var stageWidth:Float = Math.max(Width, Height);
-		var stageHeight:Float = Math.min(Width, Height);
-		
-		var ratioX:Float = stageWidth / 1024;
-		var ratioY:Float = stageHeight / 600;
-		var ratio:Float = Math.min(ratioX, ratioY);
-		super(Math.ceil(stageWidth / ratio), Math.ceil(stageHeight / ratio), TitleState, ratio, 30, 30);
+		if (zoom == -1)
+		{
+			var ratioX:Float = stageWidth / gameWidth;
+			var ratioY:Float = stageHeight / gameHeight;
+			zoom = Math.min(ratioX, ratioY);
+			gameWidth = Math.ceil(stageWidth / zoom);
+			gameHeight = Math.ceil(stageHeight / zoom);
+		}
+
+		//addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		super(1000, 1000, TitleState, zoom, 30, 30);
 
 		save = new FlxSave();
 		save.bind("tuxcoding");

@@ -7,8 +7,8 @@
  */
 
 package ;
-import org.flixel.FlxButton;
-import org.flixel.FlxSprite;
+import flixel.ui.FlxButton;
+import flixel.FlxSprite;
 
 /**
  * Level Select Button, displays the level's number
@@ -36,13 +36,13 @@ class LevelBtn extends FlxButton
 		if (locked)
 		{
 			active = false;
-			frame = 3;
+			animation.frameIndex = 3;
 			label.text = "";
 		}
 		else
 		{
 			active = true;
-			frame = 0;
+			animation.frameIndex = 0;
 		}
 
 		return locked;
@@ -51,7 +51,7 @@ class LevelBtn extends FlxButton
 	private function set_numStars(NumStars:Int):Int
 	{
 		numStars = NumStars;
-		stars.frame = numStars;
+		stars.animation.frameIndex = numStars;
 
 		return numStars;
 	}
@@ -62,11 +62,13 @@ class LevelBtn extends FlxButton
 		num = Num;
 		onClick = OnClick;
 		
-		loadGraphic(AssetNames.LvlBtn, true, false, 92, 105);
+		loadGraphic(AssetNames.LvlBtn, true, 92, 105);
 		label.setFormat(AssetNames.LvlBtnFont, 35, 0xd2343f, "center");
-		labelOffset.y = 20;
+		
+		//TODO:
+		//labelOffset.y = 20;
 
-		stars = new FlxSprite().loadGraphic(AssetNames.Stars, true, false, 92, 105);
+		stars = new FlxSprite().loadGraphic(AssetNames.Stars, true, 92, 105);
 	}
 	
 	private function _onClick():Void {

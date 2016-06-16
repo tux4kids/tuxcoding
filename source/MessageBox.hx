@@ -8,11 +8,11 @@
 
 package ;
 
-import org.flixel.FlxGroup;
-import org.flixel.FlxButton;
-import org.flixel.FlxG;
-import org.flixel.FlxSprite;
-import org.flixel.FlxText;
+import flixel.group.FlxGroup;
+import flixel.ui.FlxButton;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.text.FlxText;
 
 class MessageBox extends FlxGroup
 {
@@ -54,7 +54,7 @@ class MessageBox extends FlxGroup
 		for (i in 0...3) {
 			var marker:FlxSprite = new FlxSprite(msgWin.x+ 30, msgWin.y+ 100+i*60)
 				.loadGraphic(AssetNames.ChallengeMarker, true);
-			marker.frame = challenges[i] ? 1:0;
+			marker.animation.frameIndex = challenges[i] ? 1:0;
 			add(marker);
 		}
 
@@ -68,17 +68,17 @@ class MessageBox extends FlxGroup
 			.setFormat(AssetNames.TextFont, 35, 0x000000));
 
 		var quitBtn:FlxButton = new FlxButton(0, 0, "", quitFun);
-		quitBtn.loadGraphic(AssetNames.ReturnLevelsBtn, true, false, 93, 105);
+		quitBtn.loadGraphic(AssetNames.ReturnLevelsBtn, true, 93, 105);
 		quitBtn.y = msgWin.y + msgWin.height - quitBtn.height - 50;
 		add(quitBtn);
 
 		var replayBtn:FlxButton = new FlxButton(0, 0, "", replayFun);
-		replayBtn.loadGraphic(AssetNames.ReplayBtn, true, false, 93, 105);
+		replayBtn.loadGraphic(AssetNames.ReplayBtn, true, 93, 105);
 		replayBtn.y = msgWin.y + msgWin.height - replayBtn.height - 50;
 		add(replayBtn);
 
 		var nextBtn:FlxButton = new FlxButton(0, 0, "", playFun);
-		nextBtn.loadGraphic(AssetNames.PlayBtn, true, false, 93, 105);
+		nextBtn.loadGraphic(AssetNames.PlayBtn, true, 93, 105);
 		nextBtn.y = msgWin.y + msgWin.height - nextBtn.height - 50;
 		add(nextBtn);
 

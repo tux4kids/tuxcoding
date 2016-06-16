@@ -7,8 +7,8 @@
  */
 
 package ;
-import org.flixel.FlxSprite;
-import org.flixel.util.FlxPoint;
+import flixel.FlxSprite;
+import flixel.math.FlxPoint;
 import tileobjs.Coin;
 import tileobjs.TileObj;
 
@@ -23,7 +23,7 @@ class World
 	public var startPos (default, null):FlxPoint;
 	public var endPos (default, null):FlxPoint;
 	public var objects (default, null):Array<TileObj>;
-	public var numCoins (default, null):Int;
+	public var numCoins (default, null):Int = 0;
 
 	public function get_player():Player {
 		return playState.player;
@@ -39,7 +39,8 @@ class World
 		// count number of coins in level
 		for (obj in objects)
 		{
-			if (Std.is(obj, Coin)) numCoins++;
+			if (Std.is(obj, Coin))
+				numCoins++;
 		}
 	}
 	

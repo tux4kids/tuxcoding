@@ -9,10 +9,10 @@
 package ;
 
 import cmds.Cmd;
-import org.flixel.FlxG;
-import org.flixel.FlxGroup;
-import org.flixel.util.FlxPoint;
-import org.flixel.FlxSprite;
+import flixel.FlxG;
+import flixel.group.FlxGroup;
+import flixel.math.FlxPoint;
+import flixel.FlxSprite;
 
 class ProgramGui extends FlxGroup
 {
@@ -160,7 +160,7 @@ class ProgramGui extends FlxGroup
 		}
 	}
 
-	override public function update():Void
+	override public function update(elapsed:Float):Void
 	{
 		if (running)
 		{
